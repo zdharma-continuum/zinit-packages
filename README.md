@@ -1,6 +1,6 @@
 # zinit-packages
 
-Welcome to [zinit](https://github.com/zdharma-continuum/zinit)'s package 
+🌻 Welcome to [zinit](https://github.com/zdharma-continuum/zinit)'s package
 repository.
 
 To learn more about zinit packages and how to install them please refer to:
