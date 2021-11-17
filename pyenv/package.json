@@ -1,0 +1,77 @@
+{
+    "_from": "pyenv@^1.2.20",
+    "_id": "zsh-pyenv@1.2.20",
+    "_inBundle": false,
+    "_location": "/zsh-pyenv",
+    "_phantomChildren": {},
+    "_requested": {
+        "type": "range",
+        "registry": true,
+        "raw": "pyenv@^1.2.20",
+        "name": "pyenv",
+        "escapedName": "pyenv",
+        "rawSpec": "^1.2.20",
+        "saveSpec": null,
+        "fetchSpec": "^1.2.20"
+    },
+    "_requiredBy": [],
+    "_resolved": "https://github.com/pyenv/pyenv/archive/v1.2.20.tar.gz",
+    "_shasum": "c79e390d359ef1bc736e41ba6dd5ca016f5f4842",
+    "_spec": "pyenv@^1.2.20",
+    "_where": "/root/github2/pkg-pyenv",
+    "author": "Yuu Yamashita, Sam Stephenson, Mislav Marohnić, Josh Friend",
+    "bugs": {
+        "url": "https://github.com/pyenv/pyenv/issues"
+    },
+    "contributors": [],
+    "dependencies": {},
+    "deprecated": false,
+    "description": "Simple Python version management",
+    "devDependencies": {},
+    "directories": {
+        "test": "test"
+    },
+    "homepage": "https://github.com/pyenv/pyenv",
+    "keywords": [
+        "version management",
+        "python version management",
+        "zsh"
+    ],
+    "license": "MIT",
+    "name": "zsh-pyenv",
+    "scripts": {
+        "test": "make test"
+    },
+    "version": "1.2.20",
+    "zsh-data": {
+        "plugin-info": {
+            "user": "pyenv",
+            "plugin": "pyenv",
+            "version": "1.2.20",
+            "requires": "bgn;bash"
+        },
+        "zinit-ices": {
+            "default": {
+                "lucid": "",
+                "as": "command",
+                "pick": "bin/pyenv",
+                "atclone": "PYENV_ROOT=\"$PWD\" ./libexec/pyenv init - > zpyenv.zsh",
+                "atpull": "%atclone",
+                "atinit": "export PYENV_ROOT=\"$PWD\"",
+                "src": "zpyenv.zsh",
+                "nocompile": "!"
+            },
+            "bgn": {
+                "requires": "bgn",
+                "lucid": "",
+                "as": "null",
+                "atclone": "PYENV_ROOT=\"$PWD\" ./libexec/pyenv init - > zpyenv.zsh",
+                "atpull": "%atclone",
+                "atinit": "export PYENV_ROOT=\"$PWD\"",
+                "src": "zpyenv.zsh",
+                "nocompile": "!",
+                "sbin": "bin/pyenv"
+            }
+        }
+    }
+}
