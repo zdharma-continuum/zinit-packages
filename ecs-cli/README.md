@@ -20,10 +20,10 @@ Example invocations that'll install
 
 ```zsh
 # Download the binary of amazon-ecs-cli command
-zplugin pack for ecs-cli
+zinit pack for ecs-cli
 
 # Download the ecs-cli binary with use of the bin-gem-node annex
-zplugin pack"bgn" for ecs-cli
+zinit pack"bgn" for ecs-cli
 ```
 
 ## Default Profile
@@ -33,7 +33,7 @@ Provides the CLI command `ecs-cli` by coping it to `$ZPFX/bin`.
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin as=null id-as="ecs-cli" mv="*latest -> ecs-cli" \
+zinit as=null id-as="ecs-cli" mv="*latest -> ecs-cli" \
     atclone='chmod +x *; cp -vf ecs-cli $ZPFX/bin' \
     atpull="%atclone" sbin="ecs-cli" is-snippet for \
         https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-${(M)OSTYPE#(linux|darwin)}-amd64-latest
@@ -43,13 +43,13 @@ zplugin as=null id-as="ecs-cli" mv="*latest -> ecs-cli" \
 
 Provides the CLI command `ecs-cli` by creating a forwarder script (a *shim*) in
 `$ZPFX/bin` by using the
-[bin-gem-node](https://github.com/zplugin/z-a-bin-gem-node) annex. It's the best
+[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex. It's the best
 method of providing the binary to the command line.
 
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin as=null id-as="ecs-cli" mv="*latest -> ecs-cli" \
+zinit as=null id-as="ecs-cli" mv="*latest -> ecs-cli" \
     atclone="chmod +x *"  atpull="%atclone" sbin="ecs-cli"
     is-snippet for \
         https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-${(M)OSTYPE#(linux|darwin)}-amd64-latest

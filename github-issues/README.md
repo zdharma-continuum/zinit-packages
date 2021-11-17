@@ -20,10 +20,10 @@ Example Zplugin invocations that'll install
 
 ```zsh
 # Download the default profile. Need the `@' prefix because of the `git' ice.
-zplugin pack for @github-issues
+zinit pack for @github-issues
 
 # Download the `compact-message' profile
-zplugin pack"compact-message" for @github-issues
+zinit pack"compact-message" for @github-issues
 ```
 
 ## Default Profile
@@ -31,7 +31,7 @@ zplugin pack"compact-message" for @github-issues
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin lucid id-as"GitHub-notify" \
+zinit lucid id-as"GitHub-notify" \
  on-update-of'~/.cache/zsh-github-issues/new_titles.log' \
  notify'New issue: $NOTIFY_MESSAGE' for \
     zdharma/zsh-github-issues
@@ -44,7 +44,7 @@ Will emit the notification message without `New issue: ` prefix.
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin lucid id-as"GitHub-notify" \
+zinit lucid id-as"GitHub-notify" \
  on-update-of'~/.cache/zsh-github-issues/new_titles.log' \
  notify'$NOTIFY_MESSAGE' for \
     zdharma/zsh-github-issues

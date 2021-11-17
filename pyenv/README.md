@@ -21,13 +21,13 @@ or from Git repository:
 
 ```zsh
 # Download the tarball with the default ice list
-zplugin pack for pyenv
+zinit pack for pyenv
 
 # Download the tarball with the bin-gem-node annex-utilizing ice list
-zplugin pack"bgn" for pyenv
+zinit pack"bgn" for pyenv
 
 # Download with the bin-gem-node annex-utilizing ice list FROM GIT REPOSITORY
-zplugin pack"bgn" git for pyenv
+zinit pack"bgn" git for pyenv
 ```
 
 ## Default Profile
@@ -38,7 +38,7 @@ the `bin` subdirectory of the plugin.
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin lucid as'command' pick'bin/pyenv' atinit'export PYENV_ROOT="$PWD"' \
+zinit lucid as'command' pick'bin/pyenv' atinit'export PYENV_ROOT="$PWD"' \
     atclone'PYENV_ROOT="$PWD" ./libexec/pyenv init - > zpyenv.zsh' \
     atpull"%atclone" src"zpyenv.zsh" nocompile'!' for \
         pyenv/pyenv
@@ -48,13 +48,13 @@ zplugin lucid as'command' pick'bin/pyenv' atinit'export PYENV_ROOT="$PWD"' \
 
 Provides the version manager via *shims*, i.e.: automatic forwarder scripts created
 under `$ZPFX/bin` (which is added to the `$PATH` by default by Zplugin). It needs the
-[bin-gem-node](https://github.com/zplugin/z-a-bin-gem-node) annex (it has the
+[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex (it has the
 shim-creation feature).
 
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin as'null' lucid  atinit'export PYENV_ROOT="$PWD"' \
+zinit as'null' lucid  atinit'export PYENV_ROOT="$PWD"' \
     atclone'PYENV_ROOT="$PWD" ./libexec/pyenv init - > zpyenv.zsh' \
     atpull"%atclone" src"zpyenv.zsh" nocompile'!' sbin"bin/pyenv" for \
         pyenv/pyenv

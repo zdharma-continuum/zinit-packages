@@ -17,12 +17,12 @@ to automatically:
 
 Example invocations that'll install
 [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor) by using the
-[bin-gem-node](https://github.com/zplugin/z-a-bin-gem-node) annex:
+[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex:
 
 ```zsh
 # Download the Gem of asciidoctor locally into the plugin directory
 # Using the `@' prefix because of collision with the as'' ice
-zplugin pack for @asciidoctor
+zinit pack for @asciidoctor
 ```
 
 ## Default Profile
@@ -37,7 +37,7 @@ automatic forwarder scripts created under `$ZPFX/bin` (which is added to the
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin lucid as=null node="!asciidoctor" sbin="g:bin/asciidoctor" for \
+zinit lucid as=null node="!asciidoctor" sbin="g:bin/asciidoctor" for \
     zdharma/null
 ```
 

@@ -17,11 +17,11 @@ to automatically:
 
 Example invocations that'll install
 [thlorenz/doctoc](https://github.com/thlorenz/doctoc) by using the
-[bin-gem-node](https://github.com/zplugin/z-a-bin-gem-node) annex:
+[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex:
 
 ```zsh
 # Download the Node package of doctoc
-zplugin pack for doctoc
+zinit pack for doctoc
 ```
 
 ## Default Profile
@@ -36,7 +36,7 @@ automatic forwarder scripts created under `$ZPFX/bin` (which is added to the
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin lucid as=null node="!doctoc" sbin="n:node_modules/.bin/doctoc" for \
+zinit lucid as=null node="!doctoc" sbin="n:node_modules/.bin/doctoc" for \
     zdharma/null
 ```
 

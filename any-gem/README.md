@@ -31,13 +31,13 @@ A few example invocations:
 
 ```zsh
 # Install `chef' Gem and call the plugin with the same name
-zplugin pack param='GEM → chef' for any-gem
+zinit pack param='GEM → chef' for any-gem
 
 # Install `rails' Gem and call the plugin: ruby-on-rails
-zplugin id-as=ruby-on-rails pack param='GEM → rails' for any-gem
+zinit id-as=ruby-on-rails pack param='GEM → rails' for any-gem
 
 # Install `jekyll' Gem and call the plugin: jkl
-zplugin pack param='IDAS → jkl; GEM → jekyll' for any-gem
+zinit pack param='IDAS → jkl; GEM → jekyll' for any-gem
 ```
 
 ## Default Profile
@@ -48,7 +48,7 @@ which are substituted with the `value` from the ice `param'PARAM → value; …'
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin lucid id-as="${${:-%IDAS%}:-%GEM%}" as=null \
+zinit lucid id-as="${${:-%IDAS%}:-%GEM%}" as=null \
     gem="%GEM%;%GEM2%;%GEM3%;%GEM4%;%GEM5%;%GEM6%;%GEM7%;%OTHER%" \
     sbin="n:bin/*" for \
         zdharma/null

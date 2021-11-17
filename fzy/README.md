@@ -20,16 +20,16 @@ archive or from Git repository:
 
 ```zsh
 # Download the package with the default ice list
-zplugin pack for fzy
+zinit pack for fzy
 
 # Download the package with the bin-gem-node annex-utilizing ice list
-zplugin pack"bgn" for fzy
+zinit pack"bgn" for fzy
 
 # Download with the bin-gem-node annex-utilizing ice list FROM GIT REPOSITORY
-zplugin pack"bgn" git for fzy
+zinit pack"bgn" git for fzy
 
 # Download normal ice list and override atclone'' ice to skip the contrib scripts
-zplugin pack"bgn" atclone'' for fzy
+zinit pack"bgn" atclone'' for fzy
 ```
 
 ## Default Profile
@@ -38,7 +38,7 @@ Provides the fuzzy finder via Makefile-installation of the `fzy` binary under
 `$ZPFX/bin`.
 
 ```zsh
-zplugin lucid as"program" pick"$ZPFX/bin/fzy*" \
+zinit lucid as"program" pick"$ZPFX/bin/fzy*" \
     atclone"cp contrib/fzy-* $ZPFX/bin" \
     make"PREFIX=$ZPFX install" \
     …
@@ -48,10 +48,10 @@ zplugin lucid as"program" pick"$ZPFX/bin/fzy*" \
 
 Provides the fuzzy finder via *shims*, i.e.: automatic forwarder scripts created
 under `$ZPFX/bin` (which is added to the `$PATH` by default). It needs the
-[bin-gem-node](https://github.com/zplugin/z-a-bin-gem-node) annex.
+[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex.
 
 ```zsh
-zplugin lucid as"null" make sbin"fzy;contrib/fzy-*" …
+zinit lucid as"null" make sbin"fzy;contrib/fzy-*" …
 ```
 
 <!-- vim:set ft=markdown tw=80 fo+=an1 autoindent: -->

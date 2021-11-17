@@ -17,17 +17,17 @@ to automatically:
 
 Example invocations that'll install
 [remarkjs/remark](https://github.com/remarkjs/remark) by using the
-[bin-gem-node](https://github.com/zplugin/z-a-bin-gem-node) annex:
+[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex:
 
 ```zsh
 # Download the Node package of remark-cli, remark-man and remark-html
-zplugin pack for remark
+zinit pack for remark
 
 # Download the Node package of remark-cli and remark-man
-zplugin pack"man-only" for remark
+zinit pack"man-only" for remark
 
 # Download the Node package of remark-cli and remark-html
-zplugin pack"html-only" for remark
+zinit pack"html-only" for remark
 ```
 
 ## Default Profile
@@ -42,7 +42,7 @@ automatic forwarder scripts created under `$ZPFX/bin` (which is added to the
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin lucid as=null \
+zinit lucid as=null \
     node="remark <- !remark-cli; remark-man; remark-html" \,
     sbin="n:node_modules/.bin/remark" for \
         zdharma/null
@@ -55,7 +55,7 @@ Provides the CLI command `remark` with single plugin: Man.
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin lucid as=null \
+zinit lucid as=null \
     node="remark <- !remark-cli; remark-man" \,
     sbin="n:node_modules/.bin/remark" for \
         zdharma/null
@@ -68,7 +68,7 @@ Provides the CLI command `remark` with single plugin: Html.
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin lucid as=null \
+zinit lucid as=null \
     node="remark <- !remark-cli; remark-html" \,
     sbin="n:node_modules/.bin/remark" for \
         zdharma/null

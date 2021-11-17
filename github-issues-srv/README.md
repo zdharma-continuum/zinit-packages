@@ -20,7 +20,7 @@ Example Zplugin invocations that'll install
 
 ```zsh
 # Download the default profile. Need the `@' prefix because of the `git' ice.
-zplugin pack for @github-issues-srv
+zinit pack for @github-issues-srv
 ```
 
 ## Default Profile
@@ -32,7 +32,7 @@ GitHub.
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin lucid service"GIT" \
+zinit lucid service"GIT" \
  pick"zsh-github-issues.service.zsh" for \
     zdharma/zsh-github-issues
 ```

@@ -32,13 +32,13 @@ A few example invocations:
 
 ```zsh
 # Install `coffee-script' module and call the plugin with the same name
-zplugin pack param='MOD → coffee-script' for any-node
+zinit pack param='MOD → coffee-script' for any-node
 
 # Install `remark' Markdown processor and call the plugin: remark
-zplugin id-as=remark pack param='MOD → remark-man; MOD2 → remark-cli' for any-node
+zinit id-as=remark pack param='MOD → remark-man; MOD2 → remark-cli' for any-node
 
 # Install `pen' Markdown previewer and call the plugin: my-pen
-zplugin pack param='IDAS → my-pen; MOD → pen' for any-node
+zinit pack param='IDAS → my-pen; MOD → pen' for any-node
 ```
 
 ## Default Profile
@@ -49,7 +49,7 @@ which are substituted with the `value` from the ice `param'PARAM → value; …'
 The Zplugin command executed will be equivalent to:
 
 ```zsh
-zplugin lucid id-as="${${:-%IDAS%}:-%MOD%}" as=null \
+zinit lucid id-as="${${:-%IDAS%}:-%MOD%}" as=null \
     node="%MOD%;%MOD2%;%MOD3%;%MOD4%;%MOD5%;%MOD6%;%MOD7%;%OTHER%" \
     sbin="n:node_modules/.bin/*" for \
         zdharma/null
