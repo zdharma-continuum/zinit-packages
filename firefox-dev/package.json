@@ -53,7 +53,7 @@
                 "atpull": "%atclone"
             },
             "bgn": {
-                "required": "bgn",
+                "requires": "bgn",
                 "is-snippet": "",
                 "lucid": "",
                 "as": "null",

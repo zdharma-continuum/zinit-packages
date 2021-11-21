@@ -1,0 +1,30 @@
+{
+  "author": "zdharma-continuum",
+  "bugs": {
+    "url": "https://github.com/zdharma-continuum/null/issues"
+  },
+  "description": "",
+  "homepage": "https://github.com/zdharma-continuum/null",
+  "license": "MIT",
+  "name": "zdharma-continuum/null",
+  "version": "$version",
+  "zsh-data": {
+    "plugin-info": {
+      "user": "zdharma-continuum",
+      "plugin": "null",
+      "version": "$version"
+    },
+    "zinit-ices": {
+      "default": {
+        "lucid": "",
+        "atpull": "%atclone",
+        "wait": "",
+        "null": "",
+        "atclone": "dostuff; echo ok; random stuff;",
+        "!bash": "",
+        "light-mode": "",
+        "run-atpull": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+    "author": "$org",
+    "description": "$description",
+    "homepage": "https://github.com/$org/$repo",
+    "license": "$license",
+    "name": "$pkg",
+    "version": "$version",
+    "zsh-data": {
+        "plugin-info": {
+            "user": "$org",
+            "plugin": "$repo",
+            "version": "$version"
+        },
+        "zinit-ices": {
+            "default": {
+                "requires": ""
+            }
+        }
+    }
+}

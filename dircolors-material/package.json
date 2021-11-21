@@ -17,7 +17,6 @@
     "_requiredBy": [],
     "_spec": "dircolors-material@^1.0.0",
     "_where": "/root/github2/pkg-dircolors-material",
-
     "author": "Grigorii Horos",
     "bugs": {
         "url": "https://github.com/zpm-zsh/dircolors-material/issues"
@@ -30,7 +29,6 @@
     "directories": {
         "test": "test"
     },
-
     "homepage": "https://github.com/zpm-zsh/material-colors",
     "keywords": [
         "GNU ls colors",
@@ -38,7 +36,6 @@
         "terminal colors",
         "zsh"
     ],
-
     "license": "MIT",
     "name": "zsh-dircolors-material",
     "zsh-data": {
@@ -51,7 +48,7 @@
             "default": {
                 "git": "",
                 "lucid": "",
-                "reset" : "",
+                "reset": "",
                 "atclone": "(( !${+commands[dircolors]} )) && local P=g; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' material.dircolors; TERM=ansi ${P}dircolors -b material.dircolors >! colors.zsh",
                 "atpull": "%atclone",
                 "pick": "colors.zsh",
@@ -70,7 +67,7 @@
             "no-zsh-completion": {
                 "git": "",
                 "lucid": "",
-                "reset" : "",
+                "reset": "",
                 "atclone": "(( !${+commands[dircolors]} )) && local P=g; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' material.dircolors; TERM=ansi ${P}dircolors -b material.dircolors >! colors.zsh",
                 "atpull": "%atclone",
                 "pick": "colors.zsh",
@@ -83,7 +80,7 @@
                 "atpull": "%atclone",
                 "pick": "colors.zsh",
                 "nocompile": "!"
-            },
+            }
         }
     }
 }
