@@ -564,13 +564,13 @@ fetch_zinit_docker_run() {
   if [[ -x docker-run.sh ]]
   then
     realpath docker-run.sh
-    chmod +x docker-run.sh
     return
   fi
 
   local url="https://raw.githubusercontent.com/zdharma-continuum/zinit/main/scripts/docker-run.sh"
 
   cd "$(cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P)" || exit 9
+  rm -fv docker-run.sh
   echo_info "Fetching docker-run.sh from $url"
   if ! curl -fsSL "$url" > docker-run.sh
   then
@@ -588,8 +588,19 @@ run_package() {
   local profile="${2:-default}"
   shift 2
 
-  local cmd
-  cmd="$(fetch_zinit_docker_run)"
+  if [[ "$profile" =~ -|-- ]]
+  then
+    profile="default"
+  fi
+
+  local -a cmd
+  cmd=("$(fetch_zinit_docker_run)")
+
+  if [[ -n "$DEBUG" ]]
+  then
+    cmd=(bash -x "${cmd[0]}")
+  fi
+
   local ices_file="${package}/${profile}.ices.zsh"
 
   if ! [[ -r "$ices_file" ]]
@@ -600,11 +611,11 @@ run_package() {
 
   if [[ -n "$RUN_PACKAGE" ]]
   then
-    echo_info "🐳 Running zinit pack'${profile}' for ${package} $*"
-    "$cmd" --config "zinit pack'${profile}' for ${package}" "$@"
+    echo_info "🐳 Running zinit pack'${profile}' for ${package}"
+    "${cmd[@]}" --config "zinit pack'${profile}' for ${package}"
   else
     echo_info "🐳 Running with file: $ices_file"
-    "$cmd" --file "$ices_file" "$@"
+    "${cmd[@]}" --file "$ices_file"
   fi
 }
 
