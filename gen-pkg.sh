@@ -560,6 +560,53 @@ create_package() {
   reverse_process_package "$package"
 }
 
+fetch_zinit_docker_run() {
+  if [[ -x docker-run.sh ]]
+  then
+    realpath docker-run.sh
+    return
+  fi
+
+  local url="https://raw.githubusercontent.com/zdharma-continuum/zinit/main/scripts/docker-run.sh"
+
+  cd "$(cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P)" || exit 9
+  echo_info "Fetching docker-run.sh from $url"
+  if ! curl -fsSL "$url" > docker-run.sh
+  then
+    rm -f docker-run.sh
+    echo_err "Failed to download docker-run.sh"
+    return 1
+  fi
+
+  chmod +x docker-run.sh
+  realpath docker-run.sh
+}
+
+run_package() {
+  local package="$1"
+  local profile="${2:-default}"
+  shift 2
+
+  local cmd
+  cmd="$(fetch_zinit_docker_run)"
+  local ices_file="${package}/${profile}.ices.zsh"
+
+  if ! [[ -r "$ices_file" ]]
+  then
+    echo_err "Unable to read from ${ices_file}"
+    return 2
+  fi
+
+  if [[ -n "$RUN_PACKAGE" ]]
+  then
+    echo_info "🐳 Running zinit pack'${profile}' for ${package} $*"
+    "$cmd" --config "zinit pack'${profile}' for ${package}" "$@"
+  else
+    echo_info "🐳 Running with file: $ices_file"
+    "$cmd" --file "$ices_file" "$@"
+  fi
+}
+
 usage() {
   echo "Usage: $(basename "$0") ACTION [ARGS] [PACKAGE] [PROFILES...]"
   echo "ACTIONS: create|gen-json|gen-ices"
@@ -569,11 +616,13 @@ usage() {
   echo "  --dry-run Don't anything, just echo what would be generated"
   echo
   echo "Actions:"
-  echo "  create    PACKAGE  [PROFILES...]  Create new packages or profiles"
-  echo "            --force                 Force creation of files regardless if they already exist"
+  echo "  create   PACKAGE  [PROFILES...]   Create new packages or profiles"
+  echo "           --force                  Force creation of files regardless if they already exist"
   echo "  gen-json [PACKAGE] [PROFILES...]  Generate package.json files from source ices.zsh"
   echo "  gen-ices [PACKAGE] [PROFILES...]  Generate ices.zsh from package.json"
   echo "           --reproducible           Set timestamps to UNIX time 0"
+  echo "  run      PACKAGE [PROFILE]        Run a given package inside a container"
+  echo '           --pack                   Run zinit pack"PROFILE" PACKAGE instead of sourcing the ices.zsh file'
 }
 
 
@@ -582,6 +631,7 @@ then
   DEBUG="${DEBUG:-}"
   DRY_RUN="${DRY_RUN:-}"
   FORCE="${FORCE:-}"
+  RUN_PACKAGE="${RUN_PACKAGE:-}"
   REPRODUCIBLE="${REPRODUCIBLE:-}"
 
   ACTION="${ACTION:-generate-json}"
@@ -602,6 +652,10 @@ then
         DRY_RUN=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
+      -p|--pack|--package)
+        RUN_PACKAGE=1
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        ;;
       -R|--reproducible)
         REPRODUCIBLE=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
@@ -613,6 +667,10 @@ then
         ;;
       -r|--reverse)
         ACTION=generate-ices-zsh
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        ;;
+      --run)
+        ACTION=run
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
       --update-ices)
@@ -627,7 +685,7 @@ then
   done
   set -- "${ARGS[@]}"
 
-  # Alternative usage: $0 create|gen-json|gen-ices|update-ices
+  # Alternative usage: $0 create|gen-json|gen-ices|run|update-ices
   case "$1" in
     create|init|c|i)
       ACTION=create
@@ -639,6 +697,10 @@ then
       ;;
     gen-ices|reverse|r)
       ACTION=generate-ices-zsh
+      shift
+      ;;
+    run|R)
+      ACTION=run
       shift
       ;;
     update-self|update-ices|u)
@@ -729,7 +791,12 @@ then
           rc=1
         fi
       done
-
+      ;;
+    run)
+      # The PROFILES[@] may seem weird but that's the easiest way to forward
+      # all the CLI args to run_package after all the parsing from above
+      # it will only consume the first profile, and not all of them.
+      run_package "${PACKAGES[0]}" "${PROFILES[@]}"
       ;;
     generate-ices-zsh)
       # Generate ices.zsh files

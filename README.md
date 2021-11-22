@@ -61,7 +61,16 @@ To generate a `package.json` file for your package run:
 pkg=null
 profile=default
 
-./gen-pkg.sh ${pkg} ${profile}
+./gen-pkg.sh gen ${pkg} ${profile}
+```
+
+## How do I run these?
+
+There's a shorthand subcommand for running a `.ices.zsh` file locally, inside a
+container:
+
+```zsh
+./gen-pkg.sh RUN PACKAGE PROFILE
 ```
 
 <!-- vim: set ft=markdown et ts=2 sw=2 tw=80 --!>
