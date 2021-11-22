@@ -416,6 +416,7 @@ reverse_process_package() {
   local content ice ice_data ice_val metadata plugin
   local author description license version requirements url
   local -a ices
+  local default_plugin="zdharma-continuum/null"
   local modeline='# vim: set ft=zsh et ts=2 sw=2 :'
 
   if ! [[ -f "$pkgfile" ]]
@@ -467,7 +468,13 @@ reverse_process_package() {
     content+="REQUIREMENTS=\"${requirements}\"\n"
     content+="URL=\"${url}\"\n"
     content+="VERSION=\"${version}\"\n"
-    plugin="$(jq -er '.user + "/" + .plugin' <<< "$metadata")"
+    plugin="$(jq -er --arg default "$default_plugin" '
+      (.user + "/" + .plugin) as $n |
+      if ($n != "/") then
+        $n
+      else
+        $default
+      end' <<< "$metadata")"
 
     # Add zinit call to output (static)
     content+='\nzinit \\\n'
