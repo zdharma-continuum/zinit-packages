@@ -14,7 +14,7 @@ https://zdharma-continuum.github.io/zinit/wiki/Zinit-Packages/
 To create a new package named `foo`:
 
 ```zsh
-./gen-pkg-json.sh create foo
+./gen-pkg.sh create foo
 ```
 
 This will create a directory named `foo` which contains:
@@ -27,7 +27,7 @@ To add another profile (as in `zinit pack"PROFILE" for PACKAGE`), for example
 `bar`:
 
 ```zsh
-./gen-pkg-json.sh create foo bar
+./gen-pkg.sh create foo bar
 ```
 
 This will create a new file in your package directory: `bar.ices.zsh`.
@@ -61,7 +61,7 @@ To generate a `package.json` file for your package run:
 pkg=null
 profile=default
 
-./gen-pkg-json.sh ${pkg} ${profile}
+./gen-pkg.sh ${pkg} ${profile}
 ```
 
 <!-- vim: set ft=markdown et ts=2 sw=2 tw=80 --!>
