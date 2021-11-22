@@ -547,9 +547,16 @@ usage() {
   echo "Usage: $(basename "$0") ACTION [ARGS] [PACKAGE] [PROFILES...]"
   echo "ACTIONS: create|gen-json|gen-ices"
   echo
+  echo "Global flags:"
+  echo "  --debug   Debug mode"
+  echo "  --dry-run Don't anything, just echo what would be generated"
+  echo
+  echo "Actions:"
   echo "  create    PACKAGE  [PROFILES...]  Create new packages or profiles"
+  echo "            --force                 Force creation of files regardless if they already exist"
   echo "  gen-json [PACKAGE] [PROFILES...]  Generate package.json files from source ices.zsh"
   echo "  gen-ices [PACKAGE] [PROFILES...]  Generate ices.zsh from package.json"
+  echo "           --reproducible           Set timestamps to UNIX time 0"
 }
 
 
