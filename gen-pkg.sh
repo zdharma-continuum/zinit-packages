@@ -609,19 +609,26 @@ run_package() {
     return 2
   fi
 
+  local args=()
+  if [[ -n "$NON_INTERACTIVE" ]]
+  then
+    args=(zsh -ilsc '@zinit-scheduler burst')
+    # args=(zsh -ilsc 'exit $?')
+  fi
+
   if [[ -n "$RUN_PACKAGE" ]]
   then
     echo_info "🐳 Running zinit pack'${profile}' for ${package}"
-    "${cmd[@]}" --config "zinit pack'${profile}' for ${package}"
+    "${cmd[@]}" --config "zinit pack'${profile}' for ${package}" "${args[@]}"
   else
     echo_info "🐳 Running with file: $ices_file"
-    "${cmd[@]}" --file "$ices_file"
+    "${cmd[@]}" --file "$ices_file" "${args[@]}"
   fi
 }
 
 usage() {
   echo "Usage: $(basename "$0") ACTION [ARGS] [PACKAGE] [PROFILES...]"
-  echo "ACTIONS: create|gen-json|gen-ices"
+  echo "ACTIONS: create|gen-json|gen-ices|run|update-ices"
   echo
   echo "Global flags:"
   echo "  --debug   Debug mode"
@@ -634,6 +641,7 @@ usage() {
   echo "  gen-ices [PACKAGE] [PROFILES...]  Generate ices.zsh from package.json"
   echo "           --reproducible           Set timestamps to UNIX time 0"
   echo "  run      PACKAGE [PROFILE]        Run a given package inside a container"
+  echo "           --non-interactive        Don't keep the container running but exit right away"
   echo '           --pack                   Run zinit pack"PROFILE" PACKAGE instead of sourcing the ices.zsh file'
 }
 
@@ -643,6 +651,7 @@ then
   DEBUG="${DEBUG:-}"
   DRY_RUN="${DRY_RUN:-}"
   FORCE="${FORCE:-}"
+  NON_INTERACTIVE="${NON_INTERACTIVE:-}"
   RUN_PACKAGE="${RUN_PACKAGE:-}"
   REPRODUCIBLE="${REPRODUCIBLE:-}"
 
@@ -662,6 +671,10 @@ then
         ;;
       -k|--dry-run)
         DRY_RUN=1
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        ;;
+      -n|--non-interactive)
+        NON_INTERACTIVE=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
       -p|--pack|--package)
@@ -849,5 +862,6 @@ then
       echo_err "$pkg"
     done
   fi
+
   exit "$rc"
 fi
