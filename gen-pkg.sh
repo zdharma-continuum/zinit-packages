@@ -739,6 +739,13 @@ then
   fi
 
   PACKAGES=()
+  # Check if we were provided with a file
+  # eg: gen-pkg-json.sh null/default.ices.zsh
+  if [[ -f "$PACKAGE" ]]
+  then
+    FILENAME="${PACKAGE##*/}"
+    PACKAGES=("$(basename "$(dirname "$PACKAGE")")")
+    PROFILES=("${FILENAME%%.ices.zsh}")
   # Check if we were provided with a dir
   # eg: gen-pkg-json.sh .
   # Since packages are also directories, we need to check if the provided dir
@@ -746,7 +753,7 @@ then
   # case. Otherwise we will end up looking for package dirs inside a package
   # dir.
   # shellcheck disable=SC2010
-  if [[ -d "$PACKAGE" ]]
+  elif [[ -d "$PACKAGE" ]]
   then
     # "normal" mode, not --reverse
     if ! ls -1 "$PACKAGE" | grep -qE '.ices.zsh$|^package.json$'
