@@ -17,7 +17,7 @@ to automatically:
 
 Example invocations that'll install
 [thlorenz/doctoc](https://github.com/thlorenz/doctoc) by using the
-[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex:
+[bin-gem-node](https://github.com/zdharma-continuum/z-a-bin-gem-node) annex:
 
 ```zsh
 # Download the Node package of doctoc

@@ -48,7 +48,7 @@ zinit lucid as"program" pick"$ZPFX/bin/fzy*" \
 
 Provides the fuzzy finder via *shims*, i.e.: automatic forwarder scripts created
 under `$ZPFX/bin` (which is added to the `$PATH` by default). It needs the
-[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex.
+[bin-gem-node](https://github.com/zdharma-continuum/z-a-bin-gem-node) annex.
 
 ```zsh
 zinit lucid as"null" make sbin"fzy;contrib/fzy-*" …
