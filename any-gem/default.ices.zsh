@@ -4,7 +4,7 @@ AUTHOR="zdharma"
 DESCRIPTION=""
 LICENSE="MIT"
 REQUIREMENTS=""
-URL="https://github.com/Zsh-Packages/any-gem"
+URL="https://github.com/zdharma-continuum/zinit-packages"
 VERSION="1.0.0"
 
 zinit \

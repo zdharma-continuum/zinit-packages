@@ -19,7 +19,7 @@
     "_where": "/root/github2/pkg-any-gem",
     "author": "Sebastian Gniazdowski",
     "bugs": {
-        "url": "https://github.com/Zsh-Packages/any-gem/issues"
+        "url": "https://github.com/zdharma-continuum/zinit-packages/issues"
     },
     "version": "1.0.0",
     "contributors": [],
@@ -30,7 +30,7 @@
     "directories": {
         "test": "test"
     },
-    "homepage": "https://github.com/Zsh-Packages/any-gem",
+    "homepage": "https://github.com/zdharma-continuum/zinit-packages",
     "keywords": [
         "npm wrapper",
         "zsh"
