@@ -19,7 +19,7 @@
     "_where": "/root/github2/pkg-github-issues-srv",
     "author": "Sebastian Gniazdowski",
     "bugs": {
-        "url": "https://github.com/zdharma/zsh-github-issues/issues"
+        "url": "https://github.com/zdharma-continuum/zsh-github-issues/issues"
     },
     "version": "1.0.1",
     "contributors": [],
@@ -30,7 +30,7 @@
     "directories": {
         "test": "test"
     },
-    "homepage": "https://github.com/zdharma/zsh-github-issues",
+    "homepage": "https://github.com/zdharma-continuum/zsh-github-issues",
     "keywords": [
         "github issues",
         "github issues notifications",

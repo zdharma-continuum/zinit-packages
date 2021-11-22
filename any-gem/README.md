@@ -51,7 +51,7 @@ The Zplugin command executed will be equivalent to:
 zinit lucid id-as="${${:-%IDAS%}:-%GEM%}" as=null \
     gem="%GEM%;%GEM2%;%GEM3%;%GEM4%;%GEM5%;%GEM6%;%GEM7%;%OTHER%" \
     sbin="n:bin/*" for \
-        zdharma/null
+        zdharma-continuum/null
 ```
 
 The package is thus a simplifier of Zplugin commands.

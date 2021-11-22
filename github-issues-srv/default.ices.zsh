@@ -4,7 +4,7 @@ AUTHOR="zdharma"
 DESCRIPTION=""
 LICENSE="MIT"
 REQUIREMENTS=""
-URL="https://github.com/zdharma/zsh-github-issues"
+URL="https://github.com/zdharma-continuum/zsh-github-issues"
 VERSION="1.0.0"
 
 zinit \
@@ -13,6 +13,6 @@ zinit \
     lucid \
     pick'zsh-github-issues.service.zsh' \
     service'GIT' \
-  for @zdharma/zsh-github-issues
+  for @zdharma-continuum/zsh-github-issues
 
 # vim: set ft=zsh et ts=2 sw=2 :

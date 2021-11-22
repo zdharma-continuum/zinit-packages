@@ -52,7 +52,7 @@ The Zplugin command executed will be equivalent to:
 zinit lucid id-as="${${:-%IDAS%}:-%MOD%}" as=null \
     node="%MOD%;%MOD2%;%MOD3%;%MOD4%;%MOD5%;%MOD6%;%MOD7%;%OTHER%" \
     sbin="n:node_modules/.bin/*" for \
-        zdharma/null
+        zdharma-continuum/null
 ```
 
 The package is thus a simplifier of Zplugin commands.

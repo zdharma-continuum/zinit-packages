@@ -1,6 +1,6 @@
-# zdharma/zsh-github-issues as a Zsh package
+# zdharma-continuum/zsh-github-issues as a Zsh package
 
-##### Homepage link: [zdharma/zsh-github-issues](https://github.com/zdharma/zsh-github-issues)
+##### Homepage link: [zdharma-continuum/zsh-github-issues](https://github.com/zdharma-continuum/zsh-github-issues)
 
 | **Package source:** | Tarball | Git | Node | Gem |
 |:-------------------:|:-------:|:---:|:----:|:---:|
@@ -16,7 +16,7 @@ to automatically:
     - the ices can be selectively overriden.
 
 Example Zplugin invocations that'll install
-[zdharma/zsh-github-issues](https://github.com/zdharma/zsh-github-issues):
+[zdharma-continuum/zsh-github-issues](https://github.com/zdharma-continuum/zsh-github-issues):
 
 ```zsh
 # Download the default profile. Need the `@' prefix because of the `git' ice.
@@ -25,7 +25,7 @@ zinit pack for @github-issues-srv
 
 ## Default Profile
 
-The package is the puller-thread service for the `zdharma/zsh-github-issues`
+The package is the puller-thread service for the `zdharma-continuum/zsh-github-issues`
 plugin. It runs the background service that downloads the new issues from
 GitHub.
 
@@ -34,7 +34,7 @@ The Zplugin command executed will be equivalent to:
 ```zsh
 zinit lucid service"GIT" \
  pick"zsh-github-issues.service.zsh" for \
-    zdharma/zsh-github-issues
+    zdharma-continuum/zsh-github-issues
 ```
 
 <!-- vim:set ft=markdown tw=80 fo+=an1 autoindent: -->

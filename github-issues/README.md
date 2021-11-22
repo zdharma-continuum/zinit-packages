@@ -1,6 +1,6 @@
-# zdharma/zsh-github-issues as a Zsh package
+# zdharma-continuum/zsh-github-issues as a Zsh package
 
-##### Homepage link: [zdharma/zsh-github-issues](https://github.com/zdharma/zsh-github-issues)
+##### Homepage link: [zdharma-continuum/zsh-github-issues](https://github.com/zdharma-continuum/zsh-github-issues)
 
 | **Package source:** | Tarball | Git | Node | Gem |
 |:-------------------:|:-------:|:---:|:----:|:---:|
@@ -16,7 +16,7 @@ to automatically:
     - the ices can be selectively overriden.
 
 Example Zplugin invocations that'll install
-[zdharma/zsh-github-issues](https://github.com/zdharma/zsh-github-issues):
+[zdharma-continuum/zsh-github-issues](https://github.com/zdharma-continuum/zsh-github-issues):
 
 ```zsh
 # Download the default profile. Need the `@' prefix because of the `git' ice.
@@ -34,7 +34,7 @@ The Zplugin command executed will be equivalent to:
 zinit lucid id-as"GitHub-notify" \
  on-update-of'~/.cache/zsh-github-issues/new_titles.log' \
  notify'New issue: $NOTIFY_MESSAGE' for \
-    zdharma/zsh-github-issues
+    zdharma-continuum/zsh-github-issues
 ```
 
 ## `compact-message` Profile
@@ -47,7 +47,7 @@ The Zplugin command executed will be equivalent to:
 zinit lucid id-as"GitHub-notify" \
  on-update-of'~/.cache/zsh-github-issues/new_titles.log' \
  notify'$NOTIFY_MESSAGE' for \
-    zdharma/zsh-github-issues
+    zdharma-continuum/zsh-github-issues
 ```
 
 <!-- vim:set ft=markdown tw=80 fo+=an1 autoindent: -->

@@ -15,6 +15,6 @@ zinit \
     node'remark <- !remark-cli;
       remark-man' \
     sbin'n:node_modules/.bin/remark' \
-  for @zdharma/null
+  for @zdharma-continuum/null
 
 # vim: set ft=zsh et ts=2 sw=2 :

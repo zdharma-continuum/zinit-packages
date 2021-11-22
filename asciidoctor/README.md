@@ -38,7 +38,7 @@ The Zplugin command executed will be equivalent to:
 
 ```zsh
 zinit lucid as=null node="!asciidoctor" sbin="g:bin/asciidoctor" for \
-    zdharma/null
+    zdharma-continuum/null
 ```
 
 <!-- vim:set ft=markdown tw=80 fo+=an1 autoindent: -->

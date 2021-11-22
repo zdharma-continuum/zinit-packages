@@ -15,6 +15,6 @@ zinit \
     lucid \
     nocompile \
     sbin'g:bin/asciidoctor' \
-  for @zdharma/null
+  for @zdharma-continuum/null
 
 # vim: set ft=zsh et ts=2 sw=2 :

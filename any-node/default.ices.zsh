@@ -23,6 +23,6 @@ zinit \
       %MOD7%;
       %OTHER%' \
     sbin'n:node_modules/.bin/*' \
-  for @zdharma/null
+  for @zdharma-continuum/null
 
 # vim: set ft=zsh et ts=2 sw=2 :

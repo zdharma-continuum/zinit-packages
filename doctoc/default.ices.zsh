@@ -15,6 +15,6 @@ zinit \
     nocompile \
     node'!doctoc' \
     sbin'n:node_modules/.bin/doctoc' \
-  for @zdharma/null
+  for @zdharma-continuum/null
 
 # vim: set ft=zsh et ts=2 sw=2 :
