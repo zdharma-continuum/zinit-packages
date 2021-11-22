@@ -564,6 +564,7 @@ fetch_zinit_docker_run() {
   if [[ -x docker-run.sh ]]
   then
     realpath docker-run.sh
+    chmod +x docker-run.sh
     return
   fi
 
