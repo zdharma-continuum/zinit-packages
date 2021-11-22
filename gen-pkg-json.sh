@@ -682,9 +682,9 @@ then
 
   if [[ "$ACTION" != create ]] && [[ -z "${PACKAGES[*]}" ]]
   then
-    echo_warn "Nothing to do."
-    echo_debug "If you want to create a new package restart with:"
-    echo_debug "$0 --create ${PACKAGE:-PACKAGE_NAME}"
+    echo_warn "Nothing to do (no such package: $PACKAGE)"
+    echo_info "If you want to create a new package restart with:"
+    echo_info "$0 create ${PACKAGE:-PACKAGE_NAME}"
     exit 0
   fi
 
