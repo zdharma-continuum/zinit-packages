@@ -21,7 +21,7 @@ to automatically:
 This package is special – it is designed for easy installing of any Node modules
 inside the plugin directory, exposing their binaries via *shims* (i.e.: forwarder
 scripts)  created automatically by
-[Bin-Gem-Node](https://github.com/zdharma-continuum/z-a-bin-gem-node) annex.
+[Bin-Gem-Node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex.
 
 The Node module(s) to install are specified by the `param'MOD → {module1}; MOD2
 → {module2}; …'` ice. The name of the plugin will be `{module1}`, unless

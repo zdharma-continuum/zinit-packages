@@ -17,7 +17,7 @@ to automatically:
 
 Example invocations that'll install
 [remarkjs/remark](https://github.com/remarkjs/remark) by using the
-[bin-gem-node](https://github.com/zdharma-continuum/z-a-bin-gem-node) annex:
+[bin-gem-node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex:
 
 ```zsh
 # Download the Node package of remark-cli, remark-man and remark-html

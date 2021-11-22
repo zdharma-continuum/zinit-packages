@@ -48,7 +48,7 @@ zinit lucid as'command' pick'bin/pyenv' atinit'export PYENV_ROOT="$PWD"' \
 
 Provides the version manager via *shims*, i.e.: automatic forwarder scripts created
 under `$ZPFX/bin` (which is added to the `$PATH` by default by Zplugin). It needs the
-[bin-gem-node](https://github.com/zdharma-continuum/z-a-bin-gem-node) annex (it has the
+[bin-gem-node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex (it has the
 shim-creation feature).
 
 The Zplugin command executed will be equivalent to:

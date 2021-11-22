@@ -17,7 +17,7 @@ to automatically:
 
 Example invocations that'll install
 [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor) by using the
-[bin-gem-node](https://github.com/zdharma-continuum/z-a-bin-gem-node) annex:
+[bin-gem-node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex:
 
 ```zsh
 # Download the Gem of asciidoctor locally into the plugin directory

@@ -30,7 +30,7 @@ zinit pack for subversion
 
 Provides the Subversion revision control system by compiling and installing it
 to the `$ZPFX` directory (`~/.zinit/polaris` by default). It uses the
-[zdharma-continuum/z-a-as-monitor](https://github.com/zdharma-continuum/z-a-as-monitor) annex to
+[zdharma-continuum/zinit-annex-as-monitor](https://github.com/zdharma-continuum/zinit-annex-as-monitor) annex to
 download the latest Subversion tarball.
 
 The Zinit command executed will be equivalent to:
