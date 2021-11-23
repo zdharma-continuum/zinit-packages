@@ -644,7 +644,7 @@ run_package() {
   fi
 
   local -a cmd
-  cmd=("$(fetch_zinit_docker_run)")
+  cmd=("$(fetch_zinit_docker_run)" --env QUIET=1)
 
   if [[ -n "$DEBUG" ]]
   then
@@ -735,7 +735,7 @@ then
         DRY_RUN=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
-      -n|--non-interactive)
+      -n|--non-interactive|-ni|--exit|-e)
         NON_INTERACTIVE=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
@@ -858,6 +858,8 @@ then
 
   rc=0
   failed_pkgs=()
+
+  echo_info "Running action: $ACTION"
 
   case "$ACTION" in
     create)
