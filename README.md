@@ -46,6 +46,7 @@ supported.
 | AUTHOR       | Author of the package                 | zdharma-continuum                           |
 | DESCRIPTION  | Description of the package            | My amazing blockchain project               |
 | LICENSE      | License of the packaged software      | `GPL-3`                                     |
+| MESSAGE      | Message to be display when installing | Thanks for using zinit pack!                |
 | REQUIREMENTS | List of requirements for this package | `bgn;tar`                                   |
 | URL          | Link to the upstream project          | `https://github.com/zdharma-continuum/null` |
 | VERSION      | Version of the package                | `0.0.1`                                     |
