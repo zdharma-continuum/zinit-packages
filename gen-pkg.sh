@@ -357,7 +357,7 @@ update_ices() {
   mv "$tmpfile" "$pkgfile"
 }
 
-process_package_profile() {
+generate_package_json_profile() {
   local package="$1"
   local profile="$2"
   local zinit_json_data
@@ -371,7 +371,7 @@ process_package_profile() {
   update_ices "$package" "$profile" "$zinit_json_data"
 }
 
-process_package() {
+generate_package_json() {
   local package="$1"; shift
   local -a profiles=("$@")
   local filename
@@ -408,13 +408,13 @@ process_package() {
 
   for profile in "${profiles[@]}"
   do
-    process_package_profile "$package" "$profile"
+    generate_package_json_profile "$package" "$profile"
     # Unset vars which may be set from the .ices.zsh files
     eval unset "${PACKAGE_VARS[*]}"
   done
 }
 
-reverse_process_package() {
+generate_ices_zsh_files() {
   local package="$1"; shift
   local -a profiles=("$@")
 
@@ -566,7 +566,7 @@ create_package() {
   echo "$pkgdata" > "$pkgfile"
 
   # Generate the .ices.zsh files
-  reverse_process_package "$package"
+  generate_ices_zsh_files "$package"
 }
 
 fetch_zinit_docker_run() {
@@ -826,7 +826,7 @@ then
       # Generate package.json files
       for pkg in "${PACKAGES[@]}"
       do
-        if ! process_package "$pkg" "${PROFILES[@]}"
+        if ! generate_package_json "$pkg" "${PROFILES[@]}"
         then
           failed_pkgs+=("$pkg")
           rc=1
@@ -843,7 +843,7 @@ then
       # Generate ices.zsh files
       for pkg in "${PACKAGES[@]}"
       do
-        if ! reverse_process_package "$pkg" "${PROFILES[@]}"
+        if ! generate_ices_zsh_files "$pkg" "${PROFILES[@]}"
         then
           failed_pkgs+=("$pkg")
           rc=1
