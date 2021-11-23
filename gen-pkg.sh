@@ -457,13 +457,13 @@ generate_ices_zsh_files() {
     author="$(jq -er '.author // ""' "$pkgfile")"
     description="$(jq -er '.description // ""' "$pkgfile")"
     license="$(jq -er '.license // ""' "$pkgfile")"
+    url="$(jq -er '.homepage // ""' "$pkgfile")"
+    version="$(jq -er '.version // ""' "$pkgfile")"
     # items in plugin-info
     message="$(jq -er '.message // ""' <<< "$metadata")"
     plugin_url="$(jq -er '.url // ""' <<< "$metadata")"
     # FIXME The requirements field really shouldn't be in the ices array...
     requirements="$(jq -er '.requires // ""' <<< "$ice_data")"
-    url="$(jq -er '.homepage // ""' "$pkgfile")"
-    version="$(jq -er '.version // ""' <<< "$metadata")"
 
     local now
     if [[ -n "$REPRODUCIBLE" ]]
@@ -482,6 +482,8 @@ generate_ices_zsh_files() {
     content+="REQUIREMENTS=\"${requirements}\"\n"
     content+="URL=\"${url}\"\n"
     content+="VERSION=\"${version}\"\n"
+    # TODO Add more/better fallback logic here? For snippets for example
+    # we need to use the snippet url, or the $package name
     plugin="$(jq -er --arg default "$default_plugin" '
       (.user + "/" + .plugin) as $n |
       if ($n != "/") then
@@ -495,21 +497,37 @@ generate_ices_zsh_files() {
 
     # Process ices
     readarray -t ices < <(\
-      jq -e -r -c \
-      'keys[] | select((contains("requires") | not) and (contains("plugin") | not))' <<< "$ice_data")
+      jq -e -r -c 'keys[] | select(
+        (contains("requires") | not) and
+        (contains("plugin") | not))' <<< "$ice_data")
+
+    # Prepend id-as, if not already in the ices array
+    if ! [[ " ${ices[*]} " =~ " id-as " ]]
+    then
+      ices=(id-as "${ices[@]}")
+    fi
 
     for ice in "${ices[@]}"  # note: $ices holds the ice names only
     do
-      if [[ "$ice" == "is-snippet" ]]
-      then
-        is_snippet=1
-        # continue
-      fi
-
-      content+="    $ice"
       # Note: We need to properly encode single quotes since we are using these
       # to quote the ice values below
-      ice_val="$(jq -e -r --arg ice "$ice" '.[$ice]' <<< "$ice_data" | sed "s/'/'\\\''/g")"
+      ice_val="$(jq -e -r --arg ice "$ice" '.[$ice] // ""' <<< "$ice_data" | sed "s/'/'\\\''/g")"
+
+      case "$ice" in
+        is-snippet)
+          is_snippet=1
+          ;;
+        id-as)
+          # if the plugin does not have a propper id then use the package name
+          # TODO It make sense to *first* try to use $plugin, and then fall
+          # back to $package
+          ice_val="${ice_val:-${package}}"
+          ;;
+      esac
+
+      echo_debug "$ice value: ${ice_val:-\"\"}"
+
+      content+="    $ice"
 
       # Add newlines after && and ; (should only occur within atclone/atpull)
       # FIXME This breaks a few awk and sed calls
@@ -527,7 +545,7 @@ generate_ices_zsh_files() {
 
     if [[ -n "$is_snippet" ]] && [[ -n "$plugin_url" ]]
     then
-      content+="  for ${plugin_url}"
+      content+="  for \"${plugin_url}\""
     else
       content+="  for @${plugin}"
     fi
