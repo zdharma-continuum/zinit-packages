@@ -653,6 +653,16 @@ run_package() {
 
   local ices_file="${package}/${profile}.ices.zsh"
 
+  if [[ -n "$REGENERATE" ]]
+  then
+    if [[ -n "$RUN_PACKAGE" ]]
+    then
+      generate_package_json_profile "$package" "$profile"
+    else
+      generate_ices_zsh_files "$package" "$profile"
+    fi
+  fi
+
   if ! [[ -r "$ices_file" ]]
   then
     echo_err "Unable to read from ${ices_file}"
@@ -693,6 +703,7 @@ usage() {
   echo "  run      PACKAGE [PROFILE]        Run a given package inside a container"
   echo "           --non-interactive        Don't keep the container running but exit right away"
   echo '           --pack                   Run zinit pack"PROFILE" PACKAGE instead of sourcing the ices.zsh file'
+  echo "           --regenerate             Regenerate ices.zsh (or package.json if --pack) prior to running"
 }
 
 
@@ -704,6 +715,7 @@ then
   NON_INTERACTIVE="${NON_INTERACTIVE:-}"
   RUN_PACKAGE="${RUN_PACKAGE:-}"
   REPRODUCIBLE="${REPRODUCIBLE:-}"
+  REGENERATE="${REGENERATE:-}"
 
   ACTION="${ACTION:-generate-json}"
 
@@ -733,6 +745,10 @@ then
         ;;
       -R|--reproducible)
         REPRODUCIBLE=1
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        ;;
+      --regen*|-rr)
+        REGENERATE=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
       # Action flags
