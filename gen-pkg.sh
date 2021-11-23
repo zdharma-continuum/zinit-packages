@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Regenerate this list with
-# ./gen-pkg-json.sh --update-ices
+# ./gen-pkg.sh --update-ices
 ZINIT_ICES=(
   "aliases"
   "as"
@@ -375,7 +375,7 @@ process_package() {
   echo_debug "Processing package $package"
 
   # Check if we were provided with a file path
-  # eg: gen-pkg-json.sh null/default.ices.zsh
+  # eg: gen-pkg.sh null/default.ices.zsh
   if [[ -f "$package" ]]
   then
     filepath="$(realpath "$package")"
@@ -753,14 +753,14 @@ then
 
   PACKAGES=()
   # Check if we were provided with a file
-  # eg: gen-pkg-json.sh null/default.ices.zsh
+  # eg: gen-pkg.sh null/default.ices.zsh
   if [[ -f "$PACKAGE" ]]
   then
     FILENAME="${PACKAGE##*/}"
     PACKAGES=("$(basename "$(dirname "$PACKAGE")")")
     PROFILES=("${FILENAME%%.ices.zsh}")
   # Check if we were provided with a dir
-  # eg: gen-pkg-json.sh .
+  # eg: gen-pkg.sh .
   # Since packages are also directories, we need to check if the provided dir
   # is a package dir (ie. with an *.ices.zsh file) and not proceed it that's the
   # case. Otherwise we will end up looking for package dirs inside a package
