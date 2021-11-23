@@ -94,6 +94,7 @@ PACKAGE_VARS=(
   AUTHOR
   DESCRIPTION
   LICENSE
+  MESSAGE
   REQUIREMENTS
   URL
   VERSION
@@ -224,9 +225,12 @@ zinit() {
     esac
   done
 
-  # shellcheck disable=2153
-  echo_debug "AUTHOR=$AUTHOR DESCRIPTION=$DESCRIPTION LICENSE=$LICENSE URL=$URL " \
-             "VERSION=$VERSION REQUIREMENTS=$REQUIREMENTS"
+  # Display PACKAGE_VARS
+  local var
+  for var in "${PACKAGE_VARS[@]}"
+  do
+    echo_debug "${var}=${!var}"
+  done
   echo_debug "repo: $repo (org: $plugin_org - name: $plugin_name)"
   # shellcheck disable=2030
   echo_debug "ices: $(typeset -p ices)"
@@ -249,6 +253,7 @@ zinit() {
     --arg author "$AUTHOR" \
     --arg description "$DESCRIPTION" \
     --arg license "$LICENSE" \
+    --arg message "$MESSAGE" \
     --arg plugin_name "$plugin_name" \
     --arg plugin_org "$plugin_org" \
     --arg repo "$repo" \
@@ -256,17 +261,18 @@ zinit() {
     --arg url "$URL" \
     --arg version "$VERSION" \
     '{
-      "repo": $repo,
       "author": $author,
       "description": $description,
-      "url": $url,
-      "license": $license,
-      "version": $version,
-      "plugin_org": $plugin_org,
-      "plugin_name": $plugin_name,
       "ices": (reduce inputs as $i ({}; . + {
         ($i): (input | (tonumber? // .))
-      }))
+      })),
+      "license": $license,
+      "message": $message,
+      "plugin_name": $plugin_name,
+      "plugin_org": $plugin_org,
+      "repo": $repo,
+      "url": $url,
+      "version": $version,
     }'
 }
 
@@ -329,14 +335,15 @@ update_ices() {
   # shellcheck disable=2153
   jq -e --arg profile "$profile" \
     --argjson data "$zinit_json" \
-    '.["name"] = $data.repo |
-     .["description"] = $data.description |
-     .["author"] = $data.author |
-     .["homepage"] = $data.url |
-     .["license"] = $data.license |
-     .["zsh-data"]["plugin-info"].user = $data.plugin_org |
-     .["zsh-data"]["plugin-info"].plugin = $data.plugin_name |
+    '.author = $data.author |
+     .description = $data.description |
+     .homepage = $data.url |
+     .license = $data.license |
+     .name = $data.repo |
      .version = $data.version |
+     .["zsh-data"]["plugin-info"].message = $data.message |
+     .["zsh-data"]["plugin-info"].plugin = $data.plugin_name |
+     .["zsh-data"]["plugin-info"].user = $data.plugin_org |
      .["zsh-data"]["plugin-info"].version = $data.version |
      .["zsh-data"]["zinit-ices"][$profile] = $data.ices' \
     "$input_file" > "$tmpfile"
@@ -446,9 +453,10 @@ reverse_process_package() {
     # Metadata
     author="$(jq -er '.author // ""' "$pkgfile")"
     description="$(jq -er '.description // ""' "$pkgfile")"
+    license="$(jq -er '.license // ""' "$pkgfile")"
+    message="$(jq -er '.message // ""' <<< "$metadata")"
     # FIXME The requirements field really shouldn't be in the ices array...
     requirements="$(jq -er '.requires // ""' <<< "$ice_data")"
-    license="$(jq -er '.license // ""' "$pkgfile")"
     url="$(jq -er '.homepage // ""' "$pkgfile")"
     version="$(jq -er '.version // ""' <<< "$metadata")"
 
@@ -465,6 +473,7 @@ reverse_process_package() {
     content+="AUTHOR=\"${author}\"\n"
     content+="DESCRIPTION=\"${description}\"\n"
     content+="LICENSE=\"${license}\"\n"
+    content+="MESSAGE=\"${message}\"\n"
     content+="REQUIREMENTS=\"${requirements}\"\n"
     content+="URL=\"${url}\"\n"
     content+="VERSION=\"${version}\"\n"
