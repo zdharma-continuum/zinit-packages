@@ -421,8 +421,10 @@ generate_ices_zsh_files() {
   echo_info "Generating ices.zsh for package $package"
   local srcfile pkgfile="$package/package.json"
   local content ice ice_data ice_val metadata plugin
-  local author description license version requirements url
+  local author description license message plugin_url requirements url version
   local -a ices
+
+  # Constants
   local default_plugin="zdharma-continuum/null"
   local modeline='# vim: set ft=zsh et ts=2 sw=2 :'
 
@@ -451,10 +453,13 @@ generate_ices_zsh_files() {
                 '.["zsh-data"]["zinit-ices"][$profile]' "$pkgfile")"
 
     # Metadata
+    # items in root
     author="$(jq -er '.author // ""' "$pkgfile")"
     description="$(jq -er '.description // ""' "$pkgfile")"
     license="$(jq -er '.license // ""' "$pkgfile")"
+    # items in plugin-info
     message="$(jq -er '.message // ""' <<< "$metadata")"
+    plugin_url="$(jq -er '.url // ""' <<< "$metadata")"
     # FIXME The requirements field really shouldn't be in the ices array...
     requirements="$(jq -er '.requires // ""' <<< "$ice_data")"
     url="$(jq -er '.homepage // ""' "$pkgfile")"
@@ -495,6 +500,12 @@ generate_ices_zsh_files() {
 
     for ice in "${ices[@]}"  # note: $ices holds the ice names only
     do
+      if [[ "$ice" == "is-snippet" ]]
+      then
+        is_snippet=1
+        # continue
+      fi
+
       content+="    $ice"
       # Note: We need to properly encode single quotes since we are using these
       # to quote the ice values below
@@ -514,8 +525,13 @@ generate_ices_zsh_files() {
       content+=' \\\n'
     done
 
-    content+="  for @${plugin}\n\n"
-    content+="$modeline"
+    if [[ -n "$is_snippet" ]] && [[ -n "$plugin_url" ]]
+    then
+      content+="  for ${plugin_url}"
+    else
+      content+="  for @${plugin}"
+    fi
+    content+="\n\n$modeline"
 
     echo_debug "Generated content for ${srcfile}:\n${content}"
     if [[ -n "$DRY_RUN" ]]
