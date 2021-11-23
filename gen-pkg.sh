@@ -453,6 +453,15 @@ generate_ices_zsh_files() {
                 '.["zsh-data"]["zinit-ices"][$profile]' "$pkgfile")"
 
     # Metadata
+    # TODO Add more/better fallback logic here? For snippets for example
+    # we need to use the snippet url, or the $package name
+    plugin="$(jq -er --arg default "$default_plugin" '
+      (.user + "/" + .plugin) as $n |
+      if ($n != "/") then
+        $n
+      else
+        $default
+      end' <<< "$metadata")"
     # items in root
     author="$(jq -er '.author // ""' "$pkgfile")"
     description="$(jq -er '.description // ""' "$pkgfile")"
@@ -482,15 +491,6 @@ generate_ices_zsh_files() {
     content+="REQUIREMENTS=\"${requirements}\"\n"
     content+="URL=\"${url}\"\n"
     content+="VERSION=\"${version}\"\n"
-    # TODO Add more/better fallback logic here? For snippets for example
-    # we need to use the snippet url, or the $package name
-    plugin="$(jq -er --arg default "$default_plugin" '
-      (.user + "/" + .plugin) as $n |
-      if ($n != "/") then
-        $n
-      else
-        $default
-      end' <<< "$metadata")"
 
     # Add zinit call to output (static)
     content+='\nzinit \\\n'
@@ -549,9 +549,10 @@ generate_ices_zsh_files() {
     else
       content+="  for @${plugin}"
     fi
-    content+="\n\n$modeline"
 
+    content+="\n\n$modeline"
     echo_debug "Generated content for ${srcfile}:\n${content}"
+
     if [[ -n "$DRY_RUN" ]]
     then
       echo -e "$content"
