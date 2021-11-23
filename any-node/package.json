@@ -39,7 +39,7 @@
     "name": "zsh-any-node",
     "zsh-data": {
         "plugin-info": {
-            "user": "zdharma",
+            "user": "zdharma-continuum",
             "plugin": "null",
             "version": "1.0.0",
             "requires": "npm;bgn"

@@ -41,7 +41,7 @@
     "name": "zsh-remark",
     "zsh-data": {
         "plugin-info": {
-            "user": "zdharma",
+            "user": "zdharma-continuum",
             "plugin": "null",
             "version": "11.0.2",
             "requires": "npm;bgn"

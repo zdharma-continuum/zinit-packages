@@ -41,7 +41,7 @@
     "name": "zsh-doctoc",
     "zsh-data": {
         "plugin-info": {
-            "user": "zdharma",
+            "user": "zdharma-continuum",
             "plugin": "null",
             "version": "1.4.0",
             "requires": "npm;bgn"

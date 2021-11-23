@@ -40,7 +40,7 @@
     "name": "zsh-github-issues",
     "zsh-data": {
         "plugin-info": {
-            "user": "zdharma",
+            "user": "zdharma-continuum",
             "plugin": "zsh-github-issues",
             "message": "The profile %PROFILE% has been installed.\nTo pull the messages the `github-issues-srv' package is also needed.",
             "version": "1.0.0"
