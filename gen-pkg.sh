@@ -528,11 +528,12 @@ generate_ices_zsh_files() {
 
     for ice in "${ices[@]}"  # note: $ices holds the ice names only
     do
-      # 1st sed: escape '\\n' to '\\\n' to avoid it getting mangled by echo -e
+      # 1st sed: escape '\n' to '\\n' to avoid it getting mangled by echo -e
+      # (escapes '\\n' to '\\\n' too)
       # 2nd sed -> We need to properly encode single quotes since we are
       # using these to quote the ice values below
       ice_val="$(jq -e -r --arg ice "$ice" '.[$ice] // ""' <<< "$ice_data" | \
-                 sed 's#\\n#\\\\n#g' | \
+                 sed -r 's#(\\+n)#\\\\\\\1#g' | \
                  sed "s/'/'\\\''/g")"
 
       case "$ice" in
