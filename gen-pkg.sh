@@ -543,7 +543,12 @@ generate_ices_zsh_files() {
           # if the plugin does not have a propper id then use the package name
           # TODO It make sense to *first* try to use $plugin, and then fall
           # back to $package
-          ice_val="${ice_val:-${package}}"
+          if [[ "$plugin" != "$default_plugin" ]]
+          then
+            ice_val="${ice_val:-${plugin}}"
+          else
+            ice_val="${ice_val:-zinit-package-${package}}"
+          fi
           ;;
       esac
 
