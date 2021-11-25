@@ -496,7 +496,7 @@ generate_ices_zsh_files() {
       [[ -z "$val" ]] && continue
       val="$(sed -z "s/'/\\\'/g; s/\n/\\\\\\\\\\\\\\\\n/g" <<< "$val")"
       val="${val%$'\\\\\\\\\\\\\\\\n'}"
-      val="$(sed -z "s/\\\'/\\\\\\\\\\\\'\\\\\'/g" <<< "$val")"
+      val="$(sed -z "s/\\\'/\\\\\'\\\\\\\\\\\\'\\\\\'/g" <<< "$val")"
       eval "${var}=\$'${val}'"
     done
 
@@ -643,6 +643,7 @@ fetch_zinit_docker_run() {
 
   cd "$(cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P)" || exit 9
   rm -fv docker-run.sh
+
   echo_info "Fetching docker-run.sh from $url"
   if ! curl -fsSL "$url" > docker-run.sh
   then
