@@ -71,7 +71,7 @@ There's a shorthand subcommand for running a `.ices.zsh` file locally, inside a
 container:
 
 ```zsh
-./gen-pkg.sh RUN PACKAGE PROFILE
+./gen-pkg.sh run PACKAGE PROFILE
 ```
 
 <!-- vim: set ft=markdown et ts=2 sw=2 tw=80 --!>
