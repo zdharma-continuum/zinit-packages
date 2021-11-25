@@ -560,7 +560,7 @@ generate_ices_zsh_files() {
       # Add newlines after && and ; (should only occur within atclone/atpull)
       # FIXME This breaks a few awk and sed calls
       # in dircolors for eg there's an: ${P}sed -i '/DIR/c\DIR 38;5;63;1'
-      ice_val="$(sed -r 's#(&&|;)#\1\n     #g' <<< "$ice_val")"
+      ice_val="$(sed -r 's#(&& |; )#\1\n     #g' <<< "$ice_val")"
 
       # Append the quoted value of the ice
       if [[ -n "$ice_val" ]]
