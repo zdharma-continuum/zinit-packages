@@ -50,7 +50,7 @@
                 "git": "",
                 "lucid": "",
                 "reset": "",
-                "atclone": "[[ -z ${commands[dircolors]} ]] && local P=g; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' LS_COLORS; ${P}dircolors -b LS_COLORS >! clrs.zsh",
+                "atclone": "[[ -z ${commands[dircolors]} ]] && local P=${${(M)OSTYPE##darwin}:+g}; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' LS_COLORS; ${P}dircolors -b LS_COLORS >! clrs.zsh",
                 "atpull": "%atclone",
                 "pick": "clrs.zsh",
                 "nocompile": "!",
@@ -60,7 +60,7 @@
                 "git": "",
                 "lucid": "",
                 "reset": "",
-                "atclone": "[[ -z ${commands[dircolors]} ]] && local P=g; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' LS_COLORS; ${P}dircolors -b LS_COLORS >! clrs.zsh",
+                "atclone": "[[ -z ${commands[dircolors]} ]] && local P=${${(M)OSTYPE##darwin}:+g}; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' LS_COLORS; ${P}dircolors -b LS_COLORS >! clrs.zsh",
                 "atpull": "%atclone",
                 "pick": "clrs.zsh",
                 "nocompile": "!"
@@ -68,7 +68,7 @@
             "no-dir-color-swap": {
                 "git": "",
                 "lucid": "",
-                "atclone": "[[ -z ${commands[dircolors]} ]] && local P=g; ${P}dircolors -b LS_COLORS >! clrs.zsh",
+                "atclone": "[[ -z ${commands[dircolors]} ]] && local P=${${(M)OSTYPE##darwin}:+g}; ${P}dircolors -b LS_COLORS >! clrs.zsh",
                 "atpull": "%atclone",
                 "pick": "clrs.zsh",
                 "nocompile": "!",
