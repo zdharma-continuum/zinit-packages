@@ -9,7 +9,7 @@ https://zdharma-continuum.github.io/zinit/wiki/Zinit-Packages/
 
 # Developers!
 
-## Creating new packages
+## 🆕 Creating new packages
 
 To create a new package named `foo`:
 
@@ -32,7 +32,7 @@ To add another profile (as in `zinit pack"PROFILE" for PACKAGE`), for example
 
 This will create a new file in your package directory: `bar.ices.zsh`.
 
-## The package format
+## 📄 The package format
 
 As mentionned above you should start by editing your `.ices.zsh` file.
 
@@ -55,7 +55,7 @@ supported.
 
 Also please refer to the [`null` package](./null/) for an up-to-date example
 
-## Updating `package.json` files
+## 👏 Updating `package.json` files
 
 To generate a `package.json` file for your package run:
 
@@ -67,7 +67,7 @@ profile=default
 ./gen-pkg.sh gen ${pkg} ${profile}
 ```
 
-## How do I run these?
+## 🐳 How do I run these?
 
 There's a shorthand subcommand for running a `.ices.zsh` file locally, inside a
 container:
