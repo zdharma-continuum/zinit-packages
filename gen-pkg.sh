@@ -356,15 +356,18 @@ update_ices() {
   data="$(jq -e . "$tmpfile")"
   local rc="$?"
 
-  if [[ -n "$CHECK" ]] && diff \
-    <(jq --sort-keys . <<< "$data") \
-    <(jq --sort-keys . $pkgfile)
+  if [[ -n "$CHECK" ]]
   then
-    echo_sucess "$pkgfile: No change."
-    return
-  else
-    echo_warn "$pkgfile: Files differ!"
-    return 1
+    if diff \
+      <(jq --sort-keys . <<< "$data") \
+      <(jq --sort-keys . $pkgfile)
+    then
+      echo_sucess "$pkgfile: No change."
+      return
+    else
+      echo_warn "$pkgfile: Files differ!"
+      return 1
+    fi
   fi
 
   if [[ -n "$DRY_RUN" ]]
@@ -617,13 +620,16 @@ generate_ices_zsh_files() {
     content+="\n\n$modeline"
     echo_debug "Generated content for ${srcfile}:\n${content}"
 
-    if [[ -n "$CHECK" ]] && echo -e "$content" | diff "$srcfile" -
+    if [[ -n "$CHECK" ]]
     then
-      echo_sucess "$srcfile: No change."
-      return
-    else
-      echo_warn "$srcfile: Files differ!"
-      return 1
+      if echo -e "$content" | diff "$srcfile" -
+      then
+        echo_sucess "$srcfile: No change."
+        return
+      else
+        echo_warn "$srcfile: Files differ!"
+        return 1
+      fi
     fi
 
     if [[ -n "$DRY_RUN" ]]
