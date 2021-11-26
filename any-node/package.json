@@ -43,7 +43,7 @@
             "plugin": "null",
             "version": "1.0.0",
             "requires": "npm;bgn",
-            "param-default": "MOD -> speed-test"
+            "param-default": "MOD -> lolcatjs"
         },
         "zinit-ices": {
             "default": {
