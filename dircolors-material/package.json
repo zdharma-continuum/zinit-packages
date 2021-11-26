@@ -49,7 +49,7 @@
                 "git": "",
                 "lucid": "",
                 "reset": "",
-                "atclone": "(( !${+commands[dircolors]} )) && local P=${${(M)OSTYPE##darwin}:+g}; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' material.dircolors; TERM=ansi ${P}dircolors -b material.dircolors >! colors.zsh",
+                "atclone": "(( ! ${+commands[dircolors]} )) && local P=g; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' dircolors/01-base.dircolors && cat dircolors/*.dircolors | TERM=ansi ${P}dircolors -b - >! colors.zsh",
                 "atpull": "%atclone",
                 "pick": "colors.zsh",
                 "nocompile": "!",
@@ -58,7 +58,7 @@
             "no-color-swaps": {
                 "git": "",
                 "lucid": "",
-                "atclone": "(( !${+commands[dircolors]} )) && local P=${${(M)OSTYPE##darwin}:+g}; TERM=ansi ${P}dircolors -b material.dircolors >! colors.zsh",
+                "atclone": "(( ! ${+commands[dircolors]} )) && local P=g; cat dircolors/*.dircolors | TERM=ansi ${P}dircolors -b - >! colors.zsh",
                 "atpull": "%atclone",
                 "pick": "colors.zsh",
                 "nocompile": "!",
@@ -68,7 +68,7 @@
                 "git": "",
                 "lucid": "",
                 "reset": "",
-                "atclone": "(( !${+commands[dircolors]} )) && local P=${${(M)OSTYPE##darwin}:+g}; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' material.dircolors; TERM=ansi ${P}dircolors -b material.dircolors >! colors.zsh",
+                "atclone": "(( ! ${+commands[dircolors]} )) && local P=g; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' dircolors/01-base.dircolors && cat dircolors/*.dircolors | TERM=ansi ${P}dircolors -b - >! colors.zsh",
                 "atpull": "%atclone",
                 "pick": "colors.zsh",
                 "nocompile": "!"
@@ -76,7 +76,7 @@
             "minimal": {
                 "git": "",
                 "lucid": "",
-                "atclone": "(( !${+commands[dircolors]} )) && local P=${${(M)OSTYPE##darwin}:+g}; TERM=ansi ${P}dircolors -b material.dircolors >! colors.zsh",
+                "atclone": "(( ! ${+commands[dircolors]} )) && local P=g; cat dircolors/*.dircolors | TERM=ansi ${P}dircolors -b - >! colors.zsh",
                 "atpull": "%atclone",
                 "pick": "colors.zsh",
                 "nocompile": "!"
