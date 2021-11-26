@@ -397,11 +397,9 @@ update_ices() {
       echo_success "Generated ${package}/package.json"
     } || {
       echo_err "Failed to write ${package}/package.json"
+      return 1
     }
-    return "$?"
   fi
-
-  return "$rc"
 }
 
 extract_generated_by() {
