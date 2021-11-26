@@ -42,7 +42,8 @@
             "user": "zdharma-continuum",
             "plugin": "null",
             "version": "1.0.0",
-            "requires": "npm;bgn"
+            "requires": "npm;bgn",
+            "param-default": "GEM -> lolcat"
         },
         "zinit-ices": {
             "default": {

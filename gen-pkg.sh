@@ -95,6 +95,7 @@ PACKAGE_VARS=(
   DESCRIPTION
   LICENSE
   MESSAGE
+  PARAM_DEFAUT
   REQUIREMENTS
   URL
   VERSION
@@ -147,7 +148,7 @@ echo_info() {
   echo -e "\e[34m🫐 ${*}\e[0m" >&2
 }
 
-echo_sucess() {
+echo_success() {
   echo -e "\e[32m✅ ${*}\e[0m" >&2
 }
 
@@ -258,6 +259,7 @@ zinit() {
     --arg description "$DESCRIPTION" \
     --arg license "$LICENSE" \
     --arg message "$MESSAGE" \
+    --arg param_default "$PARAM_DEFAUT" \
     --arg plugin_name "$plugin_name" \
     --arg plugin_org "$plugin_org" \
     --arg repo "$repo" \
@@ -272,6 +274,7 @@ zinit() {
       })),
       "license": $license,
       "message": $message,
+      "param_default": $param_default,
       "plugin_name": $plugin_name,
       "plugin_org": $plugin_org,
       "repo": $repo,
@@ -347,6 +350,7 @@ update_ices() {
      .version = $data.version |
      .["zsh-data"]["plugin-info"].message = $data.message |
      .["zsh-data"]["plugin-info"].plugin = $data.plugin_name |
+     .["zsh-data"]["plugin-info"]["param-default"] = $data.param_default |
      .["zsh-data"]["plugin-info"].user = $data.plugin_org |
      .["zsh-data"]["plugin-info"].version = $data.version |
      .["zsh-data"]["zinit-ices"][$profile] = $data.ices' \
@@ -363,7 +367,7 @@ update_ices() {
       <(jq --sort-keys . <<< "$data") \
       <(jq --sort-keys . $pkgfile))"
     then
-      echo_sucess "$pkgfile [$profile]: No change."
+      echo_success "$pkgfile [$profile]: No change."
       return
     else
       echo_warn "$pkgfile [$profile]: Files differ!"
@@ -380,7 +384,11 @@ update_ices() {
 
   if [[ "$rc" -eq 0 ]]
   then
-    mv "$tmpfile" "$pkgfile"
+    mv "$tmpfile" "$pkgfile" && {
+      echo_success "Generated ${package}/package.json"
+    } || {
+      echo_err "Failed to write ${package}/package.json"
+    }
     return "$?"
   fi
 
@@ -398,10 +406,7 @@ generate_package_json_profile() {
     return "$?"
   fi
 
-  if update_ices "$package" "$profile" "$zinit_json_data"
-  then
-    echo_sucess "Generated ${profile}/package.json"
-  fi
+  update_ices "$package" "$profile" "$zinit_json_data"
 }
 
 generate_package_json() {
@@ -454,7 +459,8 @@ generate_ices_zsh_files() {
   echo_info "Generating ices.zsh for package $package"
   local srcfile pkgfile="$package/package.json"
   local content ice ice_data ice_val metadata plugin
-  local author description license message plugin_url requirements url version
+  local author description license message param_default plugin_url requirements \
+        url version
   local -a ices
 
   # Constants
@@ -509,6 +515,7 @@ generate_ices_zsh_files() {
     version="$(jq -er '.version // ""' "$pkgfile")"
     # items in plugin-info
     message="$(jq -er '.message // ""' <<< "$metadata")"
+    param_default="$(jq -er '.["param-default"] // ""' <<< "$metadata")"
     plugin_url="$(jq -er '.url // ""' <<< "$metadata")"
     # FIXME The requirements field really shouldn't be in the ices array...
     requirements="$(jq -er '.requires // ""' <<< "$ice_data")"
@@ -528,7 +535,8 @@ generate_ices_zsh_files() {
 
     # Sanitize metadata
     local var val
-    for var in author description license message requirements url version
+    for var in author description license message param_default requirements \
+               url version
     do
       # FIXME the lines below feel wrong
       val="${!var}"
@@ -546,6 +554,7 @@ generate_ices_zsh_files() {
     content+="DESCRIPTION='${description}'\n"
     content+="LICENSE='${license}'\n"
     content+="MESSAGE='${message}'\n"
+    content+="PARAM_DEFAULT='${param_default}'\n"
     content+="REQUIREMENTS='${requirements}'\n"
     content+="URL='${url}'\n"
     content+="VERSION='${version}'\n"
@@ -563,6 +572,12 @@ generate_ices_zsh_files() {
     if ! [[ " ${ices[*]} " =~ " id-as " ]]
     then
       ices=(id-as "${ices[@]}")
+    fi
+
+    # Add param ice
+    if ! [[ " ${ices[*]} " =~ " param " ]] && [[ -n "$param_default" ]]
+    then
+      ices+=("param")
     fi
 
     for ice in "${ices[@]}"  # note: $ices holds the ice names only
@@ -589,6 +604,9 @@ generate_ices_zsh_files() {
           else
             ice_val="${ice_val:-zinit-package-${package}}"
           fi
+          ;;
+        param)
+          [[ -z "$ice_val" ]] && ice_val="$param_default"
           ;;
       esac
 
@@ -626,7 +644,7 @@ generate_ices_zsh_files() {
     then
       if echo -e "$content" | diff "$srcfile" -
       then
-        echo_sucess "$srcfile: No change."
+        echo_success "$srcfile: No change."
         return
       else
         echo_warn "$srcfile: Files differ!"
@@ -640,7 +658,7 @@ generate_ices_zsh_files() {
       echo
     else
       echo -e "$content" > "$srcfile" && {
-        echo_sucess "Generated $srcfile"
+        echo_success "Generated $srcfile"
       } || {
         echo_err "Failed to generate $srcfile"
         return 1

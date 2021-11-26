@@ -41,15 +41,16 @@ supported.
 
 📝 You can also define metadata in your `.ices.zsh` files:
 
-| Variable     | Description                           | Example Value                               |
-|--------------|---------------------------------------|---------------------------------------------|
-| AUTHOR       | Author of the package                 | zdharma-continuum                           |
-| DESCRIPTION  | Description of the package            | My amazing blockchain project               |
-| LICENSE      | License of the packaged software      | `GPL-3`                                     |
-| MESSAGE      | Message to be display when installing | Thanks for using zinit pack!                |
-| REQUIREMENTS | List of requirements for this package | `bgn;tar`                                   |
-| URL          | Link to the upstream project          | `https://github.com/zdharma-continuum/null` |
-| VERSION      | Version of the package                | `0.0.1`                                     |
+| Variable      | Description                           | Example Value                               |
+|---------------|---------------------------------------|---------------------------------------------|
+| AUTHOR        | Author of the package                 | zdharma-continuum                           |
+| DESCRIPTION   | Description of the package            | My amazing blockchain project               |
+| LICENSE       | License of the packaged software      | `GPL-3`                                     |
+| MESSAGE       | Message to be display when installing | Thanks for using zinit pack!                |
+| REQUIREMENTS  | List of requirements for this package | `bgn;tar`                                   |
+| PARAM_DEFAULT | *Optional* Default `param` ice value  | `MOD -> speed-test`                         |
+| URL           | Link to the upstream project          | `https://github.com/zdharma-continuum/null` |
+| VERSION       | Version of the package                | `0.0.1`                                     |
 
 Also please refer to the [`null` package](./null/) for an up-to-date example
 
