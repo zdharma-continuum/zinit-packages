@@ -774,7 +774,7 @@ usage() {
   echo "Global flags:"
   echo "  --check   Check if generated files are different"
   echo "  --debug   Debug mode"
-  echo "  --dry-run Don't write files, just echo what would be generated"
+  echo "  --dry-run Don't write files, just display what was generated to stdout"
   echo
   echo "Actions:"
   echo "  create   PACKAGE  [PROFILES...]   Create new packages or profiles"
