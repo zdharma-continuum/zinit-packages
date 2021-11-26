@@ -95,6 +95,7 @@ PACKAGE_VARS=(
   DESCRIPTION
   LICENSE
   MESSAGE
+  NAME
   PARAM_DEFAUT
   REQUIREMENTS
   URL
@@ -259,6 +260,7 @@ zinit() {
     --arg description "$DESCRIPTION" \
     --arg license "$LICENSE" \
     --arg message "$MESSAGE" \
+    --arg name "$NAME" \
     --arg param_default "$PARAM_DEFAUT" \
     --arg plugin_name "$plugin_name" \
     --arg plugin_org "$plugin_org" \
@@ -269,11 +271,12 @@ zinit() {
     '{
       "author": $author,
       "description": $description,
-      "ices": (reduce inputs as $i ({}; . + {
+      "ices": ({"requires": $requirements} + reduce inputs as $i ({}; . + {
         ($i): (input | (tonumber? // .))
       })),
       "license": $license,
       "message": $message,
+      "name": $name,
       "param_default": $param_default,
       "plugin_name": $plugin_name,
       "plugin_org": $plugin_org,
@@ -353,7 +356,7 @@ update_ices() {
      .description = $data.description |
      .homepage = $data.url |
      .license = $data.license |
-     .name = $data.repo |
+     .name = ($data.name // $data.repo) |
      .version = $data.version |
      .["zsh-data"]["plugin-info"]["generated-by"] = $generated_by |
      .["zsh-data"]["plugin-info"]["generation-date"] = $generated_date |
@@ -394,7 +397,7 @@ update_ices() {
   if [[ "$rc" -eq 0 ]]
   then
     mv "$tmpfile" "$pkgfile" && {
-      echo_success "Generated ${package}/package.json"
+      echo_success "Updated ${package}/package.json [${profile}]"
     } || {
       echo_err "Failed to write ${package}/package.json"
       return 1
@@ -530,6 +533,7 @@ generate_ices_zsh_files() {
     author="$(jq -er '.author // ""' "$pkgfile")"
     description="$(jq -er '.description // ""' "$pkgfile")"
     license="$(jq -er '.license // ""' "$pkgfile")"
+    name="$(jq -er '.name // ""' "$pkgfile")"
     url="$(jq -er '.homepage // ""' "$pkgfile")"
     version="$(jq -er '.version // ""' "$pkgfile")"
     # items in plugin-info
@@ -554,8 +558,8 @@ generate_ices_zsh_files() {
 
     # Sanitize metadata
     local var val
-    for var in author description license message param_default requirements \
-               url version
+    for var in author description license message name param_default \
+               requirements url version
     do
       # FIXME the lines below feel wrong
       val="${!var}"
@@ -573,6 +577,7 @@ generate_ices_zsh_files() {
     content+="DESCRIPTION='${description}'\n"
     content+="LICENSE='${license}'\n"
     content+="MESSAGE='${message}'\n"
+    content+="NAME='${name}'\n"
     content+="PARAM_DEFAULT='${param_default}'\n"
     content+="REQUIREMENTS='${requirements}'\n"
     content+="URL='${url}'\n"
@@ -621,7 +626,7 @@ generate_ices_zsh_files() {
           then
             ice_val="${ice_val:-${plugin}}"
           else
-            ice_val="${ice_val:-zinit-package-${package}}"
+            ice_val="${ice_val:-${name:-zinit-package-${package}}}"
           fi
           ;;
         param)
@@ -1040,12 +1045,6 @@ then
           rc=1
         fi
       done
-
-      if [[ "$rc" -ne 0 ]]
-      then
-        echo_err "Some packages failed to update:"
-        echo_err "${failed_pkgs[*]}"
-      fi
       ;;
     *)
       echo_err "Unknown action: $ACTION"
