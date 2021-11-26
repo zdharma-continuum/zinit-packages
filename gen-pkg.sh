@@ -620,8 +620,9 @@ generate_ices_zsh_files() {
           ;;
         id-as)
           # if the plugin does not have a propper id then use the package name
-          # TODO It make sense to *first* try to use $plugin, and then fall
-          # back to $package
+          # 1. Use plugin name (if != zdharma-continuum/null)
+          # 2. Default to NAME
+          # 3. If NAME is not set, use zinit-package-$package
           if [[ "$plugin" != "$default_plugin" ]]
           then
             ice_val="${ice_val:-${plugin}}"
