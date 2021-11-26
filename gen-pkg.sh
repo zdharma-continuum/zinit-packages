@@ -348,14 +348,23 @@ update_ices() {
      .["zsh-data"]["zinit-ices"][$profile] = $data.ices' \
     "$input_file" > "$tmpfile"
 
+  local data
+  data="$(jq -e . "$tmpfile")"
+  local rc="$?"
+
   if [[ -n "$DRY_RUN" ]]
   then
-    jq -e . "$tmpfile"
+    cat <<< "$data"
+    return "$rc"
+  fi
+
+  if [[ "$rc" -eq 0 ]]
+  then
+    mv "$tmpfile" "$pkgfile"
     return "$?"
   fi
 
-  mv "$tmpfile" "$pkgfile"
-  jq -e . "$pkgfile" >/dev/null
+  return "$rc"
 }
 
 generate_package_json_profile() {
