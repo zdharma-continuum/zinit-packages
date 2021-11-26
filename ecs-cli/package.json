@@ -49,8 +49,8 @@
                 "is-snippet": "",
                 "lucid": "",
                 "as": "null",
-                "mv": "*latest -> ecs-cli",
-                "atclone": "chmod +x *; cp -vf ecs-cli $ZPFX/bin",
+                "mv": "*ecs-cli* -> ecs-cli",
+                "atclone": "chmod +x ecs-cli; cp -vf ecs-cli $ZPFX/bin",
                 "atpull": "%atclone",
                 "nocompile": ""
             },
@@ -58,10 +58,8 @@
                 "is-snippet": "",
                 "lucid": "",
                 "as": "null",
-                "mv": "*latest -> ecs-cli",
-                "atclone": "chmod +x *",
                 "atpull": "%atclone",
-                "sbin": "ecs-cli",
+                "sbin": "*ecs-cli* -> ecs-cli",
                 "nocompile": ""
             }
         }
