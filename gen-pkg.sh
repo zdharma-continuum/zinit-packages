@@ -362,10 +362,10 @@ update_ices() {
       <(jq --sort-keys . <<< "$data") \
       <(jq --sort-keys . $pkgfile)
     then
-      echo_sucess "$pkgfile: No change."
+      echo_sucess "$pkgfile [$profile]: No change."
       return
     else
-      echo_warn "$pkgfile: Files differ!"
+      echo_warn "$pkgfile [$profile]: Files differ!"
       return 1
     fi
   fi
