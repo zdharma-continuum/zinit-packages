@@ -358,14 +358,16 @@ update_ices() {
 
   if [[ -n "$CHECK" ]]
   then
-    if diff \
+    local diff_msg
+    if diff_msg="$(diff \
       <(jq --sort-keys . <<< "$data") \
-      <(jq --sort-keys . $pkgfile)
+      <(jq --sort-keys . $pkgfile))"
     then
       echo_sucess "$pkgfile [$profile]: No change."
       return
     else
       echo_warn "$pkgfile [$profile]: Files differ!"
+      echo "$diff_msg" >&2
       return 1
     fi
   fi
