@@ -355,6 +355,7 @@ update_ices() {
   fi
 
   mv "$tmpfile" "$pkgfile"
+  jq -e . "$pkgfile" >/dev/null
 }
 
 generate_package_json_profile() {
@@ -431,6 +432,12 @@ generate_ices_zsh_files() {
   if ! [[ -f "$pkgfile" ]]
   then
     echo_err "Missing package.json in ${package}/"
+    return 1
+  fi
+
+  if ! jq -e . "$pkgfile"
+  then
+    echo_err "$pkgfile: Invalid JSON"
     return 1
   fi
 
@@ -682,9 +689,17 @@ run_package() {
   then
     if [[ -n "$RUN_PACKAGE" ]]
     then
-      generate_package_json_profile "$package" "$profile"
+      if ! generate_package_json_profile "$package" "$profile"
+      then
+        echo_err "Failed to generate package.json"
+        return 1
+      fi
     else
-      generate_ices_zsh_files "$package" "$profile"
+      if ! generate_ices_zsh_files "$package" "$profile"
+      then
+        echo_err "Failed to generate ${profile}.ices.zsh"
+        return 1
+      fi
     fi
   fi
 
