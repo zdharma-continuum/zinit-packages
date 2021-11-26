@@ -346,7 +346,7 @@ update_ices() {
      .["zsh-data"]["plugin-info"].user = $data.plugin_org |
      .["zsh-data"]["plugin-info"].version = $data.version |
      .["zsh-data"]["zinit-ices"][$profile] = $data.ices' \
-    "$input_file" > "$tmpfile"
+    "$input_file" > "$tmpfile" || return 1
 
   local data
   data="$(jq -e . "$tmpfile")"
@@ -444,7 +444,7 @@ generate_ices_zsh_files() {
     return 1
   fi
 
-  if ! jq -e . "$pkgfile"
+  if ! jq -e . "$pkgfile" >/dev/null
   then
     echo_err "$pkgfile: Invalid JSON"
     return 1
@@ -805,7 +805,7 @@ then
         ACTION=create
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
-      -r|--reverse)
+      -r|--rev|--reverse)
         ACTION=generate-ices-zsh
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
@@ -835,7 +835,7 @@ then
       ACTION=generate-json
       shift
       ;;
-    gen-ices|reverse|r)
+    gen-ices|reverse|rev|r)
       ACTION=generate-ices-zsh
       shift
       ;;
