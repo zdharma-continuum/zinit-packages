@@ -787,7 +787,7 @@ usage() {
   echo "           --force                  Force creation of files regardless if they already exist"
   echo "  gen-json [PACKAGE] [PROFILES...]  Generate package.json files from source ices.zsh"
   echo "  gen-ices [PACKAGE] [PROFILES...]  Generate ices.zsh from package.json"
-  echo "           --reproducible           Set timestamps to UNIX time 0"
+  echo "           --reproducible           Re-use generation timestamps (defaults to UNIX time 0 if JSON/ices.zsh file does not exist yet)"
   echo "  run      PACKAGE [PROFILE]        Run a given package inside a container"
   echo "           --non-interactive        Don't keep the container running but exit right away"
   echo '           --pack                   Run zinit pack"PROFILE" PACKAGE instead of sourcing the ices.zsh file'
