@@ -356,6 +356,17 @@ update_ices() {
   data="$(jq -e . "$tmpfile")"
   local rc="$?"
 
+  if [[ -n "$CHECK" ]] && diff \
+    <(jq --sort-keys . <<< "$data") \
+    <(jq --sort-keys . $pkgfile)
+  then
+    echo_sucess "$pkgfile: No change."
+    return
+  else
+    echo_warn "$pkgfile: Files differ!"
+    return 1
+  fi
+
   if [[ -n "$DRY_RUN" ]]
   then
     cat <<< "$data"
@@ -606,6 +617,15 @@ generate_ices_zsh_files() {
     content+="\n\n$modeline"
     echo_debug "Generated content for ${srcfile}:\n${content}"
 
+    if [[ -n "$CHECK" ]] && echo -e "$content" | diff "$srcfile" -
+    then
+      echo_sucess "$srcfile: No change."
+      return
+    else
+      echo_warn "$srcfile: Files differ!"
+      return 1
+    fi
+
     if [[ -n "$DRY_RUN" ]]
     then
       echo -e "$content"
@@ -752,8 +772,9 @@ usage() {
   echo "ACTIONS: create|gen-json|gen-ices|run|update-ices"
   echo
   echo "Global flags:"
+  echo "  --check   Check if generated files are different"
   echo "  --debug   Debug mode"
-  echo "  --dry-run Don't anything, just echo what would be generated"
+  echo "  --dry-run Don't write files, just echo what would be generated"
   echo
   echo "Actions:"
   echo "  create   PACKAGE  [PROFILES...]   Create new packages or profiles"
@@ -770,6 +791,7 @@ usage() {
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
 then
+  CHECK="${CHECK:-}"
   DEBUG="${DEBUG:-}"
   DRY_RUN="${DRY_RUN:-}"
   FORCE="${FORCE:-}"
@@ -808,12 +830,16 @@ then
         REPRODUCIBLE=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
+      -c|--check)
+        CHECK=1
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        ;;
       --regen*|-rr)
         REGENERATE=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
       # Action flags
-      -c|--create|-i|--init)
+      -C|--create|-i|--init)
         ACTION=create
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
@@ -895,7 +921,7 @@ then
   # shellcheck disable=SC2010
   elif [[ -d "$PACKAGE" ]]
   then
-    # "normal" mode, not --reverse
+    # Search for valid packages
     if ! ls -1 "$PACKAGE" | grep -qE '.ices.zsh$|^package.json$'
     then
       for pkg in $(list_packages "$PACKAGE")
