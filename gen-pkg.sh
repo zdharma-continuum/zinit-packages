@@ -507,7 +507,7 @@ generate_ices_zsh_files() {
       jq -e -r -c '.["zsh-data"]["zinit-ices"] | keys[]' "$pkgfile")
   fi
 
-  echo_info "Selected profiles: ${profiles[*]:-default}"
+  echo_info "[${package}] Selected profiles: ${profiles[*]:-default}"
 
   local profile
   for profile in "${profiles[@]}"
@@ -822,9 +822,10 @@ usage() {
   echo "ACTIONS: create|gen-json|gen-ices|run|update-ices"
   echo
   echo "Global flags:"
-  echo "  --check   Check if generated files are different"
-  echo "  --debug   Debug mode"
-  echo "  --dry-run Don't write files, just display what was generated to stdout"
+  echo "  --check    Check if generated files are different"
+  echo "  --debug    Debug mode"
+  echo "  --dry-run  Don't write files, just display what was generated to stdout"
+  echo "  --parallel Async generation of ices.zsh/package.json"
   echo
   echo "Actions:"
   echo "  create   PACKAGE  [PROFILES...]   Create new packages or profiles"
@@ -844,6 +845,7 @@ then
   CHECK="${CHECK:-}"
   DEBUG="${DEBUG:-}"
   DRY_RUN="${DRY_RUN:-}"
+  FAST="${FAST:-}"
   FORCE="${FORCE:-}"
   NON_INTERACTIVE="${NON_INTERACTIVE:-}"
   RUN_PACKAGE="${RUN_PACKAGE:-}"
@@ -856,12 +858,20 @@ then
   for arg in "${ARGS[@]}"
   do
     case "$arg" in
+      -c|--check)
+        CHECK=1
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        ;;
       -d|--debug)
         DEBUG=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
       -f|--force)
         FORCE=1
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        ;;
+      -F|--fast|--parallel)
+        FAST=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
       -k|--dry-run)
@@ -878,10 +888,6 @@ then
         ;;
       -R|-rp|--rep|--repro|--reproducible)
         REPRODUCIBLE=1
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
-        ;;
-      -c|--check)
-        CHECK=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
       --regen*|-rr)
@@ -995,6 +1001,7 @@ then
 
   rc=0
   failed_pkgs=()
+  declare -A JOBS=()
 
   echo_info "Running action: $ACTION"
 
@@ -1022,7 +1029,11 @@ then
       # Generate package.json files
       for pkg in "${PACKAGES[@]}"
       do
-        if ! generate_package_json "$pkg" "${PROFILES[@]}"
+        if [[ -n "$FAST" ]]
+        then
+          generate_package_json "$pkg" "${PROFILES[@]}" &
+          JOBS["$pkg"]="$!"
+        elif ! generate_package_json "$pkg" "${PROFILES[@]}"
         then
           failed_pkgs+=("$pkg")
           rc=1
@@ -1039,7 +1050,11 @@ then
       # Generate ices.zsh files
       for pkg in "${PACKAGES[@]}"
       do
-        if ! generate_ices_zsh_files "$pkg" "${PROFILES[@]}"
+        if [[ -n "$FAST" ]]
+        then
+          generate_ices_zsh_files "$pkg" "${PROFILES[@]}" &
+          JOBS["$pkg"]="$!"
+        elif ! generate_ices_zsh_files "$pkg" "${PROFILES[@]}"
         then
           failed_pkgs+=("$pkg")
           rc=1
@@ -1052,6 +1067,18 @@ then
       exit 2
       ;;
   esac
+
+  if [[ -n "$FAST" ]]
+  then
+    for pkg in ${!JOBS[@]}
+    do
+      if ! wait "${JOBS["$pkg"]}"
+      then
+        failed_pkgs+=("$pkg")
+        rc=1
+      fi
+    done
+  fi
 
   if [[ "$rc" -ne 0 ]] && [[ -n "${failed_pkgs[*]}" ]]
   then
