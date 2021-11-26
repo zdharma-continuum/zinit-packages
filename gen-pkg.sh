@@ -147,6 +147,10 @@ echo_info() {
   echo -e "\e[34m🫐 ${*}\e[0m" >&2
 }
 
+echo_sucess() {
+  echo -e "\e[32m✅ ${*}\e[0m" >&2
+}
+
 echo_warn() {
   echo -e "\e[33m🚸 ${*}\e[0m" >&2
 }
@@ -378,7 +382,10 @@ generate_package_json_profile() {
     return "$?"
   fi
 
-  update_ices "$package" "$profile" "$zinit_json_data"
+  if update_ices "$package" "$profile" "$zinit_json_data"
+  then
+    echo_sucess "Generated ${profile}/package.json"
+  fi
 }
 
 generate_package_json() {
@@ -604,7 +611,12 @@ generate_ices_zsh_files() {
       echo -e "$content"
       echo
     else
-      echo -e "$content" > "$srcfile"
+      echo -e "$content" > "$srcfile" && {
+        echo_sucess "Generated $srcfile"
+      } || {
+        echo_err "Failed to generate $srcfile"
+        return 1
+      }
     fi
   done
 }
@@ -792,7 +804,7 @@ then
         RUN_PACKAGE=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
-      -R|--reproducible)
+      -R|-rp|--rep|--repro|--reproducible)
         REPRODUCIBLE=1
         IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
         ;;
