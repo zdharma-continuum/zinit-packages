@@ -298,8 +298,6 @@ get_zinit_json_data() {
 
   # call our fake zinit func
   # shellcheck disable=1090
-  # TODO disable expansions since this will lead to errors
-  # example: firefox-dev
   source "$srcfile"
 }
 
@@ -678,7 +676,11 @@ generate_ices_zsh_files() {
 
     if [[ -n "$is_snippet" ]] && [[ -n "$plugin_url" ]]
     then
-      content+="  for \"${plugin_url}\""
+      # Use single quotes here since the url might contain vars with expansions
+      # that bash is incapable of handling (eg: ${(M)OSTYPE#(linux|darwin)})
+      # It's safe to use single quotes here. zinit will expand vars in the
+      # plugin url.
+      content+="  for '${plugin_url}'"
     else
       content+="  for @${plugin}"
     fi
