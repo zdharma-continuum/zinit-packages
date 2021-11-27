@@ -17,7 +17,7 @@ to automatically:
 
 Example invocations that'll install
 [remarkjs/remark](https://github.com/remarkjs/remark) by using the
-[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex:
+[bin-gem-node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex:
 
 ```zsh
 # Download the Node package of remark-cli, remark-man and remark-html
@@ -45,7 +45,7 @@ The Zplugin command executed will be equivalent to:
 zinit lucid as=null \
     node="remark <- !remark-cli; remark-man; remark-html" \,
     sbin="n:node_modules/.bin/remark" for \
-        zdharma/null
+        zdharma-continuum/null
 ```
 
 ## `man-only` Profile
@@ -58,7 +58,7 @@ The Zplugin command executed will be equivalent to:
 zinit lucid as=null \
     node="remark <- !remark-cli; remark-man" \,
     sbin="n:node_modules/.bin/remark" for \
-        zdharma/null
+        zdharma-continuum/null
 ```
 
 ## `html-only` Profile
@@ -71,7 +71,7 @@ The Zplugin command executed will be equivalent to:
 zinit lucid as=null \
     node="remark <- !remark-cli; remark-html" \,
     sbin="n:node_modules/.bin/remark" for \
-        zdharma/null
+        zdharma-continuum/null
 ```
 
 <!-- vim:set ft=markdown tw=80 fo+=an1 autoindent: -->

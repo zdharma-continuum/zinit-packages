@@ -20,7 +20,7 @@
 This package is special – it is designed for easy installing of any Ruby Gems
 locally inside the plugin directory, exposing their binaries via *shims* (i.e.:
 forwarder scripts) created automatically by
-[Bin-Gem-Node](https://github.com/zplugin/z-a-bin-gem-gem) annex.
+[Bin-Gem-Node](https://github.com/zplugin/zinit-annex-bin-gem-gem) annex.
 
 The Ruby Gem(s) to install are specified by the `param'GEM → {gem1}; GEM2 →
 {gem2}; …'` ice. The name of the plugin will be `{gem1}`, unless `id-as''` ice
@@ -51,7 +51,7 @@ The Zplugin command executed will be equivalent to:
 zinit lucid id-as="${${:-%IDAS%}:-%GEM%}" as=null \
     gem="%GEM%;%GEM2%;%GEM3%;%GEM4%;%GEM5%;%GEM6%;%GEM7%;%OTHER%" \
     sbin="n:bin/*" for \
-        zdharma/null
+        zdharma-continuum/null
 ```
 
 The package is thus a simplifier of Zplugin commands.

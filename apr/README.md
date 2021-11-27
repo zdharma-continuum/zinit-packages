@@ -28,7 +28,7 @@ zinit pack for apr
 
 Provides the Apache Portable Runtime library by compiling and installing it to
 the `$ZPFX` directory (`~/.zinit/polaris` by default). It uses the
-[zinit-zsh/z-a-as-monitor](https://github.com/zinit-zsh/z-a-as-monitor) annex to
+[zdharma-continuum/zinit-annex-as-monitor](https://github.com/zdharma-continuum/zinit-annex-as-monitor) annex to
 download the latest Apache Portable Runtime tarball.
 
 The Zinit command executed will be equivalent to:

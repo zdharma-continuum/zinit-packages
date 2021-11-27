@@ -1,58 +1,68 @@
 {
-    "_from": "zsh@^6.1.0",
-    "_id": "zsh-static@6.1.0",
-    "_spec": "zsh-static@^6.1.0",
-    "name": "zsh-static",
-    "description": "Statically-linked, hermetic, relocatable ZSH",
-    "version": "6.1.0",
-    "homepage": "https://github.com/romkatv/zsh-bin",
-    "bugs": {
-        "url": "https://github.com/romkatv/zsh-bin/issues"
+  "_from": "zsh@^6.1.0",
+  "_id": "zsh-static@6.1.0",
+  "_spec": "zsh-static@^6.1.0",
+  "name": "zsh-static",
+  "description": "Statically-linked, hermetic, relocatable ZSH",
+  "version": "6.1.0",
+  "homepage": "https://github.com/romkatv/zsh-bin",
+  "bugs": {
+    "url": "https://github.com/romkatv/zsh-bin/issues"
+  },
+  "keywords": [
+    "Zshell",
+    "zsh"
+  ],
+  "zsh-data": {
+    "plugin-info": {
+      "user": "romkatv",
+      "plugin": "zsh-bin",
+      "generated-by": "zinit-pkg-gen.sh",
+      "generation-date": "2021-11-27T11:44:25+01:00",
+      "message": "",
+      "param-default": "",
+      "version": "6.1.0"
     },
-    "keywords": [
-        "Zshell",
-        "zsh"
-    ],
-    "zsh-data": {
-        "plugin-info": {
-            "user": "romkatv",
-            "plugin": "zsh-bin"
-        },
-        "zinit-ices": {
-            "bgn": {
-                "requires": "cp;tar;bgn",
-                "from": "gh-r",
-                "bpick": "*.tar.gz",
-                "lucid": "",
-                "as": "null",
-                "sbin": "bin/zsh*",
-                "atclone": "",
-                "atpull": "%atclone",
-                "nocompile": "",
-                "nocompletions": ""
-            },
-            "default": {
-                "requires": "cp",
-                "lucid": "",
-                "git": "",
-                "depth": "1",
-                "as": "null",
-                "nocompile": "",
-                "nocompletions": "",
-                "atclone": "./install -e yes -d /usr/local",
-                "atpull": "%atclone"
-            },
-            "rootless": {
-                "requires": "cp",
-                "lucid": "",
-                "git": "",
-                "depth": "1",
-                "as": "null",
-                "nocompile": "",
-                "nocompletions": "",
-                "atclone": "./install -e no -d ~/.local",
-                "atpull": "%atclone"
-            }
-        }
+    "zinit-ices": {
+      "bgn": {
+        "requires": "cp;tar;bgn",
+        "sbin": "bin/zsh*",
+        "nocompile": "",
+        "lucid": "",
+        "atpull": "%atclone",
+        "as": "null",
+        "nocompletions": "",
+        "id-as": "romkatv/zsh-bin",
+        "from": "gh-r",
+        "bpick": "*.tar.gz",
+        "atclone": ""
+      },
+      "default": {
+        "requires": "cp",
+        "git": "",
+        "nocompile": "",
+        "lucid": "",
+        "atpull": "%atclone",
+        "as": "null",
+        "nocompletions": "",
+        "id-as": "romkatv/zsh-bin",
+        "depth": 1,
+        "atclone": "./install -e yes -d /usr/local"
+      },
+      "rootless": {
+        "requires": "cp",
+        "git": "",
+        "nocompile": "",
+        "lucid": "",
+        "atpull": "%atclone",
+        "as": "null",
+        "nocompletions": "",
+        "id-as": "romkatv/zsh-bin",
+        "depth": 1,
+        "atclone": "./install -e no -d ~/.local"
+      }
     }
+  },
+  "author": "",
+  "license": ""
 }

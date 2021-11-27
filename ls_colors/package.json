@@ -1,79 +1,89 @@
 {
-    "_from": "ls_colors@^1.0.0",
-    "_id": "zsh-ls_colors@1.0.0",
-    "_inBundle": false,
-    "_location": "/zsh-ls_colors",
-    "_phantomChildren": {},
-    "_requested": {
-        "type": "range",
-        "registry": true,
-        "raw": "ls_colors@^1.0.0",
-        "name": "ls_colors",
-        "escapedName": "ls_colors",
-        "rawSpec": "^1.0.0",
-        "saveSpec": null,
-        "fetchSpec": "^1.0.0"
+  "_from": "ls_colors@^1.0.0",
+  "_id": "zsh-ls_colors@1.0.0",
+  "_inBundle": false,
+  "_location": "/zsh-ls_colors",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "ls_colors@^1.0.0",
+    "name": "ls_colors",
+    "escapedName": "ls_colors",
+    "rawSpec": "^1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0"
+  },
+  "_requiredBy": [],
+  "_spec": "ls_colors@^1.0.0",
+  "_where": "/root/github2/pkg-LS_COLORS",
+  "author": "Magnus Woldrich",
+  "bugs": {
+    "url": "https://github.com/trapd00r/LS_COLORS/issues"
+  },
+  "version": "1.0.4",
+  "contributors": [],
+  "dependencies": {},
+  "deprecated": false,
+  "description": "A collection of LS_COLORS definitions; needs your contribution!",
+  "devDependencies": {},
+  "directories": {
+    "test": "test"
+  },
+  "homepage": "https://github.com/trapd00r/LS_COLORS",
+  "keywords": [
+    "GNU ls colors",
+    "exa colors",
+    "terminal colors",
+    "zsh"
+  ],
+  "license": "Artistic License",
+  "name": "zsh-ls_colors",
+  "zsh-data": {
+    "plugin-info": {
+      "user": "trapd00r",
+      "plugin": "LS_COLORS",
+      "version": "1.0.4",
+      "generated-by": "zinit-pkg-gen.sh",
+      "generation-date": "2021-11-27T11:44:10+01:00",
+      "message": "",
+      "param-default": ""
     },
-    "_requiredBy": [],
-    "_spec": "ls_colors@^1.0.0",
-    "_where": "/root/github2/pkg-LS_COLORS",
-    "author": "Magnus Woldrich",
-    "bugs": {
-        "url": "https://github.com/trapd00r/LS_COLORS/issues"
-    },
-    "version": "1.0.4",
-    "contributors": [],
-    "dependencies": {},
-    "deprecated": false,
-    "description": "A collection of LS_COLORS definitions; needs your contribution!",
-    "devDependencies": {},
-    "directories": {
-        "test": "test"
-    },
-    "homepage": "https://github.com/trapd00r/LS_COLORS",
-    "keywords": [
-        "GNU ls colors",
-        "exa colors",
-        "terminal colors",
-        "zsh"
-    ],
-    "license": "Artistic License",
-    "name": "zsh-ls_colors",
-    "zsh-data": {
-        "plugin-info": {
-            "user": "trapd00r",
-            "plugin": "LS_COLORS",
-            "version": "1.0.3"
-        },
-        "zinit-ices": {
-            "default": {
-                "git": "",
-                "lucid": "",
-                "reset": "",
-                "atclone": "[[ -z ${commands[dircolors]} ]] && local P=g; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' LS_COLORS; ${P}dircolors -b LS_COLORS >! clrs.zsh",
-                "atpull": "%atclone",
-                "pick": "clrs.zsh",
-                "nocompile": "!",
-                "atload": "zstyle ':completion:*:default' list-colors \"${(s.:.)LS_COLORS}\";"
-            },
-            "no-zsh-completion": {
-                "git": "",
-                "lucid": "",
-                "reset": "",
-                "atclone": "[[ -z ${commands[dircolors]} ]] && local P=g; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' LS_COLORS; ${P}dircolors -b LS_COLORS >! clrs.zsh",
-                "atpull": "%atclone",
-                "pick": "clrs.zsh",
-                "nocompile": "!"
-            },
-            "no-dir-color-swap": {
-                "git": "",
-                "lucid": "",
-                "atclone": "[[ -z ${commands[dircolors]} ]] && local P=g; ${P}dircolors -b LS_COLORS >! clrs.zsh",
-                "atpull": "%atclone",
-                "pick": "clrs.zsh",
-                "nocompile": "!",
-                "atload": "zstyle ':completion:*:default' list-colors \"${(s.:.)LS_COLORS}\";"
-            }
-        }
+    "zinit-ices": {
+      "default": {
+        "requires": "",
+        "reset": "",
+        "git": "",
+        "nocompile": "!",
+        "atload": "zstyle ':completion:*:default' list-colors \"${(s.:.)LS_COLORS}\";",
+        "lucid": "",
+        "atpull": "%atclone",
+        "id-as": "trapd00r/LS_COLORS",
+        "atclone": "[[ -z ${commands[dircolors]} ]] && local P=${${(M)OSTYPE##darwin}:+g}; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' LS_COLORS; ${P}dircolors -b LS_COLORS >! clrs.zsh",
+        "pick": "clrs.zsh"
+      },
+      "no-zsh-completion": {
+        "requires": "",
+        "reset": "",
+        "git": "",
+        "nocompile": "!",
+        "lucid": "",
+        "atpull": "%atclone",
+        "id-as": "trapd00r/LS_COLORS",
+        "atclone": "[[ -z ${commands[dircolors]} ]] && local P=${${(M)OSTYPE##darwin}:+g}; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' LS_COLORS; ${P}dircolors -b LS_COLORS >! clrs.zsh",
+        "pick": "clrs.zsh"
+      },
+      "no-dir-color-swap": {
+        "requires": "",
+        "git": "",
+        "nocompile": "!",
+        "atload": "zstyle ':completion:*:default' list-colors \"${(s.:.)LS_COLORS}\";",
+        "lucid": "",
+        "atpull": "%atclone",
+        "id-as": "trapd00r/LS_COLORS",
+        "atclone": "[[ -z ${commands[dircolors]} ]] && local P=${${(M)OSTYPE##darwin}:+g}; ${P}dircolors -b LS_COLORS >! clrs.zsh",
+        "pick": "clrs.zsh"
+      }
     }
+  }
 }

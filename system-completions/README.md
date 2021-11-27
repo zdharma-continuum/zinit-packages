@@ -45,7 +45,7 @@ zinit id-as=system-completions wait as=completion lucid \
     atload='fpath=( ${(u)fpath[@]:#$ZPFX/share/zsh/*} ); \
       fpath+=( $ZPFX/funs )' \
     atpull="%atclone" run-atpull for \
-         zdharma/null
+         zdharma-continuum/null
 ```
 
 <!-- vim:set ft=markdown tw=80 fo+=an1 autoindent: -->

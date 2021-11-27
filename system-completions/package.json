@@ -1,55 +1,61 @@
 {
-    "_from": "system-completions@^1.0.0",
-    "_id": "zsh-system-completions@1.0.0",
-    "_inBundle": false,
-    "_location": "/zsh-system-completions",
-    "_phantomChildren": {},
-    "_requested": {
-        "type": "range",
-        "registry": true,
-        "raw": "system-completions@^1.0.0",
-        "name": "system-completions",
-        "escapedName": "system-completions",
-        "rawSpec": "^1.0.0",
-        "saveSpec": null,
-        "fetchSpec": "^1.0.0"
+  "_from": "system-completions@^1.0.0",
+  "_id": "zsh-system-completions@1.0.0",
+  "_inBundle": false,
+  "_location": "/zsh-system-completions",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "system-completions@^1.0.0",
+    "name": "system-completions",
+    "escapedName": "system-completions",
+    "rawSpec": "^1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0"
+  },
+  "_requiredBy": [],
+  "_spec": "system-completions@^1.0.0",
+  "_where": "/root/pkgs/pkg-system-completions",
+  "author": "Sebastian Gniazdowski",
+  "bugs": {
+    "url": "https://github.com/zdharma-continuum/system-completions/issues"
+  },
+  "version": "1.0.0",
+  "contributors": [],
+  "dependencies": {},
+  "deprecated": false,
+  "description": "A package that brings stock Zsh completions under the control of Zinit",
+  "homepage": "https://github.com/zdharma-continuum/system-completions/",
+  "keywords": [
+    "completions",
+    "zsh"
+  ],
+  "license": "MIT",
+  "name": "zsh-system-completions",
+  "zsh-data": {
+    "plugin-info": {
+      "user": "zdharma-continuum",
+      "plugin": "null",
+      "version": "1.0.0",
+      "generated-by": "zinit-pkg-gen.sh",
+      "generation-date": "2021-11-27T11:44:20+01:00",
+      "message": "",
+      "param-default": ""
     },
-    "_requiredBy": [],
-    "_spec": "system-completions@^1.0.0",
-    "_where": "/root/pkgs/pkg-system-completions",
-    "author": "Sebastian Gniazdowski",
-    "bugs": {
-        "url": "https://github.com/zdharma-continuum/system-completions/issues"
-    },
-    "version": "1.0.0",
-    "contributors": [],
-    "dependencies": {},
-    "deprecated": false,
-    "description": "A package that brings stock Zsh completions under the control of Zinit",
-    "homepage": "https://github.com/zdharma-continuum/system-completions/",
-    "keywords": [
-        "completions",
-        "zsh"
-    ],
-    "license": "MIT",
-    "name": "zsh-system-completions",
-    "zsh-data": {
-        "plugin-info": {
-            "user": "zdharma-continuum",
-            "plugin": "null",
-            "version": "1.0.0"
-        },
-        "zinit-ices": {
-            "default": {
-                "git": "",
-                "lucid": "",
-                "as": "completion",
-                "atclone": "print Installing system completions...; mkdir -p $ZPFX/funs; command cp -f $ZPFX/share/zsh/$ZSH_VERSION/functions/^_* $ZPFX/funs; zinit creinstall -q $ZPFX/share/zsh/$ZSH_VERSION/functions;",
-                "atpull": "%atclone",
-                "atload": "fpath=( ${(u)fpath[@]:#$ZPFX/share/zsh/*} ); fpath+=( $ZPFX/funs );",
-                "run-atpull": "",
-                "nocompile": ""
-            }
-        }
+    "zinit-ices": {
+      "default": {
+        "requires": "",
+        "git": "",
+        "nocompile": "",
+        "atload": "fpath=( ${(u)fpath[@]:#$ZPFX/share/zsh/*} ); fpath+=( $ZPFX/funs );",
+        "lucid": "",
+        "atpull": "%atclone",
+        "as": "completion",
+        "id-as": "zsh-system-completions",
+        "atclone": "print Installing system completions...; mkdir -p $ZPFX/funs; command cp -f $ZPFX/share/zsh/$ZSH_VERSION/functions/^_* $ZPFX/funs; zinit creinstall -q $ZPFX/share/zsh/$ZSH_VERSION/functions;",
+        "run-atpull": ""
+      }
     }
+  }
 }

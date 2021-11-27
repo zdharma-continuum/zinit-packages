@@ -17,7 +17,7 @@ to automatically:
 
 Example invocations that'll install
 [thlorenz/doctoc](https://github.com/thlorenz/doctoc) by using the
-[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex:
+[bin-gem-node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex:
 
 ```zsh
 # Download the Node package of doctoc
@@ -37,7 +37,7 @@ The Zplugin command executed will be equivalent to:
 
 ```zsh
 zinit lucid as=null node="!doctoc" sbin="n:node_modules/.bin/doctoc" for \
-    zdharma/null
+    zdharma-continuum/null
 ```
 
 <!-- vim:set ft=markdown tw=80 fo+=an1 autoindent: -->

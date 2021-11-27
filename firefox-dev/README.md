@@ -44,7 +44,7 @@ zinit id-as"firefox-dev" as"command" lucid" \
 
 Provides the CLI command `firefox` by creating a forwarder script (a *shim*) to
 the `firefox-bin` command, in `$ZPFX/bin` by using the
-[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex. It's the best
+[bin-gem-node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex. It's the best
 method of providing the binary to the command line.
 
 The Zinit command executed will be equivalent to:

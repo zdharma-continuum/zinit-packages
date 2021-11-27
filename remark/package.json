@@ -1,78 +1,88 @@
 {
-    "_from": "remark@^11.0.2",
-    "_id": "zsh-remark@11.0.2",
-    "_inBundle": false,
-    "_location": "/zsh-remark",
-    "_phantomChildren": {},
-    "_requested": {
-        "type": "range",
-        "registry": true,
-        "raw": "remark@^11.0.2",
-        "name": "remark",
-        "escapedName": "remark",
-        "rawSpec": "^11.0.2",
-        "saveSpec": null,
-        "fetchSpec": "^11.0.2"
+  "_from": "remark@^11.0.2",
+  "_id": "zsh-remark@11.0.2",
+  "_inBundle": false,
+  "_location": "/zsh-remark",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "remark@^11.0.2",
+    "name": "remark",
+    "escapedName": "remark",
+    "rawSpec": "^11.0.2",
+    "saveSpec": null,
+    "fetchSpec": "^11.0.2"
+  },
+  "_requiredBy": [],
+  "_spec": "remark@^11.0.2",
+  "_where": "/root/github2/pkg-remark",
+  "author": "@unifiedjs collective",
+  "bugs": {
+    "url": "https://github.com/remarkjs/remark/issues"
+  },
+  "version": "11.0.4",
+  "contributors": [],
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Markdown processor powered by plugins part of the @unifiedjs collective",
+  "devDependencies": {},
+  "directories": {
+    "test": "test"
+  },
+  "homepage": "https://github.com/remarkjs/remark",
+  "keywords": [
+    "markdown",
+    "markdown processor",
+    "markdown converter",
+    "zsh"
+  ],
+  "license": "MIT",
+  "name": "zsh-remark",
+  "zsh-data": {
+    "plugin-info": {
+      "user": "zdharma-continuum",
+      "plugin": "null",
+      "version": "11.0.4",
+      "requires": "npm;bgn",
+      "generated-by": "zinit-pkg-gen.sh",
+      "generation-date": "2021-11-27T11:44:17+01:00",
+      "message": "",
+      "param-default": ""
     },
-    "_requiredBy": [],
-    "_spec": "remark@^11.0.2",
-    "_where": "/root/github2/pkg-remark",
-    "author": "@unifiedjs collective",
-    "bugs": {
-        "url": "https://github.com/remarkjs/remark/issues"
-    },
-    "version": "11.0.4",
-    "contributors": [],
-    "dependencies": {},
-    "deprecated": false,
-    "description": "Markdown processor powered by plugins part of the @unifiedjs collective",
-    "devDependencies": {},
-    "directories": {
-        "test": "test"
-    },
-    "homepage": "https://github.com/remarkjs/remark",
-    "keywords": [
-        "markdown",
-        "markdown processor",
-        "markdown converter",
-        "zsh"
-    ],
-    "license": "MIT",
-    "name": "zsh-remark",
-    "zsh-data": {
-        "plugin-info": {
-            "user": "zdharma",
-            "plugin": "null",
-            "version": "11.0.2",
-            "requires": "npm;bgn"
-        },
-        "zinit-ices": {
-            "default": {
-                "git": "",
-                "lucid": "",
-                "as": "null",
-                "node": "remark <- !remark-cli; remark-man; remark-html",
-                "sbin": "n:node_modules/.bin/remark",
-                "atpull": "%atclone",
-                "nocompile": ""
-            },
-            "man-only": {
-                "git": "",
-                "lucid": "",
-                "as": "null",
-                "node": "remark <- !remark-cli; remark-man",
-                "sbin": "n:node_modules/.bin/remark",
-                "nocompile": ""
-            },
-            "html-only": {
-                "git": "",
-                "lucid": "",
-                "as": "null",
-                "node": "remark <- !remark-cli; remark-html",
-                "sbin": "n:node_modules/.bin/remark",
-                "atpull": "%atclone",
-                "nocompile": ""
-            }
-        }
+    "zinit-ices": {
+      "default": {
+        "requires": "",
+        "sbin": "n:node_modules/.bin/remark",
+        "node": "remark <- !remark-cli; remark-man; remark-html",
+        "git": "",
+        "nocompile": "",
+        "lucid": "",
+        "atpull": "%atclone",
+        "as": "null",
+        "id-as": "zsh-remark"
+      },
+      "man-only": {
+        "requires": "",
+        "sbin": "n:node_modules/.bin/remark",
+        "node": "remark <- !remark-cli; remark-man",
+        "git": "",
+        "nocompile": "",
+        "lucid": "",
+        "as": "null",
+        "id-as": "zsh-remark"
+      },
+      "html-only": {
+        "requires": "",
+        "sbin": "n:node_modules/.bin/remark",
+        "node": "remark <- !remark-cli; remark-html",
+        "git": "",
+        "nocompile": "",
+        "lucid": "",
+        "atpull": "%atclone",
+        "as": "null",
+        "id-as": "zsh-remark"
+      }
     }
+  }
 }

@@ -43,7 +43,7 @@ zinit as=null id-as="ecs-cli" mv="*latest -> ecs-cli" \
 
 Provides the CLI command `ecs-cli` by creating a forwarder script (a *shim*) in
 `$ZPFX/bin` by using the
-[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex. It's the best
+[bin-gem-node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex. It's the best
 method of providing the binary to the command line.
 
 The Zplugin command executed will be equivalent to:

@@ -1,60 +1,65 @@
 {
-    "_from": "any-gem@^1.0.0",
-    "_id": "zsh-any-gem@1.0.0",
-    "_inBundle": false,
-    "_location": "/zsh-any-gem",
-    "_phantomChildren": {},
-    "_requested": {
-        "type": "range",
-        "registry": true,
-        "raw": "any-gem@^1.0.0",
-        "name": "any-gem",
-        "escapedName": "any-gem",
-        "rawSpec": "^1.0.0",
-        "saveSpec": null,
-        "fetchSpec": "^1.0.0"
+  "_from": "any-gem@^1.0.0",
+  "_id": "zsh-any-gem@1.0.0",
+  "_inBundle": false,
+  "_location": "/zsh-any-gem",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "any-gem@^1.0.0",
+    "name": "any-gem",
+    "escapedName": "any-gem",
+    "rawSpec": "^1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0"
+  },
+  "_requiredBy": [],
+  "_spec": "any-gem@^1.0.0",
+  "_where": "/root/github2/pkg-any-gem",
+  "author": "Sebastian Gniazdowski",
+  "bugs": {
+    "url": "https://github.com/zdharma-continuum/zinit-packages/issues"
+  },
+  "version": "1.0.0",
+  "contributors": [],
+  "dependencies": {},
+  "deprecated": false,
+  "description": "A package that can install any Ruby Gem and expose its binaries",
+  "devDependencies": {},
+  "directories": {
+    "test": "test"
+  },
+  "homepage": "https://github.com/zdharma-continuum/zinit-packages",
+  "keywords": [
+    "npm wrapper",
+    "zsh"
+  ],
+  "license": "MIT",
+  "name": "zsh-any-gem",
+  "zsh-data": {
+    "plugin-info": {
+      "user": "zdharma-continuum",
+      "plugin": "null",
+      "version": "1.0.0",
+      "requires": "npm;bgn",
+      "param-default": "GEM -> lolcat",
+      "generated-by": "zinit-pkg-gen.sh",
+      "generation-date": "2021-11-27T12:12:25+01:00",
+      "message": ""
     },
-    "_requiredBy": [],
-    "_spec": "any-gem@^1.0.0",
-    "_where": "/root/github2/pkg-any-gem",
-    "author": "Sebastian Gniazdowski",
-    "bugs": {
-        "url": "https://github.com/Zsh-Packages/any-gem/issues"
-    },
-    "version": "1.0.0",
-    "contributors": [],
-    "dependencies": {},
-    "deprecated": false,
-    "description": "A package that can install any Ruby Gem and expose its binaries",
-    "devDependencies": {},
-    "directories": {
-        "test": "test"
-    },
-    "homepage": "https://github.com/Zsh-Packages/any-gem",
-    "keywords": [
-        "npm wrapper",
-        "zsh"
-    ],
-    "license": "MIT",
-    "name": "zsh-any-gem",
-    "zsh-data": {
-        "plugin-info": {
-            "user": "zdharma",
-            "plugin": "null",
-            "version": "1.0.0",
-            "requires": "npm;bgn"
-        },
-        "zinit-ices": {
-            "default": {
-                "git": "",
-                "lucid": "",
-                "as": "null",
-                "id-as": "${${:-%IDAS%}:-%GEM%}",
-                "gem": "%GEM%;%GEM2%;%GEM3%;%GEM4%;%GEM5%;%GEM6%;%GEM7%;%OTHER%",
-                "sbin": "g:bin/*",
-                "atpull": "%atclone",
-                "nocompile": ""
-            }
-        }
+    "zinit-ices": {
+      "default": {
+        "requires": "",
+        "sbin": "g:bin/*",
+        "git": "",
+        "nocompile": "",
+        "lucid": "",
+        "atpull": "%atclone",
+        "as": "null",
+        "id-as": "${${:-%IDAS%}:-%GEM%}",
+        "gem": "%GEM%;%GEM2%;%GEM3%;%GEM4%;%GEM5%;%GEM6%;%GEM7%;%OTHER%"
+      }
     }
+  }
 }

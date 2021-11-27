@@ -17,7 +17,7 @@ to automatically:
 
 Example invocations that'll install
 [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor) by using the
-[bin-gem-node](https://github.com/zinit/z-a-bin-gem-node) annex:
+[bin-gem-node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex:
 
 ```zsh
 # Download the Gem of asciidoctor locally into the plugin directory
@@ -38,7 +38,7 @@ The Zplugin command executed will be equivalent to:
 
 ```zsh
 zinit lucid as=null node="!asciidoctor" sbin="g:bin/asciidoctor" for \
-    zdharma/null
+    zdharma-continuum/null
 ```
 
 <!-- vim:set ft=markdown tw=80 fo+=an1 autoindent: -->
