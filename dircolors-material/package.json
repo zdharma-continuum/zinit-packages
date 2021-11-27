@@ -1,98 +1,86 @@
 {
-  "_from": "dircolors-material@^1.0.0",
-  "_id": "zsh-dircolors-material@1.0.0",
-  "_inBundle": false,
-  "_location": "/zsh-dircolors-material",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "range",
-    "registry": true,
-    "raw": "dircolors-material@^1.0.0",
-    "name": "dircolors-material",
-    "escapedName": "dircolors-material",
-    "rawSpec": "^1.0.0",
-    "saveSpec": null,
-    "fetchSpec": "^1.0.0"
-  },
-  "_requiredBy": [],
-  "_spec": "dircolors-material@^1.0.0",
-  "_where": "/root/github2/pkg-dircolors-material",
-  "author": "Grigorii Horos",
-  "bugs": {
-    "url": "https://github.com/zpm-zsh/dircolors-material/issues"
-  },
-  "version": "1.0.0",
-  "contributors": [],
-  "dependencies": {},
-  "deprecated": false,
-  "description": "Dircolors material theme",
-  "directories": {
-    "test": "test"
-  },
-  "homepage": "https://github.com/zpm-zsh/material-colors",
-  "keywords": [
-    "GNU ls colors",
-    "exa colors",
-    "terminal colors",
-    "zsh"
-  ],
-  "license": "MIT",
-  "name": "zsh-dircolors-material",
-  "zsh-data": {
-    "plugin-info": {
-      "user": "zpm-zsh",
-      "plugin": "material-colors",
-      "version": "1.0.0",
-      "generated-by": "zinit-pkg-gen.sh",
-      "generation-date": "2021-11-27T11:43:39+01:00",
-      "message": "",
-      "param-default": ""
+    "_from": "dircolors-material@^1.0.0",
+    "_id": "zsh-dircolors-material@1.0.0",
+    "_inBundle": false,
+    "_location": "/zsh-dircolors-material",
+    "_phantomChildren": {},
+    "_requested": {
+        "type": "range",
+        "registry": true,
+        "raw": "dircolors-material@^1.0.0",
+        "name": "dircolors-material",
+        "escapedName": "dircolors-material",
+        "rawSpec": "^1.0.0",
+        "saveSpec": null,
+        "fetchSpec": "^1.0.0"
     },
-    "zinit-ices": {
-      "default": {
-        "requires": "",
-        "reset": "",
-        "git": "",
-        "nocompile": "!",
-        "atload": "zstyle ':completion:*:default' list-colors \"${(s.:.)LS_COLORS}\";",
-        "lucid": "",
-        "atpull": "%atclone",
-        "id-as": "zpm-zsh/material-colors",
-        "atclone": "(( ! ${+commands[dircolors]} )) && local P=g; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' dircolors/01-base.dircolors && cat dircolors/*.dircolors | TERM=ansi ${P}dircolors -b - >! colors.zsh",
-        "pick": "colors.zsh"
-      },
-      "no-color-swaps": {
-        "requires": "",
-        "git": "",
-        "nocompile": "!",
-        "atload": "zstyle ':completion:*:default' list-colors \"${(s.:.)LS_COLORS}\";",
-        "lucid": "",
-        "atpull": "%atclone",
-        "id-as": "zpm-zsh/material-colors",
-        "atclone": "(( ! ${+commands[dircolors]} )) && local P=g; cat dircolors/*.dircolors | TERM=ansi ${P}dircolors -b - >! colors.zsh",
-        "pick": "colors.zsh"
-      },
-      "no-zsh-completion": {
-        "requires": "",
-        "reset": "",
-        "git": "",
-        "nocompile": "!",
-        "lucid": "",
-        "atpull": "%atclone",
-        "id-as": "zpm-zsh/material-colors",
-        "atclone": "(( ! ${+commands[dircolors]} )) && local P=g; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' dircolors/01-base.dircolors && cat dircolors/*.dircolors | TERM=ansi ${P}dircolors -b - >! colors.zsh",
-        "pick": "colors.zsh"
-      },
-      "minimal": {
-        "requires": "",
-        "git": "",
-        "nocompile": "!",
-        "lucid": "",
-        "atpull": "%atclone",
-        "id-as": "zpm-zsh/material-colors",
-        "atclone": "(( ! ${+commands[dircolors]} )) && local P=g; cat dircolors/*.dircolors | TERM=ansi ${P}dircolors -b - >! colors.zsh",
-        "pick": "colors.zsh"
-      }
+    "_requiredBy": [],
+    "_spec": "dircolors-material@^1.0.0",
+    "_where": "/root/github2/pkg-dircolors-material",
+    "author": "Grigorii Horos",
+    "bugs": {
+        "url": "https://github.com/zpm-zsh/dircolors-material/issues"
+    },
+    "version": "1.0.0",
+    "contributors": [],
+    "dependencies": {},
+    "deprecated": false,
+    "description": "Dircolors material theme",
+    "directories": {
+        "test": "test"
+    },
+    "homepage": "https://github.com/zpm-zsh/material-colors",
+    "keywords": [
+        "GNU ls colors",
+        "exa colors",
+        "terminal colors",
+        "zsh"
+    ],
+    "license": "MIT",
+    "name": "zsh-dircolors-material",
+    "zsh-data": {
+        "plugin-info": {
+            "user": "zpm-zsh",
+            "plugin": "material-colors",
+            "version": "1.0.3"
+        },
+        "zinit-ices": {
+            "default": {
+                "git": "",
+                "lucid": "",
+                "reset": "",
+                "atclone": "(( ! ${+commands[dircolors]} )) && local P=g; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' dircolors/01-base.dircolors && cat dircolors/*.dircolors | TERM=ansi ${P}dircolors -b - >! colors.zsh",
+                "atpull": "%atclone",
+                "pick": "colors.zsh",
+                "nocompile": "!",
+                "atload": "zstyle ':completion:*:default' list-colors \"${(s.:.)LS_COLORS}\";"
+            },
+            "no-color-swaps": {
+                "git": "",
+                "lucid": "",
+                "atclone": "(( ! ${+commands[dircolors]} )) && local P=g; cat dircolors/*.dircolors | TERM=ansi ${P}dircolors -b - >! colors.zsh",
+                "atpull": "%atclone",
+                "pick": "colors.zsh",
+                "nocompile": "!",
+                "atload": "zstyle ':completion:*:default' list-colors \"${(s.:.)LS_COLORS}\";"
+            },
+            "no-zsh-completion": {
+                "git": "",
+                "lucid": "",
+                "reset": "",
+                "atclone": "(( ! ${+commands[dircolors]} )) && local P=g; ${P}sed -i '/DIR/c\\DIR 38;5;63;1' dircolors/01-base.dircolors && cat dircolors/*.dircolors | TERM=ansi ${P}dircolors -b - >! colors.zsh",
+                "atpull": "%atclone",
+                "pick": "colors.zsh",
+                "nocompile": "!"
+            },
+            "minimal": {
+                "git": "",
+                "lucid": "",
+                "atclone": "(( ! ${+commands[dircolors]} )) && local P=g; cat dircolors/*.dircolors | TERM=ansi ${P}dircolors -b - >! colors.zsh",
+                "atpull": "%atclone",
+                "pick": "colors.zsh",
+                "nocompile": "!"
+            }
+        }
     }
-  }
 }

@@ -1,74 +1,67 @@
 {
-  "_from": "ecs-cli@^1.18.0",
-  "_id": "zsh-ecs-cli@1.18.0",
-  "_inBundle": false,
-  "_location": "/zsh-ecs-cli",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "range",
-    "registry": true,
-    "raw": "ecs-cli@^1.18.0",
-    "name": "ecs-cli",
-    "escapedName": "ecs-cli",
-    "rawSpec": "^1.18.0",
-    "saveSpec": null,
-    "fetchSpec": "^1.18.0"
-  },
-  "_requiredBy": [],
-  "_spec": "ecs-cli@^1.18.0",
-  "_where": "/root/github2/pkg-ecs-cli",
-  "author": "Amazon.com, Inc.",
-  "bugs": {
-    "url": "https://github.com/aws/amazon-ecs-cli/issues"
-  },
-  "version": "1.18.2",
-  "contributors": [],
-  "dependencies": {},
-  "deprecated": false,
-  "description": "The Amazon ECS CLI enables users to run their applications on ECS/Fargate using the Docker Compose file format, quickly provision resources, push/pull images in ECR, and monitor running applications on ECS/Fargate.",
-  "devDependencies": {},
-  "homepage": "https://github.com/aws/ecs-cli",
-  "keywords": [
-    "markdown",
-    "markdown processor",
-    "toc generator",
-    "zsh"
-  ],
-  "license": "MIT",
-  "name": "zsh-ecs-cli",
-  "zsh-data": {
-    "plugin-info": {
-      "user": "https:",
-      "plugin": "ecs-cli-${(M)OSTYPE#(linux|darwin)}-amd64-latest",
-      "url": "https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-${(M)OSTYPE#(linux|darwin)}-amd64-latest",
-      "version": "1.18.2",
-      "message": "A snippet providing The Amazon ECS CLI, i.e.: the `ecs-cli` command.",
-      "generated-by": "zinit-pkg-gen.sh",
-      "generation-date": "2021-11-27T11:43:43+01:00",
-      "param-default": ""
+    "_from": "ecs-cli@^1.18.0",
+    "_id": "zsh-ecs-cli@1.18.0",
+    "_inBundle": false,
+    "_location": "/zsh-ecs-cli",
+    "_phantomChildren": {},
+    "_requested": {
+        "type": "range",
+        "registry": true,
+        "raw": "ecs-cli@^1.18.0",
+        "name": "ecs-cli",
+        "escapedName": "ecs-cli",
+        "rawSpec": "^1.18.0",
+        "saveSpec": null,
+        "fetchSpec": "^1.18.0"
     },
-    "zinit-ices": {
-      "default": {
-        "requires": "",
-        "nocompile": "",
-        "lucid": "",
-        "atpull": "%atclone",
-        "as": "null",
-        "is-snippet": "",
-        "mv": "*ecs-cli* -> ecs-cli",
-        "id-as": "aws/amazon-ecs-cli",
-        "atclone": "chmod +x ecs-cli; cp -vf ecs-cli $ZPFX/bin"
-      },
-      "bgn": {
-        "requires": "",
-        "sbin": "*ecs-cli* -> ecs-cli",
-        "nocompile": "",
-        "lucid": "",
-        "atpull": "%atclone",
-        "as": "null",
-        "is-snippet": "",
-        "id-as": "aws/amazon-ecs-cli"
-      }
+    "_requiredBy": [],
+    "_spec": "ecs-cli@^1.18.0",
+    "_where": "/root/github2/pkg-ecs-cli",
+    "author": "Amazon.com, Inc.",
+    "bugs": {
+        "url": "https://github.com/aws/amazon-ecs-cli/issues"
+    },
+    "version": "1.18.2",
+    "contributors": [],
+    "dependencies": {},
+    "deprecated": false,
+    "description": "The Amazon ECS CLI enables users to run their applications on ECS/Fargate using the Docker Compose file format, quickly provision resources, push/pull images in ECR, and monitor running applications on ECS/Fargate.",
+    "devDependencies": {},
+    "homepage": "https://github.com/aws/ecs-cli",
+    "keywords": [
+        "markdown",
+        "markdown processor",
+        "toc generator",
+        "zsh"
+    ],
+    "license": "MIT",
+    "name": "zsh-ecs-cli",
+    "zsh-data": {
+        "plugin-info": {
+            "user": "aws",
+            "plugin": "amazon-ecs-cli",
+            "url": "https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-${(M)OSTYPE#(linux|darwin)}-amd64-latest",
+            "version": "1.18.1",
+            "message": "A snippet providing The Amazon ECS CLI, i.e.: the `ecs-cli` command."
+        },
+        "zinit-ices": {
+            "default": {
+                "is-snippet": "",
+                "lucid": "",
+                "as": "null",
+                "mv": "*ecs-cli* -> ecs-cli",
+                "atclone": "chmod +x ecs-cli; cp -vf ecs-cli $ZPFX/bin",
+                "atpull": "%atclone",
+                "nocompile": ""
+            },
+            "bgn": {
+                "is-snippet": "",
+                "lucid": "",
+                "as": "null",
+                "atpull": "%atclone",
+                "sbin": "*ecs-cli* -> ecs-cli",
+                "nocompile": ""
+            }
+        }
     }
-  }
 }
