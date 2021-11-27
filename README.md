@@ -14,7 +14,7 @@ https://zdharma-continuum.github.io/zinit/wiki/Zinit-Packages/
 To create a new package named `foo`:
 
 ```zsh
-./gen-pkg.sh create foo
+./zinit-gen-pkg.sh create foo
 ```
 
 This will create a directory named `foo` which contains:
@@ -27,7 +27,7 @@ To add another profile (as in `zinit pack"PROFILE" for PACKAGE`), for example
 `bar`:
 
 ```zsh
-./gen-pkg.sh create foo bar
+./zinit-gen-pkg.sh create foo bar
 ```
 
 This will create a new file in your package directory: `bar.ices.zsh`.
@@ -64,7 +64,7 @@ To generate a `package.json` file for your package run:
 pkg=null
 profile=default
 
-./gen-pkg.sh gen ${pkg} ${profile}
+./zinit-gen-pkg.sh gen ${pkg} ${profile}
 ```
 
 ## 🐳 How do I run these?
@@ -73,7 +73,7 @@ There's a shorthand subcommand for running a `.ices.zsh` file locally, inside a
 container:
 
 ```zsh
-./gen-pkg.sh run PACKAGE PROFILE
+./zinit-gen-pkg.sh run PACKAGE PROFILE
 ```
 
 <!-- vim: set ft=markdown et ts=2 sw=2 tw=80 --!>
