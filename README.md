@@ -20,7 +20,7 @@ To create a new package named `foo`:
 This will create a directory named `foo` which contains:
 
 - `default.ices.zsh`: Your source file where you can define your zinit
-ices and will later be used for genereting `package.json`
+ices and will later be used for generating `package.json`
 - `package.json`: this is what `zinit pack` actually consumes
 
 To add another profile (as in `zinit pack"PROFILE" for PACKAGE`), for example
