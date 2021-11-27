@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Regenerate this list with
-# ./gen-pkg.sh --update-ices
+# ./zinit-gen-pkg.sh --update-ices
 ZINIT_ICES=(
   "aliases"
   "as"
@@ -298,6 +298,8 @@ get_zinit_json_data() {
 
   # call our fake zinit func
   # shellcheck disable=1090
+  # TODO disable expansions since this will lead to errors
+  # example: firefox-dev
   source "$srcfile"
 }
 
@@ -345,6 +347,15 @@ update_ices() {
   local generated_by generated_date
   generated_by="$(extract_generated_by "$srcfile")"
   generated_date="$(extract_creation_date "$srcfile")"
+
+  # strip the param ice if it is set to the same value as param-default
+  local param_default="$(extract_param_default "$srcfile")"
+  if [[ -n "$param_default" ]] && \
+     jq -er --arg default "$param_default" '.ices.param == $default' \
+       <<< "$zinit_json"
+  then
+    zinit_json="$(jq -er 'del(.ices.param)' <<< "$zinit_json")"
+  fi
 
   # shellcheck disable=2153
   jq -e \
@@ -417,6 +428,16 @@ extract_creation_date() {
     "$srcfile" 2>/dev/null
 }
 
+extract_param_default() {
+  local srcfile="$1"   # .ice.zsh file path
+  local PARAM_DEFAULT
+
+  eval "$(awk -F = '/^PARAM_DEFAULT=/' "$srcfile")"
+
+  echo "$PARAM_DEFAULT"
+  unset PARAM_DEFAULT
+}
+
 generate_package_json_profile() {
   local package="$1"
   local profile="$2"
@@ -442,7 +463,7 @@ generate_package_json() {
   echo_debug "Processing package $package"
 
   # Check if we were provided with a file path
-  # eg: gen-pkg.sh null/default.ices.zsh
+  # eg: zinit-gen-pkg.sh null/default.ices.zsh
   if [[ -f "$package" ]]
   then
     filepath="$(realpath "$package")"
@@ -963,14 +984,14 @@ then
 
   PACKAGES=()
   # Check if we were provided with a file
-  # eg: gen-pkg.sh null/default.ices.zsh
+  # eg: zinit-gen-pkg.sh null/default.ices.zsh
   if [[ -f "$PACKAGE" ]]
   then
     FILENAME="${PACKAGE##*/}"
     PACKAGES=("$(basename "$(dirname "$PACKAGE")")")
     PROFILES=("${FILENAME%%.ices.zsh}")
   # Check if we were provided with a dir
-  # eg: gen-pkg.sh .
+  # eg: zinit-gen-pkg.sh .
   # Since packages are also directories, we need to check if the provided dir
   # is a package dir (ie. with an *.ices.zsh file) and not proceed it that's the
   # case. Otherwise we will end up looking for package dirs inside a package
