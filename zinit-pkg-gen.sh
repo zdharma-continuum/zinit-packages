@@ -352,7 +352,7 @@ update_ices() {
   local param_default="$(extract_param_default "$srcfile")"
   if [[ -n "$param_default" ]] && \
      jq -er --arg default "$param_default" '.ices.param == $default' \
-       <<< "$zinit_json"
+       <<< "$zinit_json" >/dev/null
   then
     zinit_json="$(jq -er 'del(.ices.param)' <<< "$zinit_json")"
   fi
