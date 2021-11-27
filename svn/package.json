@@ -1,65 +1,72 @@
 {
-    "_from": "svn@^1.13.0",
-    "_id": "zsh-svn@1.13.0",
-    "_inBundle": false,
-    "_location": "/zsh-svn",
-    "_phantomChildren": {},
-    "_requested": {
-        "type": "range",
-        "registry": true,
-        "raw": "svn@^1.13.0",
-        "name": "svn",
-        "escapedName": "svn",
-        "rawSpec": "^1.13.0",
-        "saveSpec": null,
-        "fetchSpec": "^1.13.0"
+  "_from": "svn@^1.13.0",
+  "_id": "zsh-svn@1.13.0",
+  "_inBundle": false,
+  "_location": "/zsh-svn",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "svn@^1.13.0",
+    "name": "svn",
+    "escapedName": "svn",
+    "rawSpec": "^1.13.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.13.0"
+  },
+  "_requiredBy": [],
+  "_resolved": "https://github.com/svn/svn/archive/v1.13.0.tar.gz",
+  "_shasum": "37e8f4207e2b43bed3cb1726d3919b5f3ff4ffa0",
+  "_spec": "svn@^1.13.0",
+  "_where": "/root/github2/pkg-svn",
+  "author": "Yuu Yamashita, Sam Stephenson, Mislav Marohnić, Josh Friend",
+  "bugs": {
+    "url": "https://github.com/svn/svn/issues"
+  },
+  "contributors": [],
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Simple Python version management",
+  "devDependencies": {},
+  "directories": {
+    "test": "test"
+  },
+  "homepage": "https://github.com/svn/svn",
+  "keywords": [
+    "version management",
+    "python version management",
+    "zsh"
+  ],
+  "license": "MIT",
+  "name": "zsh-svn",
+  "scripts": {
+    "test": "make test"
+  },
+  "version": "1.2.17",
+  "zsh-data": {
+    "plugin-info": {
+      "version": "1.2.17",
+      "requires": "monitor",
+      "url": "https://subversion.apache.org/download.cgi",
+      "generated-by": "zinit-pkg-gen.sh",
+      "generation-date": "2021-11-27T11:44:18+01:00",
+      "message": "",
+      "plugin": "download.cgi",
+      "param-default": "",
+      "user": "https:"
     },
-    "_requiredBy": [],
-    "_resolved": "https://github.com/svn/svn/archive/v1.13.0.tar.gz",
-    "_shasum": "37e8f4207e2b43bed3cb1726d3919b5f3ff4ffa0",
-    "_spec": "svn@^1.13.0",
-    "_where": "/root/github2/pkg-svn",
-    "author": "Yuu Yamashita, Sam Stephenson, Mislav Marohnić, Josh Friend",
-    "bugs": {
-        "url": "https://github.com/svn/svn/issues"
-    },
-    "contributors": [],
-    "dependencies": {},
-    "deprecated": false,
-    "description": "Simple Python version management",
-    "devDependencies": {},
-    "directories": {
-        "test": "test"
-    },
-    "homepage": "https://github.com/svn/svn",
-    "keywords": [
-        "version management",
-        "python version management",
-        "zsh"
-    ],
-    "license": "MIT",
-    "name": "zsh-svn",
-    "scripts": {
-        "test": "make test"
-    },
-    "version": "1.2.17",
-    "zsh-data": {
-        "plugin-info": {
-            "version": "1.13.0",
-            "requires": "monitor",
-            "url": "https://subversion.apache.org/download.cgi"
-
-        },
-        "zinit-ices": {
-            "default": {
-                "is-snippet": "",
-                "lucid": "",
-                "as": "null|monitor",
-                "dlink": "https://.*/subversion-%VERSION%.tar.bz2",
-                "atclone": "zpextract --move --auto; print -P \\n%F{75}Building Subversion...\\n%f; ./configure --prefix='$ZPFX' --with-apr='$ZPFX' >/dev/null && make >/dev/null && print -P \\n%F{75}Installing Subversion to $ZPFX...\\n%f && make install >/dev/null && print -P \\n%F{34}Installation of Subversion succeeded.%f || print -P \\n%F{160}Installation of Subversion failed.%f",
-                "atpull": "%atclone",
-                "nocompile": "!"
-            }
-        }
+    "zinit-ices": {
+      "default": {
+        "requires": "",
+        "nocompile": "!",
+        "dl": "inkhttps://.*/subversion-%VERSION%.tar.bz2",
+        "lucid": "",
+        "atpull": "%atclone",
+        "as": "null|monitor",
+        "is-snippet": "",
+        "id-as": "zsh-svn",
+        "atclone": "zpextract --move --auto; print -P \\\\ %F{75}Building Subversion...\\\\ %f; ./configure --prefix='$ZPFX' --with-apr='$ZPFX' >/dev/null && make >/dev/null && print -P \\\\ %F{75}Installing Subversion to $ZPFX...\\\\ %f && make install >/dev/null && print -P \\\\ %F{34}Installation of Subversion succeeded.%f || print -P \\\\ %F{160}Installation of Subversion failed.%f"
+      }
     }
+  }
 }
