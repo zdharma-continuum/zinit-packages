@@ -360,6 +360,7 @@ update_ices() {
     --arg profile "$profile" \
     --arg generated_by "$generated_by" \
     --arg generated_date "$generated_date" \
+    --arg param_default "$param_default" \
     --argjson data "$zinit_json" \
     '.author = $data.author |
      .description = $data.description |
@@ -371,7 +372,7 @@ update_ices() {
      .["zsh-data"]["plugin-info"]["generation-date"] = $generated_date |
      .["zsh-data"]["plugin-info"].message = $data.message |
      .["zsh-data"]["plugin-info"].plugin = $data.plugin_name |
-     .["zsh-data"]["plugin-info"]["param-default"] = $data.param_default |
+     .["zsh-data"]["plugin-info"]["param-default"] = $param_default |
      .["zsh-data"]["plugin-info"].user = $data.plugin_org |
      .["zsh-data"]["plugin-info"].version = $data.version |
      .["zsh-data"]["zinit-ices"][$profile] = $data.ices' \
@@ -430,7 +431,7 @@ extract_param_default() {
   local srcfile="$1"   # .ice.zsh file path
   local PARAM_DEFAULT
 
-  eval "$(awk -F = '/^PARAM_DEFAULT=/' "$srcfile")"
+  eval "$(awk '/^PARAM_DEFAULT=/' "$srcfile")"
 
   echo "$PARAM_DEFAULT"
   unset PARAM_DEFAULT
