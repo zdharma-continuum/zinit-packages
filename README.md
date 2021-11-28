@@ -76,4 +76,12 @@ container:
 ./zinit-gen-pkg.sh run PACKAGE PROFILE
 ```
 
+Great, but I want to test my `package.json` directly!
+
+Here you go:
+
+```zsh
+./zinit-gen-pkg.sh run --pack PACKAGE PROFILE
+```
+
 <!-- vim: set ft=markdown et ts=2 sw=2 tw=80 --!>
