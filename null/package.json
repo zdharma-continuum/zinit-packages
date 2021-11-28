@@ -12,13 +12,19 @@
     "plugin-info": {
       "user": "zdharma-continuum",
       "plugin": "null",
-      "version": "$version"
+      "version": "$version",
+      "generated-by": "zinit-pkg-gen.sh",
+      "generation-date": "2021-11-27T11:44:51+01:00",
+      "message": "",
+      "param-default": ""
     },
     "zinit-ices": {
       "default": {
+        "requires": "",
         "lucid": "",
         "atpull": "%atclone",
         "wait": "",
+        "id-as": "zdharma-continuum/null",
         "null": "",
         "atclone": "dostuff; echo ok; random stuff;",
         "!bash": "",
