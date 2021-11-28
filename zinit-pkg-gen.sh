@@ -800,6 +800,7 @@ run_package() {
   fi
 
   local ices_file="${package}/${profile}.ices.zsh"
+  local pkgjson="${package}/package.json"
 
   if [[ -n "$REGENERATE" ]]
   then
@@ -834,8 +835,10 @@ run_package() {
 
   if [[ -n "$RUN_PACKAGE" ]]
   then
-    echo_info "🐳 Running zinit pack'${profile}' for ${package}"
-    "${cmd[@]}" --config "zinit pack'${profile}' for ${package}" "${args[@]}"
+    echo_info "🐳 Running zinit pack'${pkgjson}:${profile}' for ${package}"
+    "${cmd[@]}" --volume "$PWD:/devel" \
+      --config "zinit pack'/devel/${pkgjson}:${profile}' for ${package}" \
+      "${args[@]}"
   else
     echo_info "🐳 Running with file: $ices_file"
     "${cmd[@]}" --file "$ices_file" "${args[@]}"
