@@ -1,23 +1,23 @@
 {
-    "_from": "pyenv@^1.2.20",
-    "_id": "zsh-pyenv@1.2.20",
+    "_from": "pyenv@^2.2.2",
+    "_id": "zsh-pyenv@2.2.2",
     "_inBundle": false,
     "_location": "/zsh-pyenv",
     "_phantomChildren": {},
     "_requested": {
         "type": "range",
         "registry": true,
-        "raw": "pyenv@^1.2.20",
+        "raw": "pyenv@^2.2.2",
         "name": "pyenv",
         "escapedName": "pyenv",
-        "rawSpec": "^1.2.20",
+        "rawSpec": "^2.2.2",
         "saveSpec": null,
-        "fetchSpec": "^1.2.20"
+        "fetchSpec": "^2.2.2"
     },
     "_requiredBy": [],
-    "_resolved": "https://github.com/pyenv/pyenv/archive/v1.2.20.tar.gz",
+    "_resolved": "https://github.com/pyenv/pyenv/archive/v2.2.2.tar.gz",
     "_shasum": "c79e390d359ef1bc736e41ba6dd5ca016f5f4842",
-    "_spec": "pyenv@^1.2.20",
+    "_spec": "pyenv@^2.2.2",
     "_where": "/root/github2/pkg-pyenv",
     "author": "Yuu Yamashita, Sam Stephenson, Mislav Marohnić, Josh Friend",
     "bugs": {
@@ -42,12 +42,12 @@
     "scripts": {
         "test": "make test"
     },
-    "version": "1.2.20",
+    "version": "2.2.2",
     "zsh-data": {
         "plugin-info": {
             "user": "pyenv",
             "plugin": "pyenv",
-            "version": "1.2.20",
+            "version": "2.2.2",
             "requires": "bgn;bash"
         },
         "zinit-ices": {
