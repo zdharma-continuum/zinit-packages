@@ -835,9 +835,9 @@ run_package() {
 
   if [[ -n "$RUN_PACKAGE" ]]
   then
-    echo_info "🐳 Running zinit pack'${pkgjson}:${profile}' for ${package}"
+    echo_info "🐳 Running zinit pack'${pkgjson}:${profile}' for @${package}"
     "${cmd[@]}" --volume "$PWD:/devel" \
-      --config "zinit pack'/devel/${pkgjson}:${profile}' for ${package}" \
+      --config "zinit pack'/devel/${pkgjson}:${profile}' for @${package}" \
       "${args[@]}"
   else
     echo_info "🐳 Running with file: $ices_file"
@@ -993,9 +993,18 @@ then
   # eg: zinit-gen-pkg.sh null/default.ices.zsh
   if [[ -f "$PACKAGE" ]]
   then
-    FILENAME="${PACKAGE##*/}"
-    PACKAGES=("$(basename "$(dirname "$PACKAGE")")")
-    PROFILES=("${FILENAME%%.ices.zsh}")
+    # Assume the user wants to test/run/generate a package.json file directly if
+    # providing a path to a package.json
+    if [[ "${PACKAGE}" =~ package.json ]]
+    then
+      RUN_PACKAGE=1
+      PACKAGES=("$(dirname "$PACKAGE")")
+      PROFILES=("${PROFILES[0]:-default}")
+    else
+      FILENAME="${PACKAGE##*/}"
+      PACKAGES=("$(basename "$(dirname "$PACKAGE")")")
+      PROFILES=("${FILENAME%%.ices.zsh}")
+    fi
   # Check if we were provided with a dir
   # eg: zinit-gen-pkg.sh .
   # Since packages are also directories, we need to check if the provided dir
