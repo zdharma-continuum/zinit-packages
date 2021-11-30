@@ -1,0 +1,29 @@
+{
+  "author": "Philipp Schmitt",
+  "description": "CLI and local web plain text note‑taking, bookmarking, and archiving with linking, tagging, filtering, search, Git versioning & syncing, Pandoc conversion, + more, in a single portable script.",
+  "homepage": "https://github.com/xwmx/nb",
+  "license": "AGPL-3.0",
+  "name": "xwmx/nb",
+  "version": "1.0",
+  "zsh-data": {
+    "plugin-info": {
+      "user": "xwmx",
+      "plugin": "nb",
+      "version": "1.0",
+      "generated-by": "zinit-pkg-gen.sh",
+      "generation-date": "2021-11-29T08:40:24+01:00",
+      "message": "",
+      "param-default": ""
+    },
+    "zinit-ices": {
+      "default": {
+        "requires": "bgn;bash",
+        "sbin": "nb",
+        "nocompile": "",
+        "as": "completion",
+        "depth": 3,
+        "atclone": "ln -sfv etc/nb-completion.zsh _nb"
+      }
+    }
+  }
+}
