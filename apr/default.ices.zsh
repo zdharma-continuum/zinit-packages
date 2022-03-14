@@ -27,11 +27,11 @@ zinit \
 %F{34}Installation of Apache Portable Runtime succeeded.%f || print -P \\
 %F{160}Installation of Apache Portable Runtime failed.%f' \
     atpull'%atclone' \
-    dl'inkhttps://.*/apr-%VERSION%.tar.bz2' \
+    dl'https://.*/apr-%VERSION%.tar.bz2' \
     id-as'zsh-apr' \
     is-snippet \
     lucid \
     nocompile'!' \
-  for 'https://apr.apache.org/download.cgi'
+  for 'https://dlcdn.apache.org/apr/'
 
 # vim: set ft=zsh et ts=2 sw=2 :
