@@ -27,8 +27,9 @@ zinit \
 %F{34}Installation of Apache Portable Runtime succeeded.%f || print -P \\
 %F{160}Installation of Apache Portable Runtime failed.%f' \
     atpull'%atclone' \
-    dlink'apr-%VERSION%.tar.gz' \
+    dlink'https://dlcdn.apache.org/apr/apr-%VERSION%.tar.gz'
     id-as'zsh-apr' \
+    extract \
     nocompile'!' \
   for https://dlcdn.apache.org/apr/
 
