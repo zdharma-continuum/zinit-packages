@@ -44,7 +44,7 @@
         "plugin-info": {
             "version": "1.6.1",
             "requires": "monitor",
-            "url": "https://apr.apache.org/download.cgi"
+            "url": "https://dlcdn.apache.org/apr/"
         },
         "zinit-ices": {
             "default": {
