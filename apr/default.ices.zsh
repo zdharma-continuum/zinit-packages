@@ -29,7 +29,6 @@ zinit \
     atpull'%atclone' \
     dl'https://.*/apr-%VERSION%.tar.bz2' \
     id-as'zsh-apr' \
-    is-snippet \
     lucid \
     nocompile'!' \
   for 'https://dlcdn.apache.org/apr/'
