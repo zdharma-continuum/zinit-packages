@@ -829,7 +829,7 @@ run_package() {
   local args=()
   if [[ -n "$NON_INTERACTIVE" ]]
   then
-    args=(zsh -ilsc '@zinit-scheduler burst')
+    args=(zsh -ilsc '@zi::scheduler burst')
     # args=(zsh -ilsc 'exit $?')
   fi
 
