@@ -2,22 +2,20 @@
 
 ##### Homepage link: [apache/apr](https://github.com/apache/apr)
 
-| **Package source:** | Source Tarball | Binary | Git | Node | Gem |
-|:-------------------:|:--------------:|:------:|:---:|:----:|:---:|
-| **Status:**         |    + <br> (default) |  -  | + | – |  –  |
+| **Package source:** |  Source Tarball  | Binary | Git | Node | Gem |
+| :-----------------: | :--------------: | :----: | :-: | :--: | :-: |
+|     **Status:**     | + <br> (default) |   -    |  +  |  –   |  –  |
 
-[Zinit](https://github.com/zdharma-continuum/zinit) can use the NPM package registry
-to automatically:
+[Zinit](https://github.com/zdharma-continuum/zinit) can use the NPM package registry to automatically:
 
 - get the plugin's Git repository OR release-package URL,
 - get the list of the recommended ices for the plugin,
-    - there can be multiple lists of ices,
-    - the ice lists are stored in *profiles*; there's at least one profile, *default*,
-    - the ices can be selectively overriden.
+  - there can be multiple lists of ices,
+  - the ice lists are stored in *profiles*; there's at least one profile, *default*,
+  - the ices can be selectively overriden.
 
-Example invocations that'll install
-[apache/apr](https://github.com/apache/apr) either from the release archive
-or from Git repository:
+Example invocations that'll install [apache/apr](https://github.com/apache/apr) either from the release archive or from
+Git repository:
 
 ```zsh
 # Download, build and install the latest Apache Portable Runtime source tarball
@@ -26,8 +24,8 @@ zinit pack for apr
 
 ## Default Profile
 
-Provides the Apache Portable Runtime library by compiling and installing it to
-the `$ZPFX` directory (`~/.zinit/polaris` by default). It uses the
+Provides the Apache Portable Runtime library by compiling and installing it to the `$ZPFX` directory (`~/.zinit/polaris`
+by default). It uses the
 [zdharma-continuum/zinit-annex-as-monitor](https://github.com/zdharma-continuum/zinit-annex-as-monitor) annex to
 download the latest Apache Portable Runtime tarball.
 

@@ -2,22 +2,20 @@
 
 ##### Homepage link: [apache/subversion](https://github.com/apache/subversion)
 
-| **Package source:** | Source Tarball | Binary | Git | Node | Gem |
-|:-------------------:|:--------------:|:------:|:---:|:----:|:---:|
-| **Status:**         |    + <br> (default) |  -  | + | – |  –  |
+| **Package source:** |  Source Tarball  | Binary | Git | Node | Gem |
+| :-----------------: | :--------------: | :----: | :-: | :--: | :-: |
+|     **Status:**     | + <br> (default) |   -    |  +  |  –   |  –  |
 
-[Zinit](https://github.com/zdharma-continuum/zinit) can use the NPM package registry
-to automatically:
+[Zinit](https://github.com/zdharma-continuum/zinit) can use the NPM package registry to automatically:
 
 - get the plugin's Git repository OR release-package URL,
 - get the list of the recommended ices for the plugin,
-    - there can be multiple lists of ices,
-    - the ice lists are stored in *profiles*; there's at least one profile, *default*,
-    - the ices can be selectively overriden.
+  - there can be multiple lists of ices,
+  - the ice lists are stored in *profiles*; there's at least one profile, *default*,
+  - the ices can be selectively overriden.
 
-Example invocations that'll install
-[apache/subversion](https://github.com/apache/subversion) either from the release archive
-or from Git repository:
+Example invocations that'll install [apache/subversion](https://github.com/apache/subversion) either from the release
+archive or from Git repository:
 
 ```zsh
 # Download and install the APR dependency of Subversion
@@ -28,8 +26,8 @@ zinit pack for subversion
 
 ## Default Profile
 
-Provides the Subversion revision control system by compiling and installing it
-to the `$ZPFX` directory (`~/.zinit/polaris` by default). It uses the
+Provides the Subversion revision control system by compiling and installing it to the `$ZPFX` directory
+(`~/.zinit/polaris` by default). It uses the
 [zdharma-continuum/zinit-annex-as-monitor](https://github.com/zdharma-continuum/zinit-annex-as-monitor) annex to
 download the latest Subversion tarball.
 

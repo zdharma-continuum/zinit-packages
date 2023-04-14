@@ -2,22 +2,20 @@
 
 ##### Homepage link: [pyenv/pyenv](https://github.com/pyenv/pyenv)
 
-| **Package source:** | Source Tarball | Binary | Git | Node | Gem |
-|:-------------------:|:--------------:|:------:|:---:|:----:|:---:|
-| **Status:**         |    + <br> (default) |  -  | + | – |  –  |
+| **Package source:** |  Source Tarball  | Binary | Git | Node | Gem |
+| :-----------------: | :--------------: | :----: | :-: | :--: | :-: |
+|     **Status:**     | + <br> (default) |   -    |  +  |  –   |  –  |
 
-[Zplugin](https://github.com/zdharma-continuum/zinit) can use the NPM package registry
-to automatically:
+[Zplugin](https://github.com/zdharma-continuum/zinit) can use the NPM package registry to automatically:
 
 - get the plugin's Git repository OR release-package URL,
 - get the list of the recommended ices for the plugin,
-    - there can be multiple lists of ices,
-    - the ice lists are stored in *profiles*; there's at least one profile, *default*,
-    - the ices can be selectively overriden.
+  - there can be multiple lists of ices,
+  - the ice lists are stored in *profiles*; there's at least one profile, *default*,
+  - the ices can be selectively overriden.
 
-Example invocations that'll install
-[pyenv/pyenv](https://github.com/pyenv/pyenv) either from the release archive
-or from Git repository:
+Example invocations that'll install [pyenv/pyenv](https://github.com/pyenv/pyenv) either from the release archive or
+from Git repository:
 
 ```zsh
 # Download the tarball with the default ice list
@@ -32,8 +30,7 @@ zinit pack"bgn" git for pyenv
 
 ## Default Profile
 
-Provides the `pyenv` version manager by extending `$PATH` to make it point into
-the `bin` subdirectory of the plugin.
+Provides the `pyenv` version manager by extending `$PATH` to make it point into the `bin` subdirectory of the plugin.
 
 The Zplugin command executed will be equivalent to:
 
@@ -46,10 +43,9 @@ zinit lucid as'command' pick'bin/pyenv' atinit'export PYENV_ROOT="$PWD"' \
 
 ## Bin-Gem-Node Profile
 
-Provides the version manager via *shims*, i.e.: automatic forwarder scripts created
-under `$ZPFX/bin` (which is added to the `$PATH` by default by Zplugin). It needs the
-[bin-gem-node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex (it has the
-shim-creation feature).
+Provides the version manager via *shims*, i.e.: automatic forwarder scripts created under `$ZPFX/bin` (which is added to
+the `$PATH` by default by Zplugin). It needs the
+[bin-gem-node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex (it has the shim-creation feature).
 
 The Zplugin command executed will be equivalent to:
 

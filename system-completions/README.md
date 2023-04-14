@@ -1,24 +1,24 @@
 # `system-completions` Zinit package
 
 | **Package source:** | Tarball | Binary | Git | Node | Gem |
-|:-------------------:|:-------:|:------:|:---:|:----:|:---:|
-| **Status:**         |    -    |    -   |  -  |   –  |  –  |
+| :-----------------: | :-----: | :----: | :-: | :--: | :-: |
+|     **Status:**     |    -    |   -    |  -  |  –   |  –  |
 
 ## Introduction
 
-[Zinit](https://github.com/zdharma-continuum/zinit) can use a `package.json`
-(similar in construct to the one used in `npm` packages) to automatically:
+[Zinit](https://github.com/zdharma-continuum/zinit) can use a `package.json` (similar in construct to the one used in
+`npm` packages) to automatically:
 
 - get the plugin's Git repository OR release-package URL,
 - get the list of the recommended ices for the plugin,
-    - there can be multiple lists of ices,
-    - the ice lists are stored in *profiles*; there's at least one profile, *default*,
-    - the ices can be selectively overriden.
+  - there can be multiple lists of ices,
+  - the ice lists are stored in *profiles*; there's at least one profile, *default*,
+  - the ices can be selectively overriden.
 
 ## The `system-completions` Package
 
-Moves the stock Zsh completions under the control of Zinit. You can then
-selectively enable and disable the completions with `cenable` and `cdisable`.
+Moves the stock Zsh completions under the control of Zinit. You can then selectively enable and disable the completions
+with `cenable` and `cdisable`.
 
 Example Zinit invocations:
 

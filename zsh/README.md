@@ -2,22 +2,20 @@
 
 ##### Homepage link: [zsh-users/zsh](https://github.com/zsh-users/zsh)
 
-| **Package source:** | Source Tarball | Binary | Git | Node | Gem |
-|:-------------------:|:--------------:|:------:|:---:|:----:|:---:|
-| **Status:**         |        -       |   -    | + <br> (default) | - | - |
+| **Package source:** | Source Tarball | Binary |       Git        | Node | Gem |
+| :-----------------: | :------------: | :----: | :--------------: | :--: | :-: |
+|     **Status:**     |       -        |   -    | + <br> (default) |  -   |  -  |
 
-[Zinit](https://github.com/zdharma-continuum/zinit) can use `package.json` to
-automatically:
+[Zinit](https://github.com/zdharma-continuum/zinit) can use `package.json` to automatically:
 
 - get the plugin's Git repository OR release-package URL,
 - get the list of the recommended ices for the plugin,
-    - there can be multiple lists of ices,
-    - the ice lists are stored in *profiles*; there's at least one profile, *default*,
-    - the ices can be selectively overriden.
+  - there can be multiple lists of ices,
+  - the ice lists are stored in *profiles*; there's at least one profile, *default*,
+  - the ices can be selectively overriden.
 
-Example invocations that'll install
-[zsh-users/zsh](https://github.com/zsh-users/zsh) either from the release archive
-or from Git repository:
+Example invocations that'll install [zsh-users/zsh](https://github.com/zsh-users/zsh) either from the release archive or
+from Git repository:
 
 ```zsh
 # Install the newest zsh
@@ -56,10 +54,9 @@ It copies the zsh binary onto `/bin/zsh`.
 
 ## What are the `-tcsetpgrp` profiles for?
 
-These are meant to be used in CI, for building ZSH without a TTY which is
-normally used to determine dynamically if
-[setpgrp](https://linux.die.net/man/2/setpgrp) is available. The `-tcsetpgrp`
-profiles explicitly set `--with-tcsetpgrp` in the `./configure` call.
+These are meant to be used in CI, for building ZSH without a TTY which is normally used to determine dynamically if
+[setpgrp](https://linux.die.net/man/2/setpgrp) is available. The `-tcsetpgrp` profiles explicitly set `--with-tcsetpgrp`
+in the `./configure` call.
 
 More info:
 
