@@ -6,22 +6,19 @@
 | :------------: | :------------: | :----: | :-: | :--: | :-: |
 |     Status     |    Default     |   +    |  +  |  –   |  -  |
 
-[Zinit](https://github.com/zdharma-continuum/Zinit) can use `package.json` to
-automatically:
+[Zinit](https://github.com/zdharma-continuum/Zinit) can use `package.json` to automatically:
 
 - get the plugin's Git repository OR release-package URL,
 - get the list of the recommended ices for the plugin,
   - there can be multiple lists of ices,
-  - the ice lists are stored in *profiles*; there's at least one profile,
-    *default*,
+  - the ice lists are stored in *profiles*; there's at least one profile, *default*,
   - the ices can be selectively overridden.
 
 More documentation on Zinit Packages can be found on the
 [Zinit Wiki](https://zdharma-continuum.github.io/zinit/wiki/Zinit-Packages/).
 
-Example invocations that'll install
-[junegunn/fzf](https://github.com/junegunn/fzf) either from the release archive
-or from Git repository:
+Example invocations that'll install [junegunn/fzf](https://github.com/junegunn/fzf) either from the release archive or
+from Git repository:
 
 ```zsh
 # Download the package with the default ice list
@@ -50,8 +47,7 @@ zinit pack"bgn-binary" for fzf
 
 ## Default Profile
 
-Provides the fuzzy finder via Makefile-installation of the `fzf` binary under
-`$ZPFX/bin`.
+Provides the fuzzy finder via Makefile-installation of the `fzf` binary under `$ZPFX/bin`.
 
 ```zsh
 zinit lucid as=program pick="$ZPFX/bin/(fzf|fzf-tmux)" \
@@ -62,9 +58,8 @@ zinit lucid as=program pick="$ZPFX/bin/(fzf|fzf-tmux)" \
 
 ## Bin-Gem-Node Profile
 
-Provides the fuzzy finder via *shims*, i.e., automatic forwarder scripts created
-under `$ZPFX/bin` (added to the `$PATH` by default). It needs the
-[bin-gem-node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex.
+Provides the fuzzy finder via *shims*, i.e., automatic forwarder scripts created under `$ZPFX/bin` (added to the `$PATH`
+by default). It needs the [bin-gem-node](https://github.com/zdharma-continuum/zinit-annex-bin-gem-node) annex.
 
 ```zsh
 zinit lucid as=null make \

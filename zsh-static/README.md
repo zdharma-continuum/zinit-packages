@@ -12,8 +12,7 @@ zinit pack for zsh-static
 
 ### Default profile
 
-Requires root or sudo. Installs static zsh to /usr/local and tries to register
-it as a login shell.
+Requires root or sudo. Installs static zsh to /usr/local and tries to register it as a login shell.
 
 ```zsh
 zinit lucid as"null" \

@@ -1,31 +1,29 @@
 # `any-gem` Zsh package
 
-| **Package source:** | Source Tarball | Binary | Git | Node | Gem |
-|:-------------------:|:--------------:|:------:|:---:|:----:|:---:|
-| **Status:**         |        -       |  -     |  -  |  –   |  + <br> (default)  |
+| **Package source:** | Source Tarball | Binary | Git | Node |       Gem        |
+| :-----------------: | :------------: | :----: | :-: | :--: | :--------------: |
+|     **Status:**     |       -        |   -    |  -  |  –   | + <br> (default) |
 
 ## Introduction
 
-[Zplugin](https://github.com/zdharma-continuum/zinit) can use a `package.json`
-(similar in construct to the one used in `npm` packages) to automatically:
+[Zplugin](https://github.com/zdharma-continuum/zinit) can use a `package.json` (similar in construct to the one used in
+`npm` packages) to automatically:
 
 - get the plugin's Git repository OR release-package URL,
 - get the list of the recommended ices for the plugin,
-    - there can be multiple lists of ices,
-    - the ice lists are stored in *profiles*; there's at least one profile, *default*,
-    - the ices can be selectively overriden.
+  - there can be multiple lists of ices,
+  - the ice lists are stored in *profiles*; there's at least one profile, *default*,
+  - the ices can be selectively overriden.
 
 ## The `any-gem` Package
 
-This package is special – it is designed for easy installing of any Ruby Gems
-locally inside the plugin directory, exposing their binaries via *shims* (i.e.:
-forwarder scripts) created automatically by
+This package is special – it is designed for easy installing of any Ruby Gems locally inside the plugin directory,
+exposing their binaries via *shims* (i.e.: forwarder scripts) created automatically by
 [Bin-Gem-Node](https://github.com/zplugin/zinit-annex-bin-gem-gem) annex.
 
-The Ruby Gem(s) to install are specified by the `param'GEM → {gem1}; GEM2 →
-{gem2}; …'` ice. The name of the plugin will be `{gem1}`, unless `id-as''` ice
-will be provided, or the `IDAS` param will be set (i.e.: `param'IDAS →
-my-plugin; GEM → …'`).
+The Ruby Gem(s) to install are specified by the `param'GEM → {gem1}; GEM2 → {gem2}; …'` ice. The name of the plugin will
+be `{gem1}`, unless `id-as''` ice will be provided, or the `IDAS` param will be set (i.e.:
+`param'IDAS → my-plugin; GEM → …'`).
 
 A few example invocations:
 
@@ -42,8 +40,8 @@ zinit pack param='IDAS → jkl; GEM → jekyll' for any-gem
 
 ## Default Profile
 
-The only profile that does all the magic. It relies on the `%PARAM%` keywords,
-which are substituted with the `value` from the ice `param'PARAM → value; …'`.
+The only profile that does all the magic. It relies on the `%PARAM%` keywords, which are substituted with the `value`
+from the ice `param'PARAM → value; …'`.
 
 The Zplugin command executed will be equivalent to:
 
