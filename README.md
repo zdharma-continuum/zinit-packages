@@ -13,7 +13,7 @@ https://zdharma-continuum.github.io/zinit/wiki/Zinit-Packages/
 To create a new package named `foo`:
 
 ```zsh
-./zinit-gen-pkg.sh create foo
+./zinit-pkg-gen.sh create foo
 ```
 
 This will create a directory named `foo` which contains:
@@ -25,7 +25,7 @@ This will create a directory named `foo` which contains:
 To add another profile (as in `zinit pack"PROFILE" for PACKAGE`), for example `bar`:
 
 ```zsh
-./zinit-gen-pkg.sh create foo bar
+./zinit-pkg-gen.sh create foo bar
 ```
 
 This will create a new file in your package directory: `bar.ices.zsh`.
@@ -61,7 +61,7 @@ To generate a `package.json` file for your package run:
 pkg=null
 profile=default
 
-./zinit-gen-pkg.sh gen ${pkg} ${profile}
+./zinit-pkg-gen.sh gen ${pkg} ${profile}
 ```
 
 ## 🐳 How do I run these?
@@ -69,7 +69,7 @@ profile=default
 There's a shorthand subcommand for running a `.ices.zsh` file locally, inside a container:
 
 ```zsh
-./zinit-gen-pkg.sh run PACKAGE PROFILE
+./zinit-pkg-gen.sh run PACKAGE PROFILE
 ```
 
 Great, but I want to test my `package.json` directly!
@@ -77,7 +77,7 @@ Great, but I want to test my `package.json` directly!
 Here you go:
 
 ```zsh
-./zinit-gen-pkg.sh run --pack PACKAGE PROFILE
+./zinit-pkg-gen.sh run --pack PACKAGE PROFILE
 ```
 
 <!-- vim: set ft=markdown et ts=2 sw=2 tw=80 --!>
