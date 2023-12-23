@@ -13,7 +13,7 @@ VERSION='1.2.17'
 
 zinit \
     as'null|monitor' \
-    atclone'zpextract --move --auto;
+    atclone'ziextract --move --auto;
       print -P \\
 %F{75}Building Subversion...\\
 %f;

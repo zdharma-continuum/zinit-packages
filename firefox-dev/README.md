@@ -34,7 +34,7 @@ The Zinit command executed will be equivalent to:
 ```zsh
 zinit id-as"firefox-dev" as"command" lucid" \
     atclone'local ext="${${${(M)OSTYPE#linux*}:+tar.bz2}:-dmg}"; \
-        zpextract %ID% $ext --norm ${${OSTYPE:#darwin*}:+--move}'
+        ziextract %ID% $ext --norm ${${OSTYPE:#darwin*}:+--move}'
     pick"firefox(|-bin)" atpull"%atclone" nocompile is-snippet for \
         "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=${${${(M)OSTYPE##linux}:+linux64}:-${${(M)OSTYPE##darwin}:+osx}}&lang=en-US"
 ```
@@ -50,7 +50,7 @@ The Zinit command executed will be equivalent to:
 ```zsh
 zinit id-as"firefox-dev" as"null" lucid \
     atclone'local ext="${${${(M)OSTYPE#linux*}:+tar.bz2}:-dmg}"; \
-        zpextract %ID% $ext --norm ${${OSTYPE:#darwin*}:+--move}'
+        ziextract %ID% $ext --norm ${${OSTYPE:#darwin*}:+--move}'
     atpull"%atclone" nocompile is-snippet for \
         "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=${${${(M)OSTYPE##linux}:+linux64}:-${${(M)OSTYPE##darwin}:+osx}}&lang=en-US"
 ```

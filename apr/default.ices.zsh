@@ -13,7 +13,7 @@ VERSION='1.6.1'
 
 zinit \
     as'null|readurl' \
-    atclone'zpextract --move --auto;
+    atclone'ziextract --move --auto;
       print -P \\
 %F{75}Building Apache Portable Runtime...\\
 %f;
