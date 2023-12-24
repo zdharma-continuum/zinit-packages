@@ -33,7 +33,7 @@ The Zinit command executed will be equivalent to:
 
 ```zsh
 zi as"null|monitor" dlink"https://.*/apr-%VERSION%.tar.bz2" \
-    atclone'zpextract --move --auto; print -P \\n%F{75}Building Apache Portable Runtime...\\n%f; ./configure \
+    atclone'ziextract --move --auto; print -P \\n%F{75}Building Apache Portable Runtime...\\n%f; ./configure \
         --prefix="$ZPFX" >/dev/null && make >/dev/null && print -P \
         \\n%F{75}Installing Apache Portable Runtime to $ZPFX...\\n%f && make install >/dev/null && print -P \
         \\n%F{34}Installation of Apache Portable Runtime succeeded.%f || \

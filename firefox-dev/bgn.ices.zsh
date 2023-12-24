@@ -17,7 +17,7 @@ zinit \
     atclone'local -A map;
       map=( '\''(#i)linux*'\'' tar.bz2 '\''(#i)(cygwin|win|wsl)*'\'' exe '\''(#i)darwin*'\'' dmg );
       local ext="${map[(k)$OSTYPE]}";
-      zpextract ff.pkg $ext --norm ${${OSTYPE:#(#i)(darwin|cygwin|win|wsl)*}:+--move};
+      ziextract ff.pkg $ext --norm ${${OSTYPE:#(#i)(darwin|cygwin|win|wsl)*}:+--move};
       command mv ff.pkg %ID%;' \
     atpull'%atclone' \
     is-snippet \
