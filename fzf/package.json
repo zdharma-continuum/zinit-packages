@@ -15,7 +15,7 @@
         "fetchSpec": "^0.61.1"
     },
     "_requiredBy": [],
-    "_resolved": "https://github.com/junegunn/fzf/archive/0.61.1.tar.gz",
+    "_resolved": "https://github.com/junegunn/fzf/archive/v0.61.1.tar.gz",
     "_shasum": "05bbfa4dd84b72e55afc3fe56c0fc185d6dd1fa1c4eef56a1559b68341f3d029",
     "_spec": "fzf@^0.61.1",
     "_where": "/root/github2/pkg-fzf",
