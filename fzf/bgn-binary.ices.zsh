@@ -9,7 +9,7 @@ NAME='zsh-fzf'
 PARAM_DEFAULT=''
 REQUIREMENTS='cp;bgn'
 URL='https://github.com/junegunn/fzf'
-VERSION='0.28.0'
+VERSION='0.61.1'
 
 zinit \
     atclone'mkdir -p $ZPFX/{bin,man/man1}' \
