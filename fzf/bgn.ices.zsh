@@ -9,10 +9,10 @@ NAME='zsh-fzf'
 PARAM_DEFAULT=''
 REQUIREMENTS='go;make;cp;bgn'
 URL='https://github.com/junegunn/fzf'
-VERSION='0.28.0'
+VERSION='0.61.1'
 
 zinit \
-    atclone'PREFIX=$ZPFX FZF_VERSION=0.28.0 FZF_REVISION=zinit-pack make install &&
+    atclone'PREFIX=$ZPFX FZF_VERSION=0.61.1 FZF_REVISION=zinit-pack make install &&
       mkdir -p $ZPFX/{bin,man/man1};
       cp shell/completion.zsh _fzf_completion;
       cp -vf man/man1/fzf(|-tmux).1 $ZPFX/man/man1' \
