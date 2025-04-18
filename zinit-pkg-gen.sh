@@ -109,8 +109,7 @@ update_zinit_ice_list() {
   local file
   file="${1:-$(basename "$0")}"
 
-  if [[ "$file" == "bash" ]]
-  then
+  if [[ $file == "bash" ]]; then
     echo_err "Cannot determine path to self."
     echo_err "Please provide filepath: $0 --update-ices FILEPATH"
     return 1
@@ -120,14 +119,13 @@ update_zinit_ice_list() {
   # The first sed add quotes around the ices and replaces " " with "\n"
   # The second one indents the values by 2 spaces
   local ices
-  ices="$(zsh -ic "zinit --help" | tail -1 | \
-    sed -r -e 's/([^ ]+)/"\1"/g' -e $'s/ /\\\n/g' | \
-    sed -e 's/^/  /g' | \
-    grep -vE '^"pack"$' | \
-    sort -u)"
+  ices="$(zsh -ic "zinit --help" | tail -1 \
+    | sed -r -e 's/([^ ]+)/"\1"/g' -e $'s/ /\\\n/g' \
+    | sed -e 's/^/  /g' \
+    | grep -vE '^"pack"$' \
+    | sort -u)"
 
-  if [[ -z "$ices" ]]
-  then
+  if [[ -z $ices ]]; then
     echo_err "Failed to build ice list. Is zinit installed correctly?"
     return 1
   fi
@@ -141,7 +139,7 @@ update_zinit_ice_list() {
 }
 
 echo_debug() {
-  [[ -z "$DEBUG" ]] && return
+  [[ -z $DEBUG ]] && return
   echo -e "\e[35m🐝 ${*}\e[0m" >&2
 }
 
@@ -192,16 +190,14 @@ zinit() {
 
   shopt -s extglob
 
-  for arg in "$@"
-  do
+  for arg in "$@"; do
     case "$arg" in
       for)
         # for is special, the next argument will be the repo
         for=1
         ;;
       *)
-        if [[ -n "$for" ]]
-        then
+        if [[ -n $for ]]; then
           # remove leading '@', as in 'zinit xxx for @direnv/direnv'
           repo="${arg#@}"
           plugin_org="${repo%%/*}"
@@ -210,17 +206,14 @@ zinit() {
           break
         else
           matched=""
-          for ice in "${ZINIT_ICES[@]}"
-          do
-            if [[ "$arg" =~ ^${ice} ]]
-            then
+          for ice in "${ZINIT_ICES[@]}"; do
+            if [[ $arg =~ ^${ice} ]]; then
               matched="$arg"
               break
             fi
           done
 
-          if [[ -z "$matched" ]]
-          then
+          if [[ -z $matched ]]; then
             echo_err "Unknown ice: $arg"
             return 1
           fi
@@ -233,16 +226,14 @@ zinit() {
 
   # Display PACKAGE_VARS
   local var
-  for var in "${PACKAGE_VARS[@]}"
-  do
+  for var in "${PACKAGE_VARS[@]}"; do
     echo_debug "${var}=${!var}"
   done
   echo_debug "repo: $repo (org: $plugin_org - name: $plugin_name)"
   # shellcheck disable=2030
   echo_debug "ices: $(typeset -p ices)"
 
-  if [[ -z "$repo" ]]
-  then
+  if [[ -z $repo ]]; then
     echo_err "Missing repo name"
     return 1
   fi
@@ -251,8 +242,7 @@ zinit() {
   local key
 
   # shellcheck disable=2031
-  for key in "${!ices[@]}"
-  do
+  for key in "${!ices[@]}"; do
     echo "$key"
     echo "${ices[$key]}"
   done | jq -e -n -R \
@@ -290,8 +280,7 @@ get_zinit_json_data() {
   local pkg="$1" profile="$2"
   local srcfile="${pkg}/${profile}.ices.zsh"
 
-  if ! [[ -e "$srcfile" ]]
-  then
+  if ! [[ -e $srcfile ]]; then
     echo_err "source file does not exist: $srcfile"
     return 1
   fi
@@ -304,23 +293,25 @@ get_zinit_json_data() {
 list_packages() {
   local dir="$1"
 
-  while IFS= read -r -d '' pkg
-  do
+  while IFS= read -r -d '' pkg; do
     basename "$pkg"
   done < <(find "$dir" -maxdepth 1 -mindepth 1 -type d \
-             -and -not -path "${dir}/.git" -print0)
+    -and -not -path "${dir}/.git" -print0)
 }
 
 list_profiles() {
   local package="$1"
 
-  find "$package" -iname '*.ices.zsh' -print0 | \
-    xargs -0 -L1 basename | \
-    sed -nr 's#(.+).ices.zsh#\1#p'
+  find "$package" -iname '*.ices.zsh' -print0 \
+    | xargs -0 -L1 basename \
+    | sed -nr 's#(.+).ices.zsh#\1#p'
 }
 
 update_ices() {
-  cd "$(cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P)" || exit 9
+  cd "$(
+    cd "$(dirname "$0")" > /dev/null 2>&1
+    pwd -P
+  )" || exit 9
 
   local pkg="$1"
   local profile="$2"
@@ -333,8 +324,7 @@ update_ices() {
   # If the target package does not already have a package.json file,
   # we need to use the template to get the min boilerplate
   local input_file="$pkgfile"
-  if ! [[ -e "$pkgfile" ]]
-  then
+  if ! [[ -e $pkgfile ]]; then
     input_file="$PWD/package.template.json"
   fi
 
@@ -348,10 +338,9 @@ update_ices() {
 
   # strip the param ice if it is set to the same value as param-default
   local param_default="$(extract_param_default "$srcfile")"
-  if [[ -n "$param_default" ]] && \
-     jq -er --arg default "$param_default" '.ices.param == $default' \
-       <<< "$zinit_json" >/dev/null
-  then
+  if [[ -n $param_default ]] \
+    && jq -er --arg default "$param_default" '.ices.param == $default' \
+      <<< "$zinit_json" > /dev/null; then
     zinit_json="$(jq -er 'del(.ices.param)' <<< "$zinit_json")"
   fi
 
@@ -382,13 +371,11 @@ update_ices() {
   data="$(jq -e . "$tmpfile")"
   local rc="$?"
 
-  if [[ -n "$CHECK" ]]
-  then
+  if [[ -n $CHECK ]]; then
     local diff_msg
     if diff_msg="$(diff \
       <(jq --sort-keys . <<< "$data") \
-      <(jq --sort-keys . $pkgfile))"
-    then
+      <(jq --sort-keys . $pkgfile))"; then
       echo_success "$pkgfile [$profile]: No change."
       return
     else
@@ -398,14 +385,12 @@ update_ices() {
     fi
   fi
 
-  if [[ -n "$DRY_RUN" ]]
-  then
+  if [[ -n $DRY_RUN ]]; then
     jq <<< "$data"
     return "$rc"
   fi
 
-  if [[ "$rc" -eq 0 ]]
-  then
+  if [[ $rc -eq 0 ]]; then
     mv "$tmpfile" "$pkgfile" && {
       echo_success "Updated ${package}/package.json [${profile}]"
     } || {
@@ -416,19 +401,19 @@ update_ices() {
 }
 
 extract_generated_by() {
-  local srcfile="$1"   # .ice.zsh file path
+  local srcfile="$1" # .ice.zsh file path
   awk -F "by " '/Generated by/ {print $2}' "$srcfile"
 }
 
 extract_creation_date() {
-  local srcfile="$1"   # .ice.zsh file path
+  local srcfile="$1" # .ice.zsh file path
 
   awk '/^# [0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\+[0-9]{2}:[0-9]{2}/ { print $2; exit }' \
-    "$srcfile" 2>/dev/null
+    "$srcfile" 2> /dev/null
 }
 
 extract_param_default() {
-  local srcfile="$1"   # .ice.zsh file path
+  local srcfile="$1" # .ice.zsh file path
   local PARAM_DEFAULT
 
   eval "$(awk '/^PARAM_DEFAULT=/' "$srcfile")"
@@ -443,8 +428,7 @@ generate_package_json_profile() {
   local zinit_json_data
 
   echo_debug "Processing package $package - profile: $profile"
-  if ! zinit_json_data="$(get_zinit_json_data "$package" "$profile")"
-  then
+  if ! zinit_json_data="$(get_zinit_json_data "$package" "$profile")"; then
     return "$?"
   fi
 
@@ -452,7 +436,8 @@ generate_package_json_profile() {
 }
 
 generate_package_json() {
-  local package="$1"; shift
+  local package="$1"
+  shift
   local -a profiles=("$@")
   local filename
   local filepath
@@ -463,31 +448,26 @@ generate_package_json() {
 
   # Check if we were provided with a file path
   # eg: zinit-gen-pkg.sh null/default.ices.zsh
-  if [[ -f "$package" ]]
-  then
+  if [[ -f $package ]]; then
     filepath="$(realpath "$package")"
     filename="$(basename "$filepath")"
     package="$(basename "$(dirname "$filepath")")"
-    profile="${filename//.ices.zsh}"
+    profile="${filename//.ices.zsh/}"
   fi
 
   # No profile provide, assume all
-  if [[ -z "${profiles[*]}" ]]
-  then
-    while IFS= read -r -d '' ice_file
-    do
-      profiles+=("$(basename "${ice_file//.ices.zsh}")")
+  if [[ -z ${profiles[*]} ]]; then
+    while IFS= read -r -d '' ice_file; do
+      profiles+=("$(basename "${ice_file//.ices.zsh/}")")
     done < <(find "$package" -type f -iname '*.ices.zsh' -print0)
   fi
 
-  if [[ "${#profiles[@]}" -eq 0 ]]
-  then
+  if [[ ${#profiles[@]} -eq 0 ]]; then
     echo_warn "Package $package doesn't contain any *.ices.zsh file"
     return 1
   fi
 
-  for profile in "${profiles[@]}"
-  do
+  for profile in "${profiles[@]}"; do
     generate_package_json_profile "$package" "$profile"
     # Unset vars which may be set from the .ices.zsh files
     eval unset "${PACKAGE_VARS[*]}"
@@ -495,49 +475,47 @@ generate_package_json() {
 }
 
 generate_ices_zsh_files() {
-  local package="$1"; shift
+  local package="$1"
+  shift
   local -a profiles=("$@")
 
   echo_info "Generating ices.zsh for package $package"
   local srcfile pkgfile="$package/package.json"
   local content ice ice_data ice_val metadata plugin
   local author description license message param_default plugin_url requirements \
-        url version
+    url version
   local -a ices
 
   # Constants
   local default_plugin="zdharma-continuum/null"
   local modeline='# vim: set ft=zsh et ts=2 sw=2 :'
 
-  if ! [[ -f "$pkgfile" ]]
-  then
+  if ! [[ -f $pkgfile ]]; then
     echo_err "Missing package.json in ${package}/"
     return 1
   fi
 
-  if ! jq -e . "$pkgfile" >/dev/null
-  then
+  if ! jq -e . "$pkgfile" > /dev/null; then
     echo_err "$pkgfile: Invalid JSON"
     return 1
   fi
 
-  if [[ -z "${profiles[*]}" ]]
-  then
-    readarray -t profiles < <(\
-      jq -e -r -c '.["zsh-data"]["zinit-ices"] | keys[]' "$pkgfile")
+  if [[ -z ${profiles[*]} ]]; then
+    readarray -t profiles < <(
+      jq -e -r -c '.["zsh-data"]["zinit-ices"] | keys[]' "$pkgfile"
+    )
   fi
 
   echo_info "[${package}] Selected profiles: ${profiles[*]:-default}"
 
   local profile
-  for profile in "${profiles[@]}"
-  do
+  for profile in "${profiles[@]}"; do
     echo_debug "Processing profile $profile"
     srcfile="${package}/${profile}.ices.zsh"
 
     metadata="$(jq -e -r '.["zsh-data"]["plugin-info"]' "$pkgfile")"
     ice_data="$(jq -e -r --arg profile "$profile" \
-                '.["zsh-data"]["zinit-ices"][$profile]' "$pkgfile")"
+      '.["zsh-data"]["zinit-ices"][$profile]' "$pkgfile")"
 
     # Metadata
     # TODO Add more/better fallback logic here? For snippets for example
@@ -564,12 +542,10 @@ generate_ices_zsh_files() {
     requirements="$(jq -er '.requires // ""' <<< "$ice_data")"
 
     local now
-    if [[ -n "$REPRODUCIBLE" ]]
-    then
+    if [[ -n $REPRODUCIBLE ]]; then
       # Re-use previous timestamp, fall back to UNIX ts 0
       now="$(extract_creation_date "$srcfile")"
-      if [[ -z "$now" ]]
-      then
+      if [[ -z $now ]]; then
         now="$(date -d @0 -Iseconds --utc)"
       fi
     else
@@ -579,11 +555,10 @@ generate_ices_zsh_files() {
     # Sanitize metadata
     local var val
     for var in author description license message name param_default \
-               requirements url version
-    do
+      requirements url version; do
       # FIXME the lines below feel wrong
       val="${!var}"
-      [[ -z "$val" ]] && continue
+      [[ -z $val ]] && continue
       val="$(sed -z "s/'/\\\'/g; s/\n/\\\\\\\\\\\\\\\\n/g" <<< "$val")"
       val="${val%$'\\\\\\\\\\\\\\\\n'}"
       val="$(sed -z "s/\\\'/\\\\\'\\\\\\\\\\\\'\\\\\'/g" <<< "$val")"
@@ -607,32 +582,30 @@ generate_ices_zsh_files() {
     content+='\nzinit \\\n'
 
     # Process ices
-    readarray -t ices < <(\
+    readarray -t ices < <(
       jq -e -r -c 'keys[] | select(
         (contains("requires") | not) and
-        (contains("plugin") | not))' <<< "$ice_data")
+        (contains("plugin") | not))' <<< "$ice_data"
+    )
 
     # Prepend id-as, if not already in the ices array
-    if ! [[ " ${ices[*]} " =~ " id-as " ]]
-    then
+    if ! [[ " ${ices[*]} " =~ " id-as " ]]; then
       ices=(id-as "${ices[@]}")
     fi
 
     # Add param ice
-    if ! [[ " ${ices[*]} " =~ " param " ]] && [[ -n "$param_default" ]]
-    then
+    if ! [[ " ${ices[*]} " =~ " param " ]] && [[ -n $param_default ]]; then
       ices+=("param")
     fi
 
-    for ice in "${ices[@]}"  # note: $ices holds the ice names only
-    do
+    for ice in "${ices[@]}"; do # note: $ices holds the ice names only
       # 1st sed: escape '\n' to '\\n' to avoid it getting mangled by echo -e
       # (escapes '\\n' to '\\\n' too)
       # 2nd sed -> We need to properly encode single quotes since we are
       # using these to quote the ice values below
-      ice_val="$(jq -e -r --arg ice "$ice" '.[$ice] // ""' <<< "$ice_data" | \
-                 sed -r 's#(\\+n)#\\\\\\\1#g' | \
-                 sed "s/'/'\\\''/g")"
+      ice_val="$(jq -e -r --arg ice "$ice" '.[$ice] // ""' <<< "$ice_data" \
+        | sed -r 's#(\\+n)#\\\\\\\1#g' \
+        | sed "s/'/'\\\''/g")"
 
       case "$ice" in
         is-snippet)
@@ -643,15 +616,14 @@ generate_ices_zsh_files() {
           # 1. Use plugin name (if != zdharma-continuum/null)
           # 2. Default to NAME
           # 3. If NAME is not set, use zinit-package-$package
-          if [[ "$plugin" != "$default_plugin" ]]
-          then
+          if [[ $plugin != "$default_plugin" ]]; then
             ice_val="${ice_val:-${plugin}}"
           else
             ice_val="${ice_val:-${name:-zinit-package-${package}}}"
           fi
           ;;
         param)
-          [[ -z "$ice_val" ]] && ice_val="$param_default"
+          [[ -z $ice_val ]] && ice_val="$param_default"
           ;;
       esac
 
@@ -667,16 +639,14 @@ generate_ices_zsh_files() {
         <<< "$ice_val")"
 
       # Append the quoted value of the ice
-      if [[ -n "$ice_val" ]]
-      then
+      if [[ -n $ice_val ]]; then
         content+="'${ice_val}'"
       fi
 
       content+=' \\\n'
     done
 
-    if [[ -n "$is_snippet" ]] && [[ -n "$plugin_url" ]]
-    then
+    if [[ -n $is_snippet ]] && [[ -n $plugin_url ]]; then
       # Use single quotes here since the url might contain vars with expansions
       # that bash is incapable of handling (eg: ${(M)OSTYPE#(linux|darwin)})
       # It's safe to use single quotes here. zinit will expand vars in the
@@ -689,10 +659,8 @@ generate_ices_zsh_files() {
     content+="\n\n$modeline"
     echo_debug "Generated content for ${srcfile}:\n${content}"
 
-    if [[ -n "$CHECK" ]]
-    then
-      if echo -e "$content" | diff "$srcfile" -
-      then
+    if [[ -n $CHECK ]]; then
+      if echo -e "$content" | diff "$srcfile" -; then
         echo_success "$srcfile: No change."
         return
       else
@@ -701,8 +669,7 @@ generate_ices_zsh_files() {
       fi
     fi
 
-    if [[ -n "$DRY_RUN" ]]
-    then
+    if [[ -n $DRY_RUN ]]; then
       echo -e "$content"
       echo
     else
@@ -717,19 +684,22 @@ generate_ices_zsh_files() {
 }
 
 create_package() {
-  local package="$1"; shift
+  local package="$1"
+  shift
   local profiles=("$@")
 
   local script_dir
-  script_dir="$(cd "$(dirname "$0")" >/dev/null 2>&1 || return 1; pwd -P)"
+  script_dir="$(
+    cd "$(dirname "$0")" > /dev/null 2>&1 || return 1
+    pwd -P
+  )"
 
   local dest="${script_dir}/${package}"
   local pkgfile="${dest}/package.json"
 
   echo_info "Creating new package: ${package} (${dest})"
   mkdir -pv "${dest}"
-  if ! [[ -e ${pkgfile} ]]
-  then
+  if ! [[ -e ${pkgfile} ]]; then
     cp -v "${script_dir}/package.template.json" "${pkgfile}"
   fi
 
@@ -738,11 +708,9 @@ create_package() {
 
   # Create additional profiles
   local profile
-  for profile in "${profiles[@]}"
-  do
+  for profile in "${profiles[@]}"; do
     echo_debug "Processing profile $profile"
-    if [[ -e "${dest}/${profile}.ices.zsh" ]] && [[ -z "$FORCE" ]]
-    then
+    if [[ -e "${dest}/${profile}.ices.zsh" ]] && [[ -z $FORCE ]]; then
       echo_err "Package profile $profile already exists for $package."
       return 1
     fi
@@ -758,20 +726,21 @@ create_package() {
 }
 
 fetch_zinit_docker_run() {
-  if [[ -x docker-run.sh ]]
-  then
+  if [[ -x docker-run.sh ]]; then
     realpath docker-run.sh
     return
   fi
 
   local url="https://raw.githubusercontent.com/zdharma-continuum/zinit/main/scripts/docker-run.sh"
 
-  cd "$(cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P)" || exit 9
+  cd "$(
+    cd "$(dirname "$0")" > /dev/null 2>&1
+    pwd -P
+  )" || exit 9
   rm -fv docker-run.sh
 
   echo_info "Fetching docker-run.sh from $url"
-  if ! curl -fsSL "$url" > docker-run.sh
-  then
+  if ! curl -fsSL "$url" > docker-run.sh; then
     rm -f docker-run.sh
     echo_err "Failed to download docker-run.sh"
     return 1
@@ -786,55 +755,46 @@ run_package() {
   local profile="${2:-default}"
   shift 2
 
-  if [[ "$profile" =~ -|-- ]]
-  then
+  if [[ $profile =~ -|-- ]]; then
     profile="default"
   fi
 
   local -a cmd
   cmd=("$(fetch_zinit_docker_run)" --env QUIET=1)
 
-  if [[ -n "$DEBUG" ]]
-  then
+  if [[ -n $DEBUG ]]; then
     cmd=(bash -x "${cmd[0]}")
   fi
 
   local ices_file="${package}/${profile}.ices.zsh"
   local pkgjson="${package}/package.json"
 
-  if [[ -n "$REGENERATE" ]]
-  then
-    if [[ -n "$RUN_PACKAGE" ]]
-    then
-      if ! generate_package_json_profile "$package" "$profile"
-      then
+  if [[ -n $REGENERATE ]]; then
+    if [[ -n $RUN_PACKAGE ]]; then
+      if ! generate_package_json_profile "$package" "$profile"; then
         echo_err "Failed to generate package.json"
         return 1
       fi
     else
-      if ! generate_ices_zsh_files "$package" "$profile"
-      then
+      if ! generate_ices_zsh_files "$package" "$profile"; then
         echo_err "Failed to generate ${profile}.ices.zsh"
         return 1
       fi
     fi
   fi
 
-  if ! [[ -r "$ices_file" ]]
-  then
+  if ! [[ -r $ices_file ]]; then
     echo_err "Unable to read from ${ices_file}"
     return 2
   fi
 
   local args=()
-  if [[ -n "$NON_INTERACTIVE" ]]
-  then
+  if [[ -n $NON_INTERACTIVE ]]; then
     args=(zsh -ilsc '@zinit-scheduler burst')
     # args=(zsh -ilsc 'exit $?')
   fi
 
-  if [[ -n "$RUN_PACKAGE" ]]
-  then
+  if [[ -n $RUN_PACKAGE ]]; then
     echo_info "🐳 Running zinit pack'${pkgjson}:${profile}' for @${package}"
     "${cmd[@]}" --volume "$PWD:/devel" \
       --config "zinit pack'/devel/${pkgjson}:${profile}' for @${package}" \
@@ -867,9 +827,7 @@ usage() {
   echo "           --regenerate             Regenerate ices.zsh (or package.json if --pack) prior to running"
 }
 
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
-then
+if [[ ${BASH_SOURCE[0]} == "${0}" ]]; then
   CHECK="${CHECK:-}"
   DEBUG="${DEBUG:-}"
   DRY_RUN="${DRY_RUN:-}"
@@ -883,63 +841,62 @@ then
   ACTION="${ACTION:-generate-json}"
 
   ARGS=("$@")
-  for arg in "${ARGS[@]}"
-  do
+  for arg in "${ARGS[@]}"; do
     case "$arg" in
-      -c|--check)
+      -c | --check)
         CHECK=1
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
-      -d|--debug)
+      -d | --debug)
         DEBUG=1
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
-      -f|--force)
+      -f | --force)
         FORCE=1
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
-      -F|--fast|--parallel)
+      -F | --fast | --parallel)
         FAST=1
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
-      -k|--dry-run)
+      -k | --dry-run)
         DRY_RUN=1
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
-      -n|--non-interactive|-ni|--exit|-e)
+      -n | --non-interactive | -ni | --exit | -e)
         NON_INTERACTIVE=1
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
-      -p|--pack|--package)
+      -p | --pack | --package)
         RUN_PACKAGE=1
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
-      -R|-rp|--rep|--repro|--reproducible)
+      -R | -rp | --rep | --repro | --reproducible)
         REPRODUCIBLE=1
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
-      --regen*|-rr)
+      --regen* | -rr)
         REGENERATE=1
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
       # Action flags
-      -C|--create|-i|--init)
+      -C | --create | -i | --init)
         ACTION=create
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
-      -r|--rev|--reverse)
+      -r | --rev | --reverse)
         ACTION=generate-ices-zsh
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
       --run)
         ACTION=run
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
       --update-ices)
         ACTION=update-ices
-        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg}"
+        IFS=" " read -r -a ARGS <<< "${ARGS[@]/$arg/}"
         ;;
-      -h|--help)
+      -h | --help)
         usage
         exit 0
         ;;
@@ -949,40 +906,39 @@ then
 
   # Alternative usage: $0 create|gen-json|gen-ices|run|update-ices
   case "$1" in
-    create|init|c|i)
+    create | init | c | i)
       ACTION=create
       shift
       ;;
-    json|generate|gen|gen-json|g|j)
+    json | generate | gen | gen-json | g | j)
       ACTION=generate-json
       shift
       ;;
-    gen-ices|reverse|rev|r)
+    gen-ices | reverse | rev | r)
       ACTION=generate-ices-zsh
       shift
       ;;
-    run|R)
+    run | R)
       ACTION=run
       shift
       ;;
-    update-self|update-ices|u)
+    update-self | update-ices | u)
       ACTION=update-ices
       shift
       ;;
   esac
 
   # Special snowflake, let's execute this right away.
-  if [[ "$ACTION" == update-ices ]]
-  then
+  if [[ $ACTION == update-ices ]]; then
     update_zinit_ice_list "$1"
     exit "$?"
   fi
 
-  PACKAGE="$1"; shift
+  PACKAGE="$1"
+  shift
   PROFILES=("$@")
 
-  if [[ -z "$PACKAGE" ]]
-  then
+  if [[ -z $PACKAGE ]]; then
     echo_err "Missing PACKAGE name"
     usage >&2
     exit 2
@@ -991,12 +947,11 @@ then
   PACKAGES=()
   # Check if we were provided with a file
   # eg: zinit-gen-pkg.sh null/default.ices.zsh
-  if [[ -f "$PACKAGE" ]]
-  then
+  # shellcheck disable=SC2010
+  if [[ -f $PACKAGE ]]; then
     # Assume the user wants to test/run/generate a package.json file directly if
     # providing a path to a package.json
-    if [[ "${PACKAGE}" =~ package.json ]]
-    then
+    if [[ ${PACKAGE} =~ package.json ]]; then
       RUN_PACKAGE=1
       PACKAGES=("$(dirname "$PACKAGE")")
       PROFILES=("${PROFILES[0]:-default}")
@@ -1011,14 +966,10 @@ then
   # is a package dir (ie. with an *.ices.zsh file) and not proceed it that's the
   # case. Otherwise we will end up looking for package dirs inside a package
   # dir.
-  # shellcheck disable=SC2010
-  elif [[ -d "$PACKAGE" ]]
-  then
+  elif [[ -d $PACKAGE ]]; then
     # Search for valid packages
-    if ! ls -1 "$PACKAGE" | grep -qE '.ices.zsh$|^package.json$'
-    then
-      for pkg in $(list_packages "$PACKAGE")
-      do
+    if ! ls -1 "$PACKAGE" | grep -qE '.ices.zsh$|^package.json$'; then
+      for pkg in $(list_packages "$PACKAGE"); do
         PACKAGES+=("$pkg")
       done
     else
@@ -1027,12 +978,11 @@ then
     fi
   fi
 
-  if [[ "$ACTION" != create ]] && [[ -z "${PACKAGES[*]}" ]]
-  then
+  if [[ $ACTION != create ]] && [[ -z ${PACKAGES[*]} ]]; then
     echo_warn "Nothing to do (no such package: $PACKAGE)"
     echo_info "Available packages:\n$(list_packages "$PWD")"
     echo_info "To create a new package restart with:" \
-              "$0 create ${PACKAGE:-PACKAGE_NAME}"
+      "$0 create ${PACKAGE:-PACKAGE_NAME}"
     exit 0
   fi
 
@@ -1044,34 +994,29 @@ then
 
   case "$ACTION" in
     create)
-      if [[ -z "$FORCE" ]] && [[ -z "${PROFILES[*]}" ]] && \
-         [[ -e "${PACKAGE}/package.json" ]]
-      then
+      if [[ -z $FORCE ]] && [[ -z ${PROFILES[*]} ]] \
+        && [[ -e "${PACKAGE}/package.json" ]]; then
         echo_err "Package $PACKAGE already exists"
         exit 1
       fi
 
-      if create_package "$PACKAGE" "${PROFILES[@]}"
-      then
+      if create_package "$PACKAGE" "${PROFILES[@]}"; then
         echo_info "Created ${PACKAGE} with profiles: ${PROFILES[*]:-default}"
         echo_info "Available profiles for ${PACKAGE}:"
         echo_info "$(list_profiles "$PACKAGE")"
       else
-        echo_err "Something went wrong while creating $PACKAGE with "\
-                 "profiles: ${PROFILES[*]}"
+        echo_err "Something went wrong while creating $PACKAGE with " \
+          "profiles: ${PROFILES[*]}"
         rc=1
       fi
       ;;
     generate-json)
       # Generate package.json files
-      for pkg in "${PACKAGES[@]}"
-      do
-        if [[ -n "$FAST" ]]
-        then
+      for pkg in "${PACKAGES[@]}"; do
+        if [[ -n $FAST ]]; then
           generate_package_json "$pkg" "${PROFILES[@]}" &
           JOBS["$pkg"]="$!"
-        elif ! generate_package_json "$pkg" "${PROFILES[@]}"
-        then
+        elif ! generate_package_json "$pkg" "${PROFILES[@]}"; then
           failed_pkgs+=("$pkg")
           rc=1
         fi
@@ -1085,14 +1030,11 @@ then
       ;;
     generate-ices-zsh)
       # Generate ices.zsh files
-      for pkg in "${PACKAGES[@]}"
-      do
-        if [[ -n "$FAST" ]]
-        then
+      for pkg in "${PACKAGES[@]}"; do
+        if [[ -n $FAST ]]; then
           generate_ices_zsh_files "$pkg" "${PROFILES[@]}" &
           JOBS["$pkg"]="$!"
-        elif ! generate_ices_zsh_files "$pkg" "${PROFILES[@]}"
-        then
+        elif ! generate_ices_zsh_files "$pkg" "${PROFILES[@]}"; then
           failed_pkgs+=("$pkg")
           rc=1
         fi
@@ -1105,23 +1047,18 @@ then
       ;;
   esac
 
-  if [[ -n "$FAST" ]]
-  then
-    for pkg in ${!JOBS[@]}
-    do
-      if ! wait "${JOBS["$pkg"]}"
-      then
+  if [[ -n $FAST ]]; then
+    for pkg in "${!JOBS[@]}"; do
+      if ! wait "${JOBS["$pkg"]}"; then
         failed_pkgs+=("$pkg")
         rc=1
       fi
     done
   fi
 
-  if [[ "$rc" -ne 0 ]] && [[ -n "${failed_pkgs[*]}" ]]
-  then
+  if [[ $rc -ne 0 ]] && [[ -n ${failed_pkgs[*]} ]]; then
     echo_err "Some packages failed to update:"
-    for pkg in "${failed_pkgs[@]}"
-    do
+    for pkg in "${failed_pkgs[@]}"; do
       echo_err "$pkg"
     done
   fi
